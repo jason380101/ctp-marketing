@@ -474,6 +474,14 @@ body {
     color: var(--metallic-silver);
 }
 
+.portfolio-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 40px;
+    background: white;
+}
+
 /* About Section */
 .about {
     padding: var(--section-padding) 0;
