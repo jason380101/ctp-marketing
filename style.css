@@ -433,8 +433,11 @@ body {
 
 .portfolio-image {
     position: relative;
-    padding-bottom: 50%;
+    height: 300px;
     overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .placeholder-image {
