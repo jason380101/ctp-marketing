@@ -64,73 +64,8 @@ if (mobileMenuToggle) {
     });
 }
 
-// Form submission
-const contactForm = document.getElementById('contactForm');
-const formMessage = document.querySelector('.form-message');
-
-if (contactForm) {
-    contactForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        
-        const submitButton = contactForm.querySelector('.btn-submit');
-        const formData = new FormData(contactForm);
-        
-        // Check honeypot
-        if (formData.get('website')) {
-            return;
-        }
-        
-        // Convert FormData to JSON
-        const data = {};
-        formData.forEach((value, key) => {
-            if (key !== 'website') {
-                data[key] = value;
-            }
-        });
-        
-        // Show loading state
-        submitButton.classList.add('loading');
-        formMessage.style.display = 'none';
-        
-        try {
-            // Replace with your actual Cloudflare Worker endpoint
-            const response = await fetch('/api/contact', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data)
-            });
-            
-            const result = await response.json();
-            
-            if (response.ok) {
-                formMessage.className = 'form-message success';
-                formMessage.textContent = 'Thank you! Your message has been sent successfully. We\'ll get back to you soon.';
-                formMessage.style.display = 'block';
-                contactForm.reset();
-            } else {
-                throw new Error(result.message || 'Something went wrong');
-            }
-        } catch (error) {
-            formMessage.className = 'form-message error';
-            formMessage.textContent = 'Oops! There was a problem sending your message. Please try again or contact us directly.';
-            formMessage.style.display = 'block';
-        } finally {
-            submitButton.classList.remove('loading');
-            
-            // Scroll to message
-            setTimeout(() => {
-                formMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-            }, 100);
-            
-            // Hide message after 10 seconds
-            setTimeout(() => {
-                formMessage.style.display = 'none';
-            }, 10000);
-        }
-    });
-}
+// Form submission handled by Netlify Forms
+// The form now submits directly to Netlify with data-netlify="true" attribute
 
 // Parallax effect for hero
 window.addEventListener('scroll', () => {
