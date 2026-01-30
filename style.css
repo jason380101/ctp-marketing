@@ -418,8 +418,7 @@ body {
 }
 
 .portfolio-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    display: flex;
     gap: 40px;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
@@ -427,11 +426,13 @@ body {
     -webkit-overflow-scrolling: touch;
     scrollbar-width: thin;
     scrollbar-color: var(--accent-blue) var(--light-foam);
+    padding-bottom: 20px;
 }
 
 .portfolio-item {
     scroll-snap-align: start;
     flex: 0 0 auto;
+    width: 350px;
     min-width: 350px;
     position: relative;
     overflow: hidden;
