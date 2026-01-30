@@ -421,14 +421,41 @@ body {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     gap: 40px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: var(--accent-blue) var(--light-foam);
 }
 
 .portfolio-item {
+    scroll-snap-align: start;
+    flex: 0 0 auto;
+    min-width: 350px;
     position: relative;
     overflow: hidden;
     border-radius: 8px;
     cursor: pointer;
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+}
+
+.portfolio-grid::-webkit-scrollbar {
+    height: 8px;
+}
+
+.portfolio-grid::-webkit-scrollbar-track {
+    background: var(--light-foam);
+    border-radius: 4px;
+}
+
+.portfolio-grid::-webkit-scrollbar-thumb {
+    background: var(--accent-blue);
+    border-radius: 4px;
+}
+
+.portfolio-grid::-webkit-scrollbar-thumb:hover {
+    background: var(--secondary-blue);
 }
 
 .portfolio-image {
