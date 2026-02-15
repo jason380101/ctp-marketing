@@ -273,9 +273,18 @@
                     <p>From tournament bass fishing to backcountry elk hunts, from fly fishing mountain streams to duck hunting on cold mornings, we know what gear performs and what outdoor enthusiasts actually want. That authentic perspective drives everything we do, from product selection to marketing strategies.</p>
                     <p>When you partner with CTP Marketing, you're working with people who genuinely understand your products and your customers.</p>
                 </div>
-                <div class="about-image" >
-                    <div class="about-image-wrapper">
-                        <img src="images/photos/team-on-the-water.jpeg" alt="CTP Marketing team bass fishing on Lake Lanier">
+                <div class="about-carousel">
+                    <div class="carousel-images">
+                        <img src="images/photos/clintbear.jpg" alt="CTP Marketing owner with bear" class="carousel-slide active">
+                        <img src="images/photos/clintdeer.jpg" alt="CTP Marketing owner with deer" class="carousel-slide">
+                        <img src="images/photos/clintturkey.jpg" alt="CTP Marketing owner with turkey" class="carousel-slide">
+                    </div>
+                    <button class="carousel-btn prev" onclick="moveSlide(-1)">&#10094;</button>
+                    <button class="carousel-btn next" onclick="moveSlide(1)">&#10095;</button>
+                    <div class="carousel-dots">
+                        <span class="dot active" onclick="currentSlide(0)"></span>
+                        <span class="dot" onclick="currentSlide(1)"></span>
+                        <span class="dot" onclick="currentSlide(2)"></span>
                     </div>
                 </div>
             </div>
@@ -408,4 +417,11 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2026 CTP Marketing LLC. All 
+                <p>&copy; 2026 CTP Marketing LLC. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html> 
