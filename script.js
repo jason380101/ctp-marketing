@@ -1,34 +1,43 @@
 // Carousel
-let currentSlideIndex = 0;
+let currentSlide = 0;
+const images = document.querySelectorAll('.carousel-image');
+const totalSlides = images.length;
 
-function moveSlide(direction) {
-    const slides = document.querySelectorAll('.carousel-slide');
-    const dots = document.querySelectorAll('.dot');
-
-    slides[currentSlideIndex].classList.remove('active');
-    dots[currentSlideIndex].classList.remove('active');
-
-    currentSlideIndex = (currentSlideIndex + direction + slides.length) % slides.length;
-
-    slides[currentSlideIndex].classList.add('active');
-    dots[currentSlideIndex].classList.add('active');
+// Create dots
+const dotsContainer = document.querySelector('.carousel-dots');
+for (let i = 0; i < totalSlides; i++) {
+    const dot = document.createElement('div');
+    dot.className = 'carousel-dot';
+    if (i === 0) dot.classList.add('active');
+    dot.onclick = () => goToSlide(i);
+    dotsContainer.appendChild(dot);
 }
 
-function currentSlide(index) {
-    const slides = document.querySelectorAll('.carousel-slide');
-    const dots = document.querySelectorAll('.dot');
-
-    slides[currentSlideIndex].classList.remove('active');
-    dots[currentSlideIndex].classList.remove('active');
-
-    currentSlideIndex = index;
-
-    slides[currentSlideIndex].classList.add('active');
-    dots[currentSlideIndex].classList.add('active');
+function moveCarousel(direction) {
+    currentSlide += direction;
+    if (currentSlide < 0) currentSlide = totalSlides - 1;
+    if (currentSlide >= totalSlides) currentSlide = 0;
+    updateCarousel();
 }
 
-// Auto-advance slides every 5 seconds
-setInterval(() => moveSlide(1), 5000);
+function goToSlide(index) {
+    currentSlide = index;
+    updateCarousel();
+}
+
+function updateCarousel() {
+    images.forEach((img, index) => {
+        img.classList.toggle('active', index === currentSlide);
+    });
+
+    const dots = document.querySelectorAll('.carousel-dot');
+    dots.forEach((dot, index) => {
+        dot.classList.toggle('active', index === currentSlide);
+    });
+}
+
+// Auto-advance every 5 seconds
+setInterval(() => moveCarousel(1), 5000);
 
 // Smooth scrolling for navigation links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {

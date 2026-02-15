@@ -567,28 +567,29 @@ body {
 .about-carousel {
     position: relative;
     width: 100%;
-    height: 100%;
-    border-radius: 8px;
+    height: 500px;
     overflow: hidden;
+    border-radius: 8px;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
 }
 
-.carousel-images {
+.carousel-container {
     position: relative;
     width: 100%;
-    height: 500px;
+    height: 100%;
 }
 
-.carousel-slide {
+.carousel-image {
     position: absolute;
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center;
     opacity: 0;
-    transition: opacity 0.5s ease-in-out;
+    transition: opacity 0.5s ease;
 }
 
-.carousel-slide.active {
+.carousel-image.active {
     opacity: 1;
 }
 
@@ -599,8 +600,8 @@ body {
     background: rgba(0, 0, 0, 0.5);
     color: white;
     border: none;
-    font-size: 24px;
-    padding: 16px 20px;
+    font-size: 3rem;
+    padding: 1rem 1.5rem;
     cursor: pointer;
     z-index: 10;
     transition: background 0.3s;
@@ -611,11 +612,11 @@ body {
 }
 
 .carousel-btn.prev {
-    left: 10px;
+    left: 20px;
 }
 
 .carousel-btn.next {
-    right: 10px;
+    right: 20px;
 }
 
 .carousel-dots {
@@ -628,7 +629,7 @@ body {
     z-index: 10;
 }
 
-.dot {
+.carousel-dot {
     width: 12px;
     height: 12px;
     border-radius: 50%;
@@ -637,8 +638,7 @@ body {
     transition: background 0.3s;
 }
 
-.dot.active,
-.dot:hover {
+.carousel-dot.active {
     background: white;
 }
 
