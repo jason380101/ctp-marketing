@@ -341,10 +341,10 @@
   // ── Supabase config — replace with your project values ──────
   const SUPABASE_URL = 'https://esmaohthnfgibncscewj.supabase.co';
   const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVzbWFvaHRobmZnaWJuY3NjZXdqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMyNDgxNzYsImV4cCI6MjA4ODgyNDE3Nn0.-QwoQje7kAOktUaQ2_PI_wMffw81eHja_8g61gzKV1Q';
-  const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
   // ── Redirect if already logged in ───────────────────────────
-  supabase.auth.getSession().then(({ data: { session } }) => {
+  sb.auth.getSession().then(({ data: { session } }) => {
     if (session) window.location.href = '/order.html';
   });
 
@@ -375,7 +375,7 @@
     btn.disabled = true;
     btn.textContent = 'SIGNING IN...';
 
-    const { error } = await supabase.auth.signInWithPassword({ email, password });
+    const { error } = await sb.auth.signInWithPassword({ email, password });
 
     if (error) {
       errorEl.textContent = error.message === 'Invalid login credentials'
@@ -430,7 +430,7 @@
     btn.disabled = true;
     btn.textContent = 'SENDING...';
 
-    const { error } = await supabase.auth.resetPasswordForEmail(email, {
+    const { error } = await sb.auth.resetPasswordForEmail(email, {
       redirectTo: `${window.location.origin}/reset-password.html`
     });
 
