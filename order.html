@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cast Fishing Co — Order Form | CTP Marketing</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+  :root {
+    --navy: #0a1628;
+    --navy-mid: #112240;
+    --navy-light: #1a3a5c;
+    --teal: #00b4a6;
+    --teal-dim: #008a7e;
+    --gold: #c9a84c;
+    --white: #f0f4f8;
+    --muted: #7a9abf;
+    --border: rgba(0,180,166,0.2);
+    --row-alt: rgba(0,180,166,0.04);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--navy);
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  body.ready { opacity: 1; }
+
+  /* Auth gate — shown while checking session */
+  #authGate {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18px;
+    letter-spacing: 3px;
+    color: var(--muted);
+  }
+
+  header {
+    background: var(--navy-mid);
+    border-bottom: 2px solid var(--teal);
+    padding: 20px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .header-left { display: flex; flex-direction: column; gap: 2px; }
+  .header-brand {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 26px;
+    letter-spacing: 3px;
+  }
+  .header-sub { font-size: 11px; color: var(--muted); letter-spacing: 2px; text-transform: uppercase; }
+
+  .header-right { display: flex; align-items: center; gap: 20px; }
+
+  .retailer-pill {
+    background: rgba(0,180,166,0.1);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 6px 16px;
+    font-size: 13px;
+    color: var(--teal);
+  }
+  .retailer-pill span { color: var(--white); font-weight: 500; }
+
+  .signout-btn {
+    background: none;
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    color: var(--muted);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    letter-spacing: 1px;
+    padding: 6px 14px;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-transform: uppercase;
+  }
+  .signout-btn:hover { border-color: var(--teal); color: var(--teal); }
+
+  .header-badge {
+    background: var(--teal);
+    color: var(--navy);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 13px;
+    letter-spacing: 2px;
+    padding: 6px 16px;
+    border-radius: 2px;
+  }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 48px 24px 80px; }
+
+  .page-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 48px;
+    letter-spacing: 4px;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .page-subtitle {
+    color: var(--muted);
+    font-size: 14px;
+    letter-spacing: 1px;
+    margin-bottom: 48px;
+  }
+  .page-subtitle span { color: var(--teal); }
+
+  .section-label {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 13px;
+    letter-spacing: 4px;
+    color: var(--teal);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* Pre-filled retailer info banner */
+  .retailer-info-banner {
+    background: var(--navy-mid);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 20px 24px;
+    margin-bottom: 48px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+  }
+
+  .info-item { display: flex; flex-direction: column; gap: 4px; }
+  .info-label { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); }
+  .info-value { font-size: 14px; font-weight: 500; }
+  .info-value.empty { color: var(--muted); font-style: italic; font-weight: 300; }
+
+  .edit-info-link {
+    font-size: 12px;
+    color: var(--teal);
+    text-decoration: none;
+    letter-spacing: 1px;
+    align-self: flex-end;
+  }
+
+  /* Product tables */
+  .product-section { margin-bottom: 40px; }
+
+  .category-header {
+    background: var(--navy-light);
+    border-left: 3px solid var(--teal);
+    padding: 10px 16px;
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+  }
+  .category-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18px;
+    letter-spacing: 2px;
+  }
+  .category-desc { font-size: 12px; color: var(--muted); letter-spacing: 1px; }
+
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+
+  thead th {
+    background: rgba(0,180,166,0.08);
+    padding: 10px 14px;
+    text-align: left;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 500;
+    border-bottom: 1px solid var(--border);
+  }
+  thead th.right { text-align: right; }
+  thead th.center { text-align: center; }
+
+  tbody tr {
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    transition: background 0.15s;
+  }
+  tbody tr:nth-child(even) { background: var(--row-alt); }
+  tbody tr:hover { background: rgba(0,180,166,0.06); }
+
+  td { padding: 10px 14px; vertical-align: middle; }
+  td.right { text-align: right; color: var(--muted); }
+  td.bold { font-weight: 500; }
+
+  .sku { font-size: 11px; color: var(--muted); font-family: monospace; }
+  .color-dot {
+    display: inline-block;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    margin-right: 6px;
+    background: var(--teal);
+    opacity: 0.6;
+  }
+
+  .qty-input {
+    width: 70px;
+    background: var(--navy);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 6px 10px;
+    text-align: center;
+    outline: none;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .qty-input:focus { border-color: var(--teal); background: var(--navy-mid); }
+
+  .line-total {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--muted);
+    min-width: 70px;
+    text-align: right;
+  }
+  .line-total.has-value { color: var(--gold); }
+
+  .notes-field {
+    width: 100%;
+    background: var(--navy-mid);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    padding: 12px 16px;
+    resize: vertical;
+    min-height: 80px;
+    outline: none;
+    margin-bottom: 48px;
+  }
+  .notes-field:focus { border-color: var(--teal); }
+
+  /* Sticky summary */
+  .order-summary {
+    position: sticky;
+    bottom: 0;
+    background: var(--navy-mid);
+    border-top: 2px solid var(--teal);
+    padding: 20px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+    z-index: 100;
+  }
+
+  .summary-stats { display: flex; gap: 40px; }
+  .stat { display: flex; flex-direction: column; gap: 2px; }
+  .stat-label { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); }
+  .stat-value { font-family: 'Bebas Neue', sans-serif; font-size: 28px; }
+  .stat-value.teal { color: var(--teal); }
+
+  .submit-btn {
+    background: var(--teal);
+    color: var(--navy);
+    border: none;
+    border-radius: 3px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18px;
+    letter-spacing: 3px;
+    padding: 14px 40px;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+    min-width: 200px;
+  }
+  .submit-btn:hover { background: #00d4c4; }
+  .submit-btn:active { transform: scale(0.98); }
+  .submit-btn:disabled { background: var(--muted); cursor: not-allowed; }
+
+  .status-msg {
+    padding: 16px 24px;
+    border-radius: 3px;
+    margin-top: 16px;
+    font-size: 14px;
+    display: none;
+    line-height: 1.6;
+  }
+  .status-msg.success { background: rgba(0,180,166,0.15); border: 1px solid var(--teal); color: var(--teal); }
+  .status-msg.error { background: rgba(200,50,50,0.15); border: 1px solid #c83232; color: #ff6b6b; }
+
+  /* Brand selection grid */
+  .brand-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+    gap: 16px;
+    margin-top: 40px;
+  }
+
+  .brand-card {
+    background: var(--navy-mid);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: border-color 0.2s, transform 0.15s, box-shadow 0.2s;
+    overflow: hidden;
+  }
+  .brand-card.active:hover {
+    border-color: var(--teal);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(0,180,166,0.12);
+  }
+  .brand-card.coming-soon {
+    opacity: 0.45;
+    cursor: default;
+  }
+
+  .brand-card-inner {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 24px;
+  }
+
+  .brand-logo-area {
+    width: 64px;
+    height: 64px;
+    background: rgba(0,180,166,0.08);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .brand-initials {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20px;
+    letter-spacing: 2px;
+    color: var(--teal);
+  }
+
+  .brand-info { flex: 1; }
+
+  .brand-card-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 2px;
+    margin-bottom: 4px;
+  }
+
+  .brand-card-desc {
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+
+  .brand-card-tag {
+    display: inline-block;
+    background: rgba(0,180,166,0.1);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    font-size: 11px;
+    letter-spacing: 1px;
+    color: var(--teal);
+    padding: 3px 10px;
+  }
+
+  .brand-card-tag.coming {
+    background: rgba(122,154,191,0.1);
+    border-color: rgba(122,154,191,0.2);
+    color: var(--muted);
+  }
+
+  .brand-arrow {
+    font-size: 20px;
+    color: var(--teal);
+    opacity: 0.6;
+    transition: transform 0.2s, opacity 0.2s;
+  }
+  .brand-card.active:hover .brand-arrow {
+    transform: translateX(4px);
+    opacity: 1;
+  }
+
+  @media (max-width: 500px) {
+    .brand-grid { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 768px) {
+    header { padding: 16px 20px; flex-wrap: wrap; gap: 12px; }
+    .header-right { flex-wrap: wrap; }
+    main { padding: 32px 16px 120px; }
+    .order-summary { flex-direction: column; }
+    .summary-stats { justify-content: space-between; }
+    .submit-btn { width: 100%; }
+    .sku { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div id="authGate">VERIFYING ACCESS...</div>
+
+<div id="pageContent" style="display:none">
+
+<header>
+  <div class="header-left">
+    <div class="header-brand">CTP Marketing</div>
+    <div class="header-sub">Retailer Portal</div>
+  </div>
+  <div class="header-right">
+    <div class="retailer-pill">Logged in as <span id="retailerName">—</span></div>
+    <div class="header-badge" id="headerBadge" style="display:none">—</div>
+    <button class="signout-btn" id="signoutBtn">Sign Out</button>
+  </div>
+</header>
+
+<!-- ── Brand Selection Screen ───────────────────────────── -->
+<div id="brandScreen">
+<main style="max-width:900px;margin:0 auto;padding:64px 24px;">
+  <div class="page-title">Select a Brand</div>
+  <div class="page-subtitle">Choose which brand you'd like to place a wholesale order for.</div>
+
+  <div class="brand-grid">
+
+    <div class="brand-card active" data-brand="cast">
+      <div class="brand-card-inner">
+        <div class="brand-logo-area">
+          <div class="brand-initials">CFC</div>
+        </div>
+        <div class="brand-info">
+          <div class="brand-card-name">Cast Fishing Co</div>
+          <div class="brand-card-desc">Prodigy · Echo · Nova · X12 Braid · BFS Braid</div>
+          <div class="brand-card-tag">55 SKUs Available</div>
+        </div>
+        <div class="brand-arrow">→</div>
+      </div>
+    </div>
+
+    <div class="brand-card coming-soon" data-brand="queen">
+      <div class="brand-card-inner">
+        <div class="brand-logo-area">
+          <div class="brand-initials">QT</div>
+        </div>
+        <div class="brand-info">
+          <div class="brand-card-name">Queen Tackle</div>
+          <div class="brand-card-desc">Tungsten jigs & finesse tackle</div>
+          <div class="brand-card-tag coming">Coming Soon</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="brand-card coming-soon" data-brand="lanier">
+      <div class="brand-card-inner">
+        <div class="brand-logo-area">
+          <div class="brand-initials">LB</div>
+        </div>
+        <div class="brand-info">
+          <div class="brand-card-name">Lanier Baits</div>
+          <div class="brand-card-desc">Finesse tackle</div>
+          <div class="brand-card-tag coming">Coming Soon</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="brand-card coming-soon" data-brand="bluerock">
+      <div class="brand-card-inner">
+        <div class="brand-logo-area">
+          <div class="brand-initials">BR</div>
+        </div>
+        <div class="brand-info">
+          <div class="brand-card-name">Blue Rock Custom Tackle</div>
+          <div class="brand-card-desc">Hand-tied jigs</div>
+          <div class="brand-card-tag coming">Coming Soon</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</main>
+</div>
+
+<!-- ── Order Form Screen ─────────────────────────────────── -->
+<div id="orderScreen" style="display:none">
+
+<main>
+  <div style="display:flex;align-items:center;gap:16px;margin-bottom:6px;">
+    <button id="backToBrands" style="background:none;border:none;color:var(--muted);font-family:'DM Sans',sans-serif;font-size:13px;letter-spacing:1px;cursor:pointer;padding:0;transition:color 0.2s;" onmouseover="this.style.color='var(--teal)'" onmouseout="this.style.color='var(--muted)'">← Change Brand</button>
+  </div>
+  <div class="page-title" id="orderPageTitle">Cast Fishing Co</div>
+  <div class="page-subtitle">Wholesale Order Form — Powered by <span>CTP Marketing LLC</span></div>
+
+  <div class="section-label">Your Account</div>
+  <div class="retailer-info-banner" id="retailerBanner">
+    <div class="info-item">
+      <div class="info-label">Store Name</div>
+      <div class="info-value" id="infoStore">—</div>
+    </div>
+    <div class="info-item">
+      <div class="info-label">Contact</div>
+      <div class="info-value" id="infoContact">—</div>
+    </div>
+    <div class="info-item">
+      <div class="info-label">Email</div>
+      <div class="info-value" id="infoEmail">—</div>
+    </div>
+    <div class="info-item">
+      <div class="info-label">Shipping Address</div>
+      <div class="info-value" id="infoAddress">—</div>
+    </div>
+  </div>
+
+  <form id="orderForm">
+    <input type="hidden" id="hiddenRetailerId" name="retailer_id">
+
+    <!-- PRODIGY -->
+    <div class="product-section">
+      <div class="section-label">Products — Enter Quantity to Order</div>
+      <div class="category-header">
+        <span class="category-name">Prodigy</span>
+        <span class="category-desc">Soft Plastic Swimbaits</span>
+      </div>
+      <table><thead><tr>
+        <th>Product</th><th>SKU</th><th>Color</th><th>Size / Pack</th>
+        <th class="right">Wholesale</th><th class="right">Retail</th>
+        <th class="center">Qty</th><th class="right">Line Total</th>
+      </tr></thead><tbody id="prodigy-rows"></tbody></table>
+    </div>
+
+    <!-- ECHO -->
+    <div class="product-section">
+      <div class="category-header">
+        <span class="category-name">Echo</span>
+        <span class="category-desc">Finesse Minnow — Sonar/Hover Rig</span>
+      </div>
+      <table><thead><tr>
+        <th>Product</th><th>SKU</th><th>Color</th><th>Size / Pack</th>
+        <th class="right">Wholesale</th><th class="right">Retail</th>
+        <th class="center">Qty</th><th class="right">Line Total</th>
+      </tr></thead><tbody id="echo-rows"></tbody></table>
+    </div>
+
+    <!-- NOVA -->
+    <div class="product-section">
+      <div class="category-header">
+        <span class="category-name">Nova</span>
+        <span class="category-desc">Neko Worm</span>
+      </div>
+      <table><thead><tr>
+        <th>Product</th><th>SKU</th><th>Color</th><th>Size / Pack</th>
+        <th class="right">Wholesale</th><th class="right">Retail</th>
+        <th class="center">Qty</th><th class="right">Line Total</th>
+      </tr></thead><tbody id="nova-rows"></tbody></table>
+    </div>
+
+    <!-- X12 -->
+    <div class="product-section">
+      <div class="category-header">
+        <span class="category-name">X12 Casting Braid</span>
+        <span class="category-desc">330–440 Yard Spools</span>
+      </div>
+      <table><thead><tr>
+        <th>Product</th><th>SKU</th><th>Color</th><th>Size / Pack</th>
+        <th class="right">Wholesale</th><th class="right">Retail</th>
+        <th class="center">Qty</th><th class="right">Line Total</th>
+      </tr></thead><tbody id="x12-rows"></tbody></table>
+    </div>
+
+    <!-- BFS -->
+    <div class="product-section">
+      <div class="category-header">
+        <span class="category-name">BFS Casting Braid</span>
+        <span class="category-desc">150 Yard Spools</span>
+      </div>
+      <table><thead><tr>
+        <th>Product</th><th>SKU</th><th>Color</th><th>Size / Pack</th>
+        <th class="right">Wholesale</th><th class="right">Retail</th>
+        <th class="center">Qty</th><th class="right">Line Total</th>
+      </tr></thead><tbody id="bfs-rows"></tbody></table>
+    </div>
+
+    <div class="section-label">Order Notes (Optional)</div>
+    <textarea class="notes-field" id="orderNotes" placeholder="Special instructions, rush requests, or questions for CTP Marketing..."></textarea>
+
+    <div id="statusMsg" class="status-msg"></div>
+  </form>
+</main>
+
+<div class="order-summary">
+  <div class="summary-stats">
+    <div class="stat">
+      <div class="stat-label">Items Ordered</div>
+      <div class="stat-value" id="totalItems">0</div>
+    </div>
+    <div class="stat">
+      <div class="stat-label">SKUs Selected</div>
+      <div class="stat-value" id="totalSkus">0</div>
+    </div>
+    <div class="stat">
+      <div class="stat-label">Order Total</div>
+      <div class="stat-value teal" id="orderTotal">$0.00</div>
+    </div>
+  </div>
+  <button class="submit-btn" id="submitBtn">SUBMIT ORDER</button>
+</div>
+
+</div><!-- end order-summary -->
+
+</div><!-- end orderScreen -->
+</div><!-- end pageContent -->
+
+<script>
+// ── Supabase config ──────────────────────────────────────────
+const SUPABASE_URL = 'YOUR_SUPABASE_PROJECT_URL';
+const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
+const N8N_WEBHOOK_URL = 'YOUR_N8N_WEBHOOK_URL_HERE';
+
+const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+// ── Auth gate ────────────────────────────────────────────────
+let currentUser = null;
+let currentRetailer = null;
+
+async function initPage() {
+  const { data: { session } } = await supabase.auth.getSession();
+  if (!session) {
+    window.location.href = '/login.html';
+    return;
+  }
+
+  currentUser = session.user;
+
+  // Load retailer profile
+  const { data: retailer } = await supabase
+    .from('retailers')
+    .select('*')
+    .eq('id', currentUser.id)
+    .single();
+
+  currentRetailer = retailer;
+
+  // Populate header + banner
+  document.getElementById('retailerName').textContent = retailer?.store_name || currentUser.email;
+  document.getElementById('infoStore').textContent = retailer?.store_name || '—';
+  document.getElementById('infoContact').textContent = retailer?.contact_name || '—';
+  document.getElementById('infoEmail').textContent = retailer?.email || currentUser.email;
+  document.getElementById('infoAddress').textContent =
+    retailer?.shipping_address && retailer?.city_state_zip
+      ? `${retailer.shipping_address}, ${retailer.city_state_zip}`
+      : 'Not set';
+  document.getElementById('hiddenRetailerId').value = currentUser.id;
+
+  // Show page — brand screen first
+  document.getElementById('authGate').style.display = 'none';
+  document.getElementById('pageContent').style.display = 'block';
+  document.body.classList.add('ready');
+}
+
+initPage();
+
+// ── Brand selection ──────────────────────────────────────────
+document.querySelectorAll('.brand-card.active').forEach(card => {
+  card.addEventListener('click', () => {
+    const brand = card.dataset.brand;
+    document.getElementById('brandScreen').style.display = 'none';
+    document.getElementById('orderScreen').style.display = 'block';
+    document.getElementById('headerBadge').style.display = 'block';
+
+    if (brand === 'cast') {
+      document.getElementById('orderPageTitle').textContent = 'Cast Fishing Co';
+      document.getElementById('headerBadge').textContent = 'Cast Fishing Co';
+    }
+
+    // Render product rows if not already rendered
+    if (!document.getElementById('prodigy-rows').hasChildNodes()) {
+      renderRows('prodigy', 'prodigy-rows');
+      renderRows('echo',    'echo-rows');
+      renderRows('nova',    'nova-rows');
+      renderRows('x12',     'x12-rows');
+      renderRows('bfs',     'bfs-rows');
+    }
+  });
+});
+
+document.getElementById('backToBrands').addEventListener('click', () => {
+  document.getElementById('orderScreen').style.display = 'none';
+  document.getElementById('brandScreen').style.display = 'block';
+  document.getElementById('headerBadge').style.display = 'none';
+  // Reset form state
+  document.querySelectorAll('.qty-input').forEach(i => { i.value = ''; });
+  document.querySelectorAll('.line-total').forEach(el => { el.textContent = '—'; el.classList.remove('has-value'); });
+  if (document.getElementById('orderNotes')) document.getElementById('orderNotes').value = '';
+  updateTotals();
+  document.getElementById('statusMsg').style.display = 'none';
+});
+
+// ── Sign out ─────────────────────────────────────────────────
+
+// ── Sign out ─────────────────────────────────────────────────
+document.getElementById('signoutBtn').addEventListener('click', async () => {
+  await supabase.auth.signOut();
+  window.location.href = '/login.html';
+});
+
+// ── Product catalog ──────────────────────────────────────────
+const catalog = {
+  prodigy: [
+    { sku: 'CFC-PRODIGY-ETHER-3',      color: 'Ether',             size: '3" / 8 Pack',   wholesale: 5.40, retail: 9.99 },
+    { sku: 'CFC-PRODIGY-BBHERRING-3',  color: 'Blue Back Herring', size: '3" / 8 Pack',   wholesale: 5.40, retail: 9.99 },
+    { sku: 'CFC-PRODIGY-TITAN-3',      color: 'Titan',             size: '3" / 8 Pack',   wholesale: 6.90, retail: 9.99 },
+    { sku: 'CFC-PRODIGY-OZARK-3',      color: 'Ozark',             size: '3" / 8 Pack',   wholesale: 5.40, retail: 9.99 },
+    { sku: 'CFC-PRODIGY-CARBON-3',     color: 'Carbon',            size: '3" / 8 Pack',   wholesale: 5.40, retail: 9.99 },
+    { sku: 'CFC-PRODIGY-AMETHYST-3',   color: 'Amethyst',          size: '3" / 8 Pack',   wholesale: 5.40, retail: 9.99 },
+    { sku: 'CFC-PRODIGY-LANIER-3',     color: 'Lanier',            size: '3" / 8 Pack',   wholesale: 5.40, retail: 9.99 },
+    { sku: 'CFC-PRODIGY-ETHER-4',      color: 'Ether',             size: '4.1" / 6 Pack', wholesale: 5.95, retail: 10.99 },
+    { sku: 'CFC-PRODIGY-BBHERRING-4',  color: 'Blue Back Herring', size: '4.1" / 6 Pack', wholesale: 5.95, retail: 10.99 },
+    { sku: 'CFC-PRODIGY-TITAN-4',      color: 'Titan',             size: '4.1" / 6 Pack', wholesale: 7.50, retail: 10.99 },
+    { sku: 'CFC-PRODIGY-OZARK-4',      color: 'Ozark',             size: '4.1" / 6 Pack', wholesale: 5.95, retail: 10.99 },
+    { sku: 'CFC-PRODIGY-CARBON-4',     color: 'Carbon',            size: '4.1" / 6 Pack', wholesale: 5.95, retail: 10.99 },
+    { sku: 'CFC-PRODIGY-AMETHYST-4',   color: 'Amethyst',          size: '4.1" / 6 Pack', wholesale: 5.95, retail: 10.99 },
+    { sku: 'CFC-PRODIGY-LANIER-4',     color: 'Lanier',            size: '4.1" / 6 Pack', wholesale: 5.95, retail: 10.99 },
+  ],
+  echo: [
+    { sku: 'CFC-ECHO-ETHER-2.75',      color: 'Ether',             size: '2.75" / 8 Pack', wholesale: 5.40, retail: 9.99 },
+    { sku: 'CFC-ECHO-BBHERRING-2.75',  color: 'Blue Back Herring', size: '2.75" / 8 Pack', wholesale: 5.40, retail: 9.99 },
+    { sku: 'CFC-ECHO-TITAN-2.75',      color: 'Titan',             size: '2.75" / 8 Pack', wholesale: 6.90, retail: 9.99 },
+    { sku: 'CFC-ECHO-OZARK-2.75',      color: 'Ozark',             size: '2.75" / 8 Pack', wholesale: 5.40, retail: 9.99 },
+    { sku: 'CFC-ECHO-CARBON-2.75',     color: 'Carbon',            size: '2.75" / 8 Pack', wholesale: 5.40, retail: 9.99 },
+    { sku: 'CFC-ECHO-AMETHYST-2.75',   color: 'Amethyst',          size: '2.75" / 8 Pack', wholesale: 5.40, retail: 9.99 },
+    { sku: 'CFC-ECHO-LANIER-2.75',     color: 'Lanier',            size: '2.75" / 8 Pack', wholesale: 5.40, retail: 9.99 },
+    { sku: 'CFC-ECHO-ETHER-3',         color: 'Ether',             size: '3.5" / 8 Pack',  wholesale: 5.40, retail: 9.99 },
+    { sku: 'CFC-ECHO-BBHERRING-3',     color: 'Blue Back Herring', size: '3.5" / 8 Pack',  wholesale: 5.40, retail: 9.99 },
+    { sku: 'CFC-ECHO-TITAN-3',         color: 'Titan',             size: '3.5" / 8 Pack',  wholesale: 6.90, retail: 9.99 },
+    { sku: 'CFC-ECHO-OZARK-3',         color: 'Ozark',             size: '3.5" / 8 Pack',  wholesale: 5.40, retail: 9.99 },
+    { sku: 'CFC-ECHO-CARBON-3',        color: 'Carbon',            size: '3.5" / 8 Pack',  wholesale: 5.40, retail: 9.99 },
+    { sku: 'CFC-ECHO-AMETHYST-3',      color: 'Amethyst',          size: '3.5" / 8 Pack',  wholesale: 5.40, retail: 9.99 },
+    { sku: 'CFC-ECHO-LANIER-3',        color: 'Lanier',            size: '3.5" / 8 Pack',  wholesale: 5.40, retail: 9.99 },
+    { sku: 'CFC-ECHO-ETHER-5',         color: 'Ether',             size: '5.4" / 6 Pack',  wholesale: 7.10, retail: 11.99 },
+    { sku: 'CFC-ECHO-BBHERRING-5',     color: 'Blue Back Herring', size: '5.4" / 6 Pack',  wholesale: 7.10, retail: 11.99 },
+    { sku: 'CFC-ECHO-TITAN-5',         color: 'Titan',             size: '5.4" / 6 Pack',  wholesale: 8.10, retail: 11.99 },
+    { sku: 'CFC-ECHO-OZARK-5',         color: 'Ozark',             size: '5.4" / 6 Pack',  wholesale: 7.10, retail: 11.99 },
+    { sku: 'CFC-ECHO-CARBON-5',        color: 'Carbon',            size: '5.4" / 6 Pack',  wholesale: 7.10, retail: 11.99 },
+    { sku: 'CFC-ECHO-AMETHYST-5',      color: 'Amethyst',          size: '5.4" / 6 Pack',  wholesale: 7.10, retail: 11.99 },
+    { sku: 'CFC-ECHO-LANIER-5',        color: 'Lanier',            size: '5.4" / 6 Pack',  wholesale: 7.10, retail: 11.99 },
+    { sku: 'CFC-ECHO-ETHER-7',         color: 'Ether',             size: '7.2" / 5 Pack',  wholesale: 7.65, retail: 12.99 },
+    { sku: 'CFC-ECHO-BBHERRING-7',     color: 'Blue Back Herring', size: '7.2" / 5 Pack',  wholesale: 7.65, retail: 12.99 },
+    { sku: 'CFC-ECHO-TITAN-7',         color: 'Titan',             size: '7.2" / 5 Pack',  wholesale: 8.65, retail: 12.99 },
+    { sku: 'CFC-ECHO-OZARK-7',         color: 'Ozark',             size: '7.2" / 5 Pack',  wholesale: 7.65, retail: 12.99 },
+    { sku: 'CFC-ECHO-CARBON-7',        color: 'Carbon',            size: '7.2" / 5 Pack',  wholesale: 7.65, retail: 12.99 },
+    { sku: 'CFC-ECHO-AMETHYST-7',      color: 'Amethyst',          size: '7.2" / 5 Pack',  wholesale: 7.65, retail: 12.99 },
+    { sku: 'CFC-ECHO-LANIER-7',        color: 'Lanier',            size: '7.2" / 5 Pack',  wholesale: 7.65, retail: 12.99 },
+  ],
+  nova: [
+    { sku: 'CFC-NOVA-MAMBA-4.5',         color: 'Mamba',          size: '4.5" / 10 Pack', wholesale: 5.50, retail: 8.99 },
+    { sku: 'CFC-NOVA-LANIER-4.5',        color: 'Lanier',         size: '4.5" / 10 Pack', wholesale: 5.50, retail: 8.99 },
+    { sku: 'CFC-NOVA-AMETHYST-4.5',      color: 'Amethyst',       size: '4.5" / 10 Pack', wholesale: 5.50, retail: 8.99 },
+    { sku: 'CFC-NOVA-SPIKEDPUMPKIN-4.5', color: 'Spiced Pumpkin', size: '4.5" / 10 Pack', wholesale: 5.50, retail: 8.99 },
+    { sku: 'CFC-NOVA-SPACEJAM-4.5',      color: 'Spacejam',       size: '4.5" / 10 Pack', wholesale: 5.50, retail: 8.99 },
+  ],
+  x12: [
+    { sku: 'CFC-X12-12LB', color: 'Atoll', size: '12LB / 330 Yds', wholesale: 40.00, retail: 59.99 },
+    { sku: 'CFC-X12-20LB', color: 'Atoll', size: '20LB / 330 Yds', wholesale: 40.00, retail: 59.99 },
+    { sku: 'CFC-X12-30LB', color: 'Atoll', size: '30LB / 330 Yds', wholesale: 40.00, retail: 59.99 },
+    { sku: 'CFC-X12-50LB', color: 'Atoll', size: '50LB / 330 Yds', wholesale: 40.00, retail: 59.99 },
+    { sku: 'CFC-X12-65LB', color: 'Atoll', size: '65LB / 440 Yds', wholesale: 40.00, retail: 59.99 },
+    { sku: 'CFC-X12-80LB', color: 'Atoll', size: '80LB / 440 Yds', wholesale: 40.00, retail: 59.99 },
+  ],
+  bfs: [
+    { sku: 'CFC-BFS-8LB',  color: 'Grape', size: '8LB / 150 Yds',  wholesale: 20.00, retail: 29.99 },
+    { sku: 'CFC-BFS-10LB', color: 'Grape', size: '10LB / 150 Yds', wholesale: 20.00, retail: 29.99 },
+  ]
+};
+
+const productNames = {
+  prodigy: 'Prodigy Swimbait',
+  echo: 'Echo Finesse Minnow',
+  nova: 'Nova Neko Worm',
+  x12: 'X12 Casting Braid',
+  bfs: 'BFS Casting Braid'
+};
+
+function renderRows(cat, tbodyId) {
+  const tbody = document.getElementById(tbodyId);
+  catalog[cat].forEach(p => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td class="bold">${productNames[cat]}</td>
+      <td class="sku">${p.sku}</td>
+      <td><span class="color-dot"></span>${p.color}</td>
+      <td>${p.size}</td>
+      <td class="right">$${p.wholesale.toFixed(2)}</td>
+      <td class="right" style="color:var(--muted)">$${p.retail.toFixed(2)}</td>
+      <td style="text-align:center">
+        <input class="qty-input" type="number" min="0" step="1"
+          data-sku="${p.sku}" data-wholesale="${p.wholesale}"
+          data-product="${productNames[cat]}" data-color="${p.color}"
+          data-size="${p.size}" data-retail="${p.retail}"
+          placeholder="0" autocomplete="off">
+      </td>
+      <td class="right"><span class="line-total" id="lt-${p.sku.replace(/[.\s]/g,'_')}">—</span></td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+// ── Live totals ──────────────────────────────────────────────
+function updateTotals() {
+  let totalCost = 0, totalItems = 0, totalSkus = 0;
+  document.querySelectorAll('.qty-input').forEach(input => {
+    const qty = parseInt(input.value) || 0;
+    const wholesale = parseFloat(input.dataset.wholesale);
+    const ltId = `lt-${input.dataset.sku.replace(/[.\s]/g,'_')}`;
+    const ltEl = document.getElementById(ltId);
+    if (qty > 0) {
+      const line = qty * wholesale;
+      totalCost += line;
+      totalItems += qty;
+      totalSkus++;
+      ltEl.textContent = `$${line.toFixed(2)}`;
+      ltEl.classList.add('has-value');
+    } else {
+      ltEl.textContent = '—';
+      ltEl.classList.remove('has-value');
+    }
+  });
+  document.getElementById('totalItems').textContent = totalItems;
+  document.getElementById('totalSkus').textContent = totalSkus;
+  document.getElementById('orderTotal').textContent = `$${totalCost.toFixed(2)}`;
+}
+
+document.addEventListener('input', e => {
+  if (e.target.classList.contains('qty-input')) updateTotals();
+});
+
+// ── Submit ───────────────────────────────────────────────────
+document.getElementById('submitBtn').addEventListener('click', async () => {
+  const btn = document.getElementById('submitBtn');
+  const statusEl = document.getElementById('statusMsg');
+
+  statusEl.style.display = 'none';
+
+  // Collect ordered items
+  const items = [];
+  document.querySelectorAll('.qty-input').forEach(input => {
+    const qty = parseInt(input.value) || 0;
+    if (qty > 0) {
+      items.push({
+        sku: input.dataset.sku,
+        product_name: input.dataset.product,
+        color: input.dataset.color,
+        size: input.dataset.size,
+        wholesale_cost: parseFloat(input.dataset.wholesale),
+        retail_price: parseFloat(input.dataset.retail),
+        qty,
+        line_total: (qty * parseFloat(input.dataset.wholesale)).toFixed(2)
+      });
+    }
+  });
+
+  if (items.length === 0) {
+    statusEl.textContent = 'Please enter a quantity for at least one product before submitting.';
+    statusEl.className = 'status-msg error';
+    statusEl.style.display = 'block';
+    return;
+  }
+
+  const order_total = items.reduce((s, i) => s + parseFloat(i.line_total), 0).toFixed(2);
+
+  btn.disabled = true;
+  btn.textContent = 'SUBMITTING...';
+
+  try {
+    // 1. Save order to Supabase
+    const { data: order, error: orderError } = await supabase
+      .from('orders')
+      .insert({
+        retailer_id: currentUser.id,
+        brand: 'Cast Fishing Co',
+        order_total: parseFloat(order_total),
+        notes: document.getElementById('orderNotes').value || null
+      })
+      .select()
+      .single();
+
+    if (orderError) throw orderError;
+
+    // 2. Save order items
+    const orderItems = items.map(item => ({ ...item, order_id: order.id }));
+    const { error: itemsError } = await supabase.from('order_items').insert(orderItems);
+    if (itemsError) throw itemsError;
+
+    // 3. Fire n8n webhook
+    await fetch(N8N_WEBHOOK_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        order_id: order.id,
+        brand: 'Cast Fishing Co',
+        retailer: {
+          store_name: currentRetailer?.store_name,
+          contact_name: currentRetailer?.contact_name,
+          email: currentRetailer?.email || currentUser.email,
+          phone: currentRetailer?.phone,
+          shipping_address: currentRetailer?.shipping_address,
+          city_state_zip: currentRetailer?.city_state_zip
+        },
+        items,
+        order_total,
+        notes: document.getElementById('orderNotes').value || ''
+      })
+    });
+
+    // Success
+    statusEl.textContent = `Order #${order.id.slice(0,8).toUpperCase()} submitted! CTP Marketing will confirm shortly. A summary has been sent to ${currentRetailer?.email || currentUser.email}.`;
+    statusEl.className = 'status-msg success';
+    statusEl.style.display = 'block';
+
+    // Reset quantities
+    document.querySelectorAll('.qty-input').forEach(i => { i.value = ''; });
+    document.getElementById('orderNotes').value = '';
+    document.querySelectorAll('.line-total').forEach(el => { el.textContent = '—'; el.classList.remove('has-value'); });
+    updateTotals();
+
+    btn.textContent = 'ORDER SENT ✓';
+    setTimeout(() => { btn.disabled = false; btn.textContent = 'SUBMIT ORDER'; }, 6000);
+
+  } catch (err) {
+    console.error(err);
+    statusEl.textContent = 'Something went wrong submitting your order. Please try again or contact info@ctpmarketing.com.';
+    statusEl.className = 'status-msg error';
+    statusEl.style.display = 'block';
+    btn.disabled = false;
+    btn.textContent = 'SUBMIT ORDER';
+  }
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Retailer Login — CTP Marketing</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+  :root {
+    --navy: #0a1628;
+    --navy-mid: #112240;
+    --navy-light: #1a3a5c;
+    --teal: #00b4a6;
+    --gold: #c9a84c;
+    --white: #f0f4f8;
+    --muted: #7a9abf;
+    --border: rgba(0,180,166,0.2);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--navy);
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Subtle background texture */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 20% 0%, rgba(0,180,166,0.06) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 40% at 80% 100%, rgba(201,168,76,0.04) 0%, transparent 50%);
+    pointer-events: none;
+  }
+
+  header {
+    padding: 24px 40px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    z-index: 1;
+  }
+
+  .brand { display: flex; flex-direction: column; gap: 2px; }
+  .brand-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 26px;
+    letter-spacing: 3px;
+    color: var(--white);
+  }
+  .brand-sub {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .back-link {
+    font-size: 12px;
+    letter-spacing: 1px;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .back-link:hover { color: var(--teal); }
+
+  main {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 48px 24px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .login-card {
+    width: 100%;
+    max-width: 440px;
+  }
+
+  .card-eyebrow {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 12px;
+  }
+
+  .card-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 42px;
+    letter-spacing: 3px;
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .card-desc {
+    font-size: 14px;
+    color: var(--muted);
+    margin-bottom: 40px;
+    line-height: 1.6;
+  }
+
+  .card-body {
+    background: var(--navy-mid);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 36px;
+  }
+
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+
+  .field label {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .field input {
+    background: var(--navy);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    padding: 13px 16px;
+    outline: none;
+    transition: border-color 0.2s;
+    width: 100%;
+  }
+  .field input:focus { border-color: var(--teal); }
+  .field input::placeholder { color: var(--muted); opacity: 0.4; }
+
+  .password-wrap { position: relative; }
+  .password-wrap input { padding-right: 48px; }
+  .toggle-pw {
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--muted);
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 0;
+    transition: color 0.2s;
+  }
+  .toggle-pw:hover { color: var(--teal); }
+
+  .forgot-link {
+    display: block;
+    text-align: right;
+    font-size: 12px;
+    color: var(--muted);
+    text-decoration: none;
+    margin-top: -12px;
+    margin-bottom: 28px;
+    transition: color 0.2s;
+  }
+  .forgot-link:hover { color: var(--teal); }
+
+  .login-btn {
+    width: 100%;
+    background: var(--teal);
+    color: var(--navy);
+    border: none;
+    border-radius: 3px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18px;
+    letter-spacing: 3px;
+    padding: 15px;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+  }
+  .login-btn:hover { background: #00d4c4; }
+  .login-btn:active { transform: scale(0.99); }
+  .login-btn:disabled { background: var(--muted); cursor: not-allowed; }
+
+  .error-msg {
+    background: rgba(200,50,50,0.12);
+    border: 1px solid rgba(200,50,50,0.4);
+    border-radius: 3px;
+    color: #ff7b7b;
+    font-size: 13px;
+    padding: 12px 16px;
+    margin-top: 16px;
+    display: none;
+    line-height: 1.5;
+  }
+
+  .success-msg {
+    background: rgba(0,180,166,0.1);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    color: var(--teal);
+    font-size: 13px;
+    padding: 12px 16px;
+    margin-top: 16px;
+    display: none;
+    line-height: 1.5;
+  }
+
+  .divider {
+    height: 1px;
+    background: var(--border);
+    margin: 28px 0;
+  }
+
+  .access-note {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.6;
+    text-align: center;
+  }
+  .access-note a {
+    color: var(--teal);
+    text-decoration: none;
+  }
+
+  /* Reset password view */
+  .reset-view { display: none; }
+  .login-view { display: block; }
+
+  footer {
+    padding: 20px 40px;
+    text-align: center;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 1px;
+    border-top: 1px solid var(--border);
+    position: relative;
+    z-index: 1;
+  }
+
+  @media (max-width: 480px) {
+    header { padding: 16px 20px; }
+    .card-body { padding: 24px 20px; }
+    .card-title { font-size: 36px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand">
+    <div class="brand-name">CTP Marketing</div>
+    <div class="brand-sub">Retailer Portal</div>
+  </div>
+  <a href="/" class="back-link">← Back to Site</a>
+</header>
+
+<main>
+  <div class="login-card">
+
+    <!-- Login View -->
+    <div class="login-view" id="loginView">
+      <div class="card-eyebrow">Authorized Retailers Only</div>
+      <div class="card-title">Sign In</div>
+      <div class="card-desc">Access your wholesale ordering portal, order history, and account details.</div>
+
+      <div class="card-body">
+        <div class="field">
+          <label>Email Address</label>
+          <input type="email" id="loginEmail" placeholder="you@yourstore.com" autocomplete="email">
+        </div>
+
+        <div class="field">
+          <label>Password</label>
+          <div class="password-wrap">
+            <input type="password" id="loginPassword" placeholder="••••••••" autocomplete="current-password">
+            <button type="button" class="toggle-pw" id="togglePw">Show</button>
+          </div>
+        </div>
+
+        <a href="#" class="forgot-link" id="showReset">Forgot password?</a>
+
+        <button class="login-btn" id="loginBtn">SIGN IN</button>
+
+        <div class="error-msg" id="loginError"></div>
+
+        <div class="divider"></div>
+
+        <div class="access-note">
+          Don't have an account? Retailer access is by invite only.<br>
+          Contact <a href="mailto:info@ctpmarketing.com">info@ctpmarketing.com</a> to apply.
+        </div>
+      </div>
+    </div>
+
+    <!-- Reset Password View -->
+    <div class="reset-view" id="resetView">
+      <div class="card-eyebrow">Password Reset</div>
+      <div class="card-title">Reset Password</div>
+      <div class="card-desc">Enter your email and we'll send you a link to reset your password.</div>
+
+      <div class="card-body">
+        <div class="field">
+          <label>Email Address</label>
+          <input type="email" id="resetEmail" placeholder="you@yourstore.com">
+        </div>
+
+        <button class="login-btn" id="resetBtn">SEND RESET LINK</button>
+
+        <div class="error-msg" id="resetError"></div>
+        <div class="success-msg" id="resetSuccess"></div>
+
+        <div class="divider"></div>
+
+        <div class="access-note">
+          <a href="#" id="backToLogin">← Back to sign in</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer>© 2025 CTP Marketing LLC — Lore City, Ohio</footer>
+
+<script>
+  // ── Supabase config — replace with your project values ──────
+  const SUPABASE_URL = 'YOUR_SUPABASE_PROJECT_URL';
+  const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
+  const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  // ── Redirect if already logged in ───────────────────────────
+  supabase.auth.getSession().then(({ data: { session } }) => {
+    if (session) window.location.href = '/order.html';
+  });
+
+  // ── Toggle password visibility ───────────────────────────────
+  const togglePw = document.getElementById('togglePw');
+  const pwField = document.getElementById('loginPassword');
+  togglePw.addEventListener('click', () => {
+    const isHidden = pwField.type === 'password';
+    pwField.type = isHidden ? 'text' : 'password';
+    togglePw.textContent = isHidden ? 'Hide' : 'Show';
+  });
+
+  // ── Login ────────────────────────────────────────────────────
+  document.getElementById('loginBtn').addEventListener('click', async () => {
+    const email = document.getElementById('loginEmail').value.trim();
+    const password = document.getElementById('loginPassword').value;
+    const btn = document.getElementById('loginBtn');
+    const errorEl = document.getElementById('loginError');
+
+    errorEl.style.display = 'none';
+
+    if (!email || !password) {
+      errorEl.textContent = 'Please enter your email and password.';
+      errorEl.style.display = 'block';
+      return;
+    }
+
+    btn.disabled = true;
+    btn.textContent = 'SIGNING IN...';
+
+    const { error } = await supabase.auth.signInWithPassword({ email, password });
+
+    if (error) {
+      errorEl.textContent = error.message === 'Invalid login credentials'
+        ? 'Incorrect email or password. Please try again.'
+        : error.message;
+      errorEl.style.display = 'block';
+      btn.disabled = false;
+      btn.textContent = 'SIGN IN';
+    } else {
+      btn.textContent = 'SUCCESS — REDIRECTING...';
+      window.location.href = '/order.html';
+    }
+  });
+
+  // Allow Enter key to submit
+  document.getElementById('loginPassword').addEventListener('keydown', e => {
+    if (e.key === 'Enter') document.getElementById('loginBtn').click();
+  });
+  document.getElementById('loginEmail').addEventListener('keydown', e => {
+    if (e.key === 'Enter') document.getElementById('loginBtn').click();
+  });
+
+  // ── Forgot password toggle ───────────────────────────────────
+  document.getElementById('showReset').addEventListener('click', e => {
+    e.preventDefault();
+    document.getElementById('loginView').style.display = 'none';
+    document.getElementById('resetView').style.display = 'block';
+  });
+
+  document.getElementById('backToLogin').addEventListener('click', e => {
+    e.preventDefault();
+    document.getElementById('resetView').style.display = 'none';
+    document.getElementById('loginView').style.display = 'block';
+  });
+
+  // ── Password reset ───────────────────────────────────────────
+  document.getElementById('resetBtn').addEventListener('click', async () => {
+    const email = document.getElementById('resetEmail').value.trim();
+    const btn = document.getElementById('resetBtn');
+    const errorEl = document.getElementById('resetError');
+    const successEl = document.getElementById('resetSuccess');
+
+    errorEl.style.display = 'none';
+    successEl.style.display = 'none';
+
+    if (!email) {
+      errorEl.textContent = 'Please enter your email address.';
+      errorEl.style.display = 'block';
+      return;
+    }
+
+    btn.disabled = true;
+    btn.textContent = 'SENDING...';
+
+    const { error } = await supabase.auth.resetPasswordForEmail(email, {
+      redirectTo: `${window.location.origin}/reset-password.html`
+    });
+
+    if (error) {
+      errorEl.textContent = error.message;
+      errorEl.style.display = 'block';
+      btn.disabled = false;
+      btn.textContent = 'SEND RESET LINK';
+    } else {
+      successEl.textContent = 'Reset link sent. Check your email — it may take a minute or two to arrive.';
+      successEl.style.display = 'block';
+      btn.textContent = 'LINK SENT';
+    }
+  });
+</script>
+</body>
+</html>
