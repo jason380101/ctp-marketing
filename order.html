@@ -798,7 +798,6 @@ function renderRows(cat, tbodyId) {
   const tbody = document.getElementById(tbodyId);
   catalog[cat].forEach(p => {
     const tr = document.createElement('tr');
-    const safeSize = p.size.replace(/"/g, '&quot;');
     tr.innerHTML = `
       <td class="bold">${productNames[cat]}</td>
       <td class="sku">${p.sku}</td>
@@ -810,7 +809,7 @@ function renderRows(cat, tbodyId) {
         <input class="qty-input" type="number" min="0" step="1"
           data-sku="${p.sku}" data-wholesale="${p.wholesale}"
           data-product="${productNames[cat]}" data-color="${p.color}"
-          data-size="${safeSize}" data-retail="${p.retail}"
+          data-size='${p.size}' data-retail="${p.retail}"
           placeholder="0" autocomplete="off">
       </td>
       <td class="right"><span class="line-total" id="lt-${p.sku.replace(/[.\s]/g,'_')}">—</span></td>
