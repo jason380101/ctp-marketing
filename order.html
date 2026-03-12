@@ -33,7 +33,6 @@
   }
   body.ready { opacity: 1; }
 
-  /* Auth gate — shown while checking session */
   #authGate {
     display: flex;
     align-items: center;
@@ -133,7 +132,6 @@
     background: var(--border);
   }
 
-  /* Pre-filled retailer info banner */
   .retailer-info-banner {
     background: var(--navy-mid);
     border: 1px solid var(--border);
@@ -158,7 +156,6 @@
     align-self: flex-end;
   }
 
-  /* Product tables */
   .product-section { margin-bottom: 40px; }
 
   .category-header {
@@ -254,7 +251,6 @@
   }
   .notes-field:focus { border-color: var(--teal); }
 
-  /* Sticky summary */
   .order-summary {
     position: sticky;
     bottom: 0;
@@ -302,7 +298,6 @@
   .status-msg.success { background: rgba(0,180,166,0.15); border: 1px solid var(--teal); color: var(--teal); }
   .status-msg.error { background: rgba(200,50,50,0.15); border: 1px solid #c83232; color: #ff6b6b; }
 
-  /* Brand selection grid */
   .brand-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
@@ -452,6 +447,20 @@
       </div>
     </div>
 
+    <div class="brand-card active" data-brand="wiseeye">
+      <div class="brand-card-inner">
+        <div class="brand-logo-area">
+          <div class="brand-initials">WE</div>
+        </div>
+        <div class="brand-info">
+          <div class="brand-card-name">WiseEye Tech</div>
+          <div class="brand-card-desc">Data Cams · Accessories · Mounting · Antennas</div>
+          <div class="brand-card-tag">23 SKUs Available</div>
+        </div>
+        <div class="brand-arrow">→</div>
+      </div>
+    </div>
+
     <div class="brand-card coming-soon" data-brand="queen">
       <div class="brand-card-inner">
         <div class="brand-logo-area">
@@ -528,71 +537,125 @@
   <form id="orderForm">
     <input type="hidden" id="hiddenRetailerId" name="retailer_id">
 
-    <!-- PRODIGY -->
-    <div class="product-section">
-      <div class="section-label">Products — Enter Quantity to Order</div>
-      <div class="category-header">
-        <span class="category-name">Prodigy</span>
-        <span class="category-desc">Soft Plastic Swimbaits</span>
+    <!-- CAST FORM -->
+    <div id="castForm">
+      <div class="product-section">
+        <div class="section-label">Products — Enter Quantity to Order</div>
+        <div class="category-header">
+          <span class="category-name">Prodigy</span>
+          <span class="category-desc">Soft Plastic Swimbaits</span>
+        </div>
+        <table><thead><tr>
+          <th>Product</th><th>SKU</th><th>Color</th><th>Size / Pack</th>
+          <th class="right">Wholesale</th><th class="right">Retail</th>
+          <th class="center">Qty</th><th class="right">Line Total</th>
+        </tr></thead><tbody id="prodigy-rows"></tbody></table>
       </div>
-      <table><thead><tr>
-        <th>Product</th><th>SKU</th><th>Color</th><th>Size / Pack</th>
-        <th class="right">Wholesale</th><th class="right">Retail</th>
-        <th class="center">Qty</th><th class="right">Line Total</th>
-      </tr></thead><tbody id="prodigy-rows"></tbody></table>
-    </div>
+      <div class="product-section">
+        <div class="category-header">
+          <span class="category-name">Echo</span>
+          <span class="category-desc">Finesse Minnow — Sonar/Hover Rig</span>
+        </div>
+        <table><thead><tr>
+          <th>Product</th><th>SKU</th><th>Color</th><th>Size / Pack</th>
+          <th class="right">Wholesale</th><th class="right">Retail</th>
+          <th class="center">Qty</th><th class="right">Line Total</th>
+        </tr></thead><tbody id="echo-rows"></tbody></table>
+      </div>
+      <div class="product-section">
+        <div class="category-header">
+          <span class="category-name">Nova</span>
+          <span class="category-desc">Neko Worm</span>
+        </div>
+        <table><thead><tr>
+          <th>Product</th><th>SKU</th><th>Color</th><th>Size / Pack</th>
+          <th class="right">Wholesale</th><th class="right">Retail</th>
+          <th class="center">Qty</th><th class="right">Line Total</th>
+        </tr></thead><tbody id="nova-rows"></tbody></table>
+      </div>
+      <div class="product-section">
+        <div class="category-header">
+          <span class="category-name">X12 Casting Braid</span>
+          <span class="category-desc">330–440 Yard Spools</span>
+        </div>
+        <table><thead><tr>
+          <th>Product</th><th>SKU</th><th>Color</th><th>Size / Pack</th>
+          <th class="right">Wholesale</th><th class="right">Retail</th>
+          <th class="center">Qty</th><th class="right">Line Total</th>
+        </tr></thead><tbody id="x12-rows"></tbody></table>
+      </div>
+      <div class="product-section">
+        <div class="category-header">
+          <span class="category-name">BFS Casting Braid</span>
+          <span class="category-desc">150 Yard Spools</span>
+        </div>
+        <table><thead><tr>
+          <th>Product</th><th>SKU</th><th>Color</th><th>Size / Pack</th>
+          <th class="right">Wholesale</th><th class="right">Retail</th>
+          <th class="center">Qty</th><th class="right">Line Total</th>
+        </tr></thead><tbody id="bfs-rows"></tbody></table>
+      </div>
+    </div><!-- end castForm -->
 
-    <!-- ECHO -->
-    <div class="product-section">
-      <div class="category-header">
-        <span class="category-name">Echo</span>
-        <span class="category-desc">Finesse Minnow — Sonar/Hover Rig</span>
+    <!-- WISEEYE FORM -->
+    <div id="wiseyeForm" style="display:none">
+      <div class="product-section">
+        <div class="section-label">Products — Enter Quantity to Order</div>
+        <div class="category-header">
+          <span class="category-name">Cameras</span>
+          <span class="category-desc">Trail &amp; Data Cameras</span>
+        </div>
+        <table><thead><tr>
+          <th class="center">Qty</th><th>SKU</th><th>UPC</th><th>Description</th>
+          <th class="right">MAP SRP</th><th class="right">Wholesale</th>
+          <th class="right">Order Price</th><th class="right">Line Total</th>
+        </tr></thead><tbody id="we-cameras-rows"></tbody></table>
       </div>
-      <table><thead><tr>
-        <th>Product</th><th>SKU</th><th>Color</th><th>Size / Pack</th>
-        <th class="right">Wholesale</th><th class="right">Retail</th>
-        <th class="center">Qty</th><th class="right">Line Total</th>
-      </tr></thead><tbody id="echo-rows"></tbody></table>
-    </div>
-
-    <!-- NOVA -->
-    <div class="product-section">
-      <div class="category-header">
-        <span class="category-name">Nova</span>
-        <span class="category-desc">Neko Worm</span>
+      <div class="product-section">
+        <div class="category-header">
+          <span class="category-name">Power &amp; Battery</span>
+          <span class="category-desc">Solar Chargers, Battery Packs &amp; Trays</span>
+        </div>
+        <table><thead><tr>
+          <th class="center">Qty</th><th>SKU</th><th>UPC</th><th>Description</th>
+          <th class="right">MAP SRP</th><th class="right">Wholesale</th>
+          <th class="right">Order Price</th><th class="right">Line Total</th>
+        </tr></thead><tbody id="we-power-rows"></tbody></table>
       </div>
-      <table><thead><tr>
-        <th>Product</th><th>SKU</th><th>Color</th><th>Size / Pack</th>
-        <th class="right">Wholesale</th><th class="right">Retail</th>
-        <th class="center">Qty</th><th class="right">Line Total</th>
-      </tr></thead><tbody id="nova-rows"></tbody></table>
-    </div>
-
-    <!-- X12 -->
-    <div class="product-section">
-      <div class="category-header">
-        <span class="category-name">X12 Casting Braid</span>
-        <span class="category-desc">330–440 Yard Spools</span>
+      <div class="product-section">
+        <div class="category-header">
+          <span class="category-name">Cables &amp; Connectors</span>
+          <span class="category-desc">12V Power Cords &amp; Connection Kits</span>
+        </div>
+        <table><thead><tr>
+          <th class="center">Qty</th><th>SKU</th><th>UPC</th><th>Description</th>
+          <th class="right">MAP SRP</th><th class="right">Wholesale</th>
+          <th class="right">Order Price</th><th class="right">Line Total</th>
+        </tr></thead><tbody id="we-cables-rows"></tbody></table>
       </div>
-      <table><thead><tr>
-        <th>Product</th><th>SKU</th><th>Color</th><th>Size / Pack</th>
-        <th class="right">Wholesale</th><th class="right">Retail</th>
-        <th class="center">Qty</th><th class="right">Line Total</th>
-      </tr></thead><tbody id="x12-rows"></tbody></table>
-    </div>
-
-    <!-- BFS -->
-    <div class="product-section">
-      <div class="category-header">
-        <span class="category-name">BFS Casting Braid</span>
-        <span class="category-desc">150 Yard Spools</span>
+      <div class="product-section">
+        <div class="category-header">
+          <span class="category-name">Security &amp; Mounting</span>
+          <span class="category-desc">Security Boxes &amp; Clamp Mount Kits</span>
+        </div>
+        <table><thead><tr>
+          <th class="center">Qty</th><th>SKU</th><th>UPC</th><th>Description</th>
+          <th class="right">MAP SRP</th><th class="right">Wholesale</th>
+          <th class="right">Order Price</th><th class="right">Line Total</th>
+        </tr></thead><tbody id="we-security-rows"></tbody></table>
       </div>
-      <table><thead><tr>
-        <th>Product</th><th>SKU</th><th>Color</th><th>Size / Pack</th>
-        <th class="right">Wholesale</th><th class="right">Retail</th>
-        <th class="center">Qty</th><th class="right">Line Total</th>
-      </tr></thead><tbody id="bfs-rows"></tbody></table>
-    </div>
+      <div class="product-section">
+        <div class="category-header">
+          <span class="category-name">Storage &amp; Antennas</span>
+          <span class="category-desc">SD Cards &amp; Replacement Antennas</span>
+        </div>
+        <table><thead><tr>
+          <th class="center">Qty</th><th>SKU</th><th>UPC</th><th>Description</th>
+          <th class="right">MAP SRP</th><th class="right">Wholesale</th>
+          <th class="right">Order Price</th><th class="right">Line Total</th>
+        </tr></thead><tbody id="we-storage-rows"></tbody></table>
+      </div>
+    </div><!-- end wiseyeForm -->
 
     <div class="section-label">Order Notes (Optional)</div>
     <textarea class="notes-field" id="orderNotes" placeholder="Special instructions, rush requests, or questions for CTP Marketing..."></textarea>
@@ -619,8 +682,6 @@
   <button class="submit-btn" id="submitBtn">SUBMIT ORDER</button>
 </div>
 
-</div><!-- end order-summary -->
-
 </div><!-- end orderScreen -->
 </div><!-- end pageContent -->
 
@@ -645,7 +706,6 @@ async function initPage() {
 
   currentUser = session.user;
 
-  // Load retailer profile
   const { data: retailer } = await sb
     .from('retailers')
     .select('*')
@@ -654,7 +714,6 @@ async function initPage() {
 
   currentRetailer = retailer;
 
-  // Populate header + banner
   document.getElementById('retailerName').textContent = retailer?.store_name || currentUser.email;
   document.getElementById('infoStore').textContent = retailer?.store_name || '—';
   document.getElementById('infoContact').textContent = retailer?.contact_name || '—';
@@ -665,7 +724,6 @@ async function initPage() {
       : 'Not set';
   document.getElementById('hiddenRetailerId').value = currentUser.id;
 
-  // Show page — brand screen first
   document.getElementById('authGate').style.display = 'none';
   document.getElementById('pageContent').style.display = 'block';
   document.body.classList.add('ready');
@@ -681,18 +739,35 @@ document.querySelectorAll('.brand-card.active').forEach(card => {
     document.getElementById('orderScreen').style.display = 'block';
     document.getElementById('headerBadge').style.display = 'block';
 
+    // Reset qty inputs and totals on brand switch
+    document.querySelectorAll('.qty-input').forEach(i => { i.value = ''; });
+    document.querySelectorAll('.line-total').forEach(el => { el.textContent = '—'; el.classList.remove('has-value'); });
+    updateTotals();
+
     if (brand === 'cast') {
       document.getElementById('orderPageTitle').textContent = 'Cast Fishing Co';
       document.getElementById('headerBadge').textContent = 'Cast Fishing Co';
-    }
-
-    // Render product rows if not already rendered
-    if (!document.getElementById('prodigy-rows').hasChildNodes()) {
-      renderRows('prodigy', 'prodigy-rows');
-      renderRows('echo',    'echo-rows');
-      renderRows('nova',    'nova-rows');
-      renderRows('x12',     'x12-rows');
-      renderRows('bfs',     'bfs-rows');
+      document.getElementById('castForm').style.display = 'block';
+      document.getElementById('wiseyeForm').style.display = 'none';
+      if (!document.getElementById('prodigy-rows').hasChildNodes()) {
+        renderRows('prodigy', 'prodigy-rows');
+        renderRows('echo',    'echo-rows');
+        renderRows('nova',    'nova-rows');
+        renderRows('x12',     'x12-rows');
+        renderRows('bfs',     'bfs-rows');
+      }
+    } else if (brand === 'wiseeye') {
+      document.getElementById('orderPageTitle').textContent = 'WiseEye Tech';
+      document.getElementById('headerBadge').textContent = 'WiseEye Tech';
+      document.getElementById('castForm').style.display = 'none';
+      document.getElementById('wiseyeForm').style.display = 'block';
+      if (!document.getElementById('we-cameras-rows').hasChildNodes()) {
+        renderWiseyeRows('cameras',  'we-cameras-rows');
+        renderWiseyeRows('power',    'we-power-rows');
+        renderWiseyeRows('cables',   'we-cables-rows');
+        renderWiseyeRows('security', 'we-security-rows');
+        renderWiseyeRows('storage',  'we-storage-rows');
+      }
     }
   });
 });
@@ -701,7 +776,6 @@ document.getElementById('backToBrands').addEventListener('click', () => {
   document.getElementById('orderScreen').style.display = 'none';
   document.getElementById('brandScreen').style.display = 'block';
   document.getElementById('headerBadge').style.display = 'none';
-  // Reset form state
   document.querySelectorAll('.qty-input').forEach(i => { i.value = ''; });
   document.querySelectorAll('.line-total').forEach(el => { el.textContent = '—'; el.classList.remove('has-value'); });
   if (document.getElementById('orderNotes')) document.getElementById('orderNotes').value = '';
@@ -710,14 +784,12 @@ document.getElementById('backToBrands').addEventListener('click', () => {
 });
 
 // ── Sign out ─────────────────────────────────────────────────
-
-// ── Sign out ─────────────────────────────────────────────────
 document.getElementById('signoutBtn').addEventListener('click', async () => {
   await sb.auth.signOut();
   window.location.href = '/login.html';
 });
 
-// ── Product catalog ──────────────────────────────────────────
+// ── Cast catalog ─────────────────────────────────────────────
 const catalog = {
   prodigy: [
     { sku: 'CFC-PRODIGY-ETHER-3',      color: 'Ether',             size: '3" / 8 Pack',   wholesale: 5.40, retail: 9.99 },
@@ -794,6 +866,44 @@ const productNames = {
   bfs: 'BFS Casting Braid'
 };
 
+// ── WiseEye catalog ──────────────────────────────────────────
+const wiseyeCatalog = {
+  cameras: [
+    { sku: 'CM-DC2LGN-DD1', upc: '715786401865', desc: 'WiseEye Data Cam 2',         map: 229.99, wholesale: 172.49, order_price: 165.59 },
+    { sku: 'CM-DC2NGN-DD1', upc: '659675878300', desc: 'WiseEye Data Cam 2 No Glow', map: 249.99, wholesale: 187.49, order_price: 179.99 },
+    { sku: 'CM-MC2LGN-ZE1', upc: '659675841601', desc: 'WiseEye Mini Cam 2',         map: 139.99, wholesale: 104.99, order_price: 100.79 },
+  ],
+  power: [
+    { sku: 'AC-SC05AH-ZB2', upc: '715786006572', desc: 'SP2 Solar Charger 7.4V 5W 5000mAh',        map: 89.99,  wholesale: 67.49, order_price: 64.79 },
+    { sku: 'AC-CDRC17-ZB1', upc: '680660845472', desc: "Solar Charger Replacement Cord 5' 1.7MM",  map: 12.99,  wholesale: 9.09,  order_price: 8.73  },
+    { sku: 'AC-DC2BP5-ZE1', upc: '659675668857', desc: 'Lithium Battery Pack (DC-2) 5Ah',           map: 54.99,  wholesale: 41.24, order_price: 39.59 },
+    { sku: 'AC-DC2BTA-ZE1', upc: '615629004034', desc: 'AA Battery Tray (DC-2) Replacement',        map: 12.99,  wholesale: 9.09,  order_price: 8.73  },
+  ],
+  cables: [
+    { sku: 'AC-CD12MK-ZB2', upc: '610655628834', desc: "12V Cord Kit 5'/10' 4 Pieces",  map: 26.99, wholesale: 18.89, order_price: 18.13 },
+    { sku: 'AC-CDBAT5-ZB1', upc: '680660845489', desc: "12V Clip Connectors 5'",        map: 12.99, wholesale: 9.09,  order_price: 8.73  },
+    { sku: 'AC-CDSPT5-ZB2', upc: '658865433947', desc: "12V Spade Connectors 5'",       map: 12.99, wholesale: 9.09,  order_price: 8.73  },
+    { sku: 'AC-CDRGT5-ZB2', upc: '645637128040', desc: "12V Ring Connectors 5'",        map: 12.99, wholesale: 9.09,  order_price: 8.73  },
+    { sku: 'AC-CDMEC5-ZB1', upc: '685568337658', desc: "12V Power Cord Extension 5'",   map: 12.99, wholesale: 9.09,  order_price: 8.73  },
+  ],
+  security: [
+    { sku: 'AC-SBDC2X-ZE1', upc: '659675693910', desc: 'Security Box (DC-2 Only)',                     map: 49.99, wholesale: 34.99, order_price: 33.59 },
+    { sku: 'AC-SBD1M1-ZE1', upc: '645637236929', desc: 'Security Box (DC-1, MC-1 and MC-2)',           map: 49.99, wholesale: 34.99, order_price: 33.59 },
+    { sku: 'AC-CLMCK2-ZB3', upc: '605258627032', desc: 'Clamp Mount Kit Maverick II (T-Post Double)',  map: 38.99, wholesale: 27.29, order_price: 26.20 },
+    { sku: 'AC-CLMCK2-ZB2', upc: '610655926138', desc: 'Clamp Mount Kit Maverick I (T-Post Single)',   map: 28.99, wholesale: 20.29, order_price: 19.48 },
+    { sku: 'AC-CLMCK2-ZB1', upc: '610655640102', desc: 'Clamp Mount Kit Infinity (Tree Spike)',        map: 25.99, wholesale: 18.19, order_price: 17.46 },
+    { sku: 'AC-CLMCK1-ZB2', upc: '715786171805', desc: 'Clamp Mount Kit (Not Recommended for DC-2)',   map: 17.99, wholesale: 12.59, order_price: 12.09 },
+  ],
+  storage: [
+    { sku: 'AC-SD032G-ZB2', upc: '638457963212', desc: 'SD Card Retail Pkg 32GB C10 U3',           map: 16.99, wholesale: 11.89, order_price: 11.41 },
+    { sku: 'AC-ANDC2C-DD1', upc: '659675880921', desc: 'Replacement Antenna 5dBi Camo (DC-2)',     map: 16.99, wholesale: 11.89, order_price: 11.41 },
+    { sku: 'AC-ANMC2G-ZE1', upc: '715786192589', desc: 'Replacement Antenna 5dBi Gray (MC-2)',     map: 16.99, wholesale: 11.89, order_price: 11.41 },
+    { sku: 'AC-ANBLKN-ZB1', upc: '680660845526', desc: 'Replacement Antenna 5dBi Black',           map: 16.99, wholesale: 11.89, order_price: 11.41 },
+    { sku: 'AC-AND1M1-AH1', upc: '615629323326', desc: 'Replacement Antenna 6dBi Camo (DC-1)',     map: 16.99, wholesale: 11.89, order_price: 11.41 },
+  ]
+};
+
+// ── Render functions ─────────────────────────────────────────
 function renderRows(cat, tbodyId) {
   const tbody = document.getElementById(tbodyId);
   catalog[cat].forEach(p => {
@@ -818,6 +928,30 @@ function renderRows(cat, tbodyId) {
   });
 }
 
+function renderWiseyeRows(cat, tbodyId) {
+  const tbody = document.getElementById(tbodyId);
+  wiseyeCatalog[cat].forEach(p => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td style="text-align:center">
+        <input class="qty-input" type="number" min="0" step="1"
+          data-sku="${p.sku}" data-wholesale="${p.order_price}"
+          data-product="${p.desc}" data-upc="${p.upc}"
+          data-map="${p.map}" data-ws="${p.wholesale}" data-op="${p.order_price}"
+          placeholder="0" autocomplete="off">
+      </td>
+      <td class="sku">${p.sku}</td>
+      <td class="sku">${p.upc}</td>
+      <td class="bold">${p.desc}</td>
+      <td class="right" style="color:var(--muted)">$${p.map.toFixed(2)}</td>
+      <td class="right" style="color:var(--muted)">$${p.wholesale.toFixed(2)}</td>
+      <td class="right">$${p.order_price.toFixed(2)}</td>
+      <td class="right"><span class="line-total" id="lt-${p.sku.replace(/[.\s]/g,'_')}">—</span></td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
 // ── Live totals ──────────────────────────────────────────────
 function updateTotals() {
   let totalCost = 0, totalItems = 0, totalSkus = 0;
@@ -826,16 +960,18 @@ function updateTotals() {
     const wholesale = parseFloat(input.dataset.wholesale);
     const ltId = `lt-${input.dataset.sku.replace(/[.\s]/g,'_')}`;
     const ltEl = document.getElementById(ltId);
-    if (qty > 0) {
-      const line = qty * wholesale;
-      totalCost += line;
-      totalItems += qty;
-      totalSkus++;
-      ltEl.textContent = `$${line.toFixed(2)}`;
-      ltEl.classList.add('has-value');
-    } else {
-      ltEl.textContent = '—';
-      ltEl.classList.remove('has-value');
+    if (ltEl) {
+      if (qty > 0) {
+        const line = qty * wholesale;
+        totalCost += line;
+        totalItems += qty;
+        totalSkus++;
+        ltEl.textContent = `$${line.toFixed(2)}`;
+        ltEl.classList.add('has-value');
+      } else {
+        ltEl.textContent = '—';
+        ltEl.classList.remove('has-value');
+      }
     }
   });
   document.getElementById('totalItems').textContent = totalItems;
@@ -854,7 +990,6 @@ document.getElementById('submitBtn').addEventListener('click', async () => {
 
   statusEl.style.display = 'none';
 
-  // Collect ordered items
   const items = [];
   document.querySelectorAll('.qty-input').forEach(input => {
     const qty = parseInt(input.value) || 0;
@@ -862,10 +997,10 @@ document.getElementById('submitBtn').addEventListener('click', async () => {
       items.push({
         sku: input.dataset.sku,
         product_name: input.dataset.product,
-        color: input.dataset.color,
-        size: input.dataset.size,
+        color: input.dataset.color || '',
+        size: input.dataset.size || '',
         wholesale_cost: parseFloat(input.dataset.wholesale),
-        retail_price: parseFloat(input.dataset.retail),
+        retail_price: parseFloat(input.dataset.retail || input.dataset.map || 0),
         qty,
         line_total: (qty * parseFloat(input.dataset.wholesale)).toFixed(2)
       });
@@ -880,6 +1015,7 @@ document.getElementById('submitBtn').addEventListener('click', async () => {
   }
 
   const order_total = items.reduce((s, i) => s + parseFloat(i.line_total), 0).toFixed(2);
+  const brandName = document.getElementById('headerBadge').textContent;
 
   btn.disabled = true;
   btn.textContent = 'SUBMITTING...';
@@ -890,7 +1026,7 @@ document.getElementById('submitBtn').addEventListener('click', async () => {
       .from('orders')
       .insert({
         retailer_id: currentUser.id,
-        brand: 'Cast Fishing Co',
+        brand: brandName,
         order_total: parseFloat(order_total),
         notes: document.getElementById('orderNotes').value || null
       })
@@ -910,7 +1046,7 @@ document.getElementById('submitBtn').addEventListener('click', async () => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         order_id: order.id,
-        brand: 'Cast Fishing Co',
+        brand: brandName,
         retailer: {
           store_name: currentRetailer?.store_name,
           contact_name: currentRetailer?.contact_name,
@@ -925,7 +1061,6 @@ document.getElementById('submitBtn').addEventListener('click', async () => {
       })
     });
 
-    // Redirect to confirmation page
     btn.textContent = 'ORDER SENT — REDIRECTING...';
     window.location.href = `/order-confirmation.html?id=${order.id}`;
 
