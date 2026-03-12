@@ -425,11 +425,11 @@
 <script>
   const SUPABASE_URL = 'https://esmaohthnfgibncscewj.supabase.co';
   const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVzbWFvaHRobmZnaWJuY3NjZXdqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMyNDgxNzYsImV4cCI6MjA4ODgyNDE3Nn0.-QwoQje7kAOktUaQ2_PI_wMffw81eHja_8g61gzKV1Q';
-  const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
   async function loadConfirmation() {
     // Auth check
-    const { data: { session } } = await supabase.auth.getSession();
+    const { data: { session } } = await sb.auth.getSession();
     if (!session) { window.location.href = '/login.html'; return; }
 
     // Get order ID from URL
