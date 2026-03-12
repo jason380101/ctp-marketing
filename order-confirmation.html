@@ -438,7 +438,7 @@
     if (!orderId) { showError(); return; }
 
     // Fetch order
-    const { data: order, error: orderError } = await supabase
+    const { data: order, error: orderError } = await sb
       .from('orders')
       .select('*')
       .eq('id', orderId)
@@ -448,7 +448,7 @@
     if (orderError || !order) { showError(); return; }
 
     // Fetch order items
-    const { data: items, error: itemsError } = await supabase
+    const { data: items, error: itemsError } = await sb
       .from('order_items')
       .select('*')
       .eq('order_id', orderId);
@@ -456,7 +456,7 @@
     if (itemsError) { showError(); return; }
 
     // Fetch retailer profile
-    const { data: retailer } = await supabase
+    const { data: retailer } = await sb
       .from('retailers')
       .select('*')
       .eq('id', session.user.id)
