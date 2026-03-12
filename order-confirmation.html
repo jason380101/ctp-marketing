@@ -476,13 +476,14 @@
 
     // Render items
     const tbody = document.getElementById('itemsBody');
+    const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
     items.forEach((item, idx) => {
       const tr = document.createElement('tr');
       tr.innerHTML = `
-        <td>${item.product_name}</td>
-        <td class="muted">${item.sku}</td>
-        <td>${item.color}</td>
-        <td>${item.size}</td>
+        <td>${esc(item.product_name)}</td>
+        <td class="muted">${esc(item.sku)}</td>
+        <td>${esc(item.color)}</td>
+        <td>${esc(item.size)}</td>
         <td class="right">$${Number(item.wholesale_cost).toFixed(2)}</td>
         <td class="center">${item.qty}</td>
         <td class="right" style="font-weight:500;color:var(--gold);">$${Number(item.line_total).toFixed(2)}</td>
