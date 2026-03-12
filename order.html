@@ -630,14 +630,14 @@ const SUPABASE_URL = 'https://esmaohthnfgibncscewj.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVzbWFvaHRobmZnaWJuY3NjZXdqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMyNDgxNzYsImV4cCI6MjA4ODgyNDE3Nn0.-QwoQje7kAOktUaQ2_PI_wMffw81eHja_8g61gzKV1Q';
 const N8N_WEBHOOK_URL = 'https://neffdigitalsolutions.app.n8n.cloud/webhook/cast-order';
 
-const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 // ── Auth gate ────────────────────────────────────────────────
 let currentUser = null;
 let currentRetailer = null;
 
 async function initPage() {
-  const { data: { session } } = await sb.auth.getSession();
+  const { data: { session } } = await supabase.auth.getSession();
   if (!session) {
     window.location.href = '/login.html';
     return;
@@ -646,7 +646,7 @@ async function initPage() {
   currentUser = session.user;
 
   // Load retailer profile
-  const { data: retailer } = await sb
+  const { data: retailer } = await supabase
     .from('retailers')
     .select('*')
     .eq('id', currentUser.id)
@@ -671,11 +671,7 @@ async function initPage() {
   document.body.classList.add('ready');
 }
 
-initPage().catch(err => {
-  console.error('initPage error:', err);
-  document.body.classList.add('ready');
-  document.getElementById('authGate').textContent = 'Something went wrong. Please refresh or log in again.';
-});
+initPage();
 
 // ── Brand selection ──────────────────────────────────────────
 document.querySelectorAll('.brand-card.active').forEach(card => {
@@ -717,7 +713,7 @@ document.getElementById('backToBrands').addEventListener('click', () => {
 
 // ── Sign out ─────────────────────────────────────────────────
 document.getElementById('signoutBtn').addEventListener('click', async () => {
-  await sb.auth.signOut();
+  await supabase.auth.signOut();
   window.location.href = '/login.html';
 });
 
@@ -890,7 +886,7 @@ document.getElementById('submitBtn').addEventListener('click', async () => {
 
   try {
     // 1. Save order to Supabase
-    const { data: order, error: orderError } = await sb
+    const { data: order, error: orderError } = await supabase
       .from('orders')
       .insert({
         retailer_id: currentUser.id,
@@ -905,7 +901,7 @@ document.getElementById('submitBtn').addEventListener('click', async () => {
 
     // 2. Save order items
     const orderItems = items.map(item => ({ ...item, order_id: order.id }));
-    const { error: itemsError } = await sb.from('order_items').insert(orderItems);
+    const { error: itemsError } = await supabase.from('order_items').insert(orderItems);
     if (itemsError) throw itemsError;
 
     // 3. Fire n8n webhook
@@ -929,19 +925,9 @@ document.getElementById('submitBtn').addEventListener('click', async () => {
       })
     });
 
-    // Success
-    statusEl.textContent = `Order #${order.id.slice(0,8).toUpperCase()} submitted! CTP Marketing will confirm shortly. A summary has been sent to ${currentRetailer?.email || currentUser.email}.`;
-    statusEl.className = 'status-msg success';
-    statusEl.style.display = 'block';
-
-    // Reset quantities
-    document.querySelectorAll('.qty-input').forEach(i => { i.value = ''; });
-    document.getElementById('orderNotes').value = '';
-    document.querySelectorAll('.line-total').forEach(el => { el.textContent = '—'; el.classList.remove('has-value'); });
-    updateTotals();
-
-    btn.textContent = 'ORDER SENT ✓';
-    setTimeout(() => { btn.disabled = false; btn.textContent = 'SUBMIT ORDER'; }, 6000);
+    // Redirect to confirmation page
+    btn.textContent = 'ORDER SENT — REDIRECTING...';
+    window.location.href = `/order-confirmation.html?id=${order.id}`;
 
   } catch (err) {
     console.error(err);
