@@ -448,15 +448,15 @@
       </div>
     </div>
 
-    <div class="brand-card active" data-brand="wiseeye">
+    <div class="brand-card active" data-brand="feathermoon">
       <div class="brand-card-inner">
         <div class="brand-logo-area">
-          <div class="brand-initials">WE</div>
+          <div class="brand-initials">FM</div>
         </div>
         <div class="brand-info">
-          <div class="brand-card-name">WiseEye Tech</div>
-          <div class="brand-card-desc">Data Cams · Accessories · Mounting · Antennas</div>
-          <div class="brand-card-tag">23 SKUs Available</div>
+          <div class="brand-card-name">FeatherMoon Outdoors</div>
+          <div class="brand-card-desc">Mouth Calls · Pot Calls · Flip Calls · Hunting Accessories</div>
+          <div class="brand-card-tag">15 SKUs Available</div>
         </div>
         <div class="brand-arrow">→</div>
       </div>
@@ -598,65 +598,21 @@
       </div>
     </div><!-- end castForm -->
 
-    <!-- WISEEYE FORM -->
-    <div id="wiseyeForm" style="display:none">
+    <!-- FEATHERMOON FORM -->
+    <div id="feathermoonForm" style="display:none">
       <div class="product-section">
         <div class="section-label">Products — Enter Quantity to Order</div>
         <div class="category-header">
-          <span class="category-name">Cameras</span>
-          <span class="category-desc">Trail &amp; Data Cameras</span>
+          <span class="category-name">FeatherMoon Outdoors</span>
+          <span class="category-desc">Game Calls &amp; Hunting Accessories</span>
         </div>
         <table><thead><tr>
-          <th class="center">Qty</th><th>SKU</th><th>UPC</th><th>Description</th>
-          <th class="right">MAP SRP</th><th class="right">Wholesale</th>
-          <th class="right">Order Price</th><th class="right">Line Total</th>
-        </tr></thead><tbody id="we-cameras-rows"></tbody></table>
+          <th>Product</th><th>SKU</th><th>Notes</th>
+          <th class="right">Wholesale</th><th class="right">Retail</th>
+          <th class="center">Qty</th><th class="right">Line Total</th>
+        </tr></thead><tbody id="feathermoon-rows"></tbody></table>
       </div>
-      <div class="product-section">
-        <div class="category-header">
-          <span class="category-name">Power &amp; Battery</span>
-          <span class="category-desc">Solar Chargers, Battery Packs &amp; Trays</span>
-        </div>
-        <table><thead><tr>
-          <th class="center">Qty</th><th>SKU</th><th>UPC</th><th>Description</th>
-          <th class="right">MAP SRP</th><th class="right">Wholesale</th>
-          <th class="right">Order Price</th><th class="right">Line Total</th>
-        </tr></thead><tbody id="we-power-rows"></tbody></table>
-      </div>
-      <div class="product-section">
-        <div class="category-header">
-          <span class="category-name">Cables &amp; Connectors</span>
-          <span class="category-desc">12V Power Cords &amp; Connection Kits</span>
-        </div>
-        <table><thead><tr>
-          <th class="center">Qty</th><th>SKU</th><th>UPC</th><th>Description</th>
-          <th class="right">MAP SRP</th><th class="right">Wholesale</th>
-          <th class="right">Order Price</th><th class="right">Line Total</th>
-        </tr></thead><tbody id="we-cables-rows"></tbody></table>
-      </div>
-      <div class="product-section">
-        <div class="category-header">
-          <span class="category-name">Security &amp; Mounting</span>
-          <span class="category-desc">Security Boxes &amp; Clamp Mount Kits</span>
-        </div>
-        <table><thead><tr>
-          <th class="center">Qty</th><th>SKU</th><th>UPC</th><th>Description</th>
-          <th class="right">MAP SRP</th><th class="right">Wholesale</th>
-          <th class="right">Order Price</th><th class="right">Line Total</th>
-        </tr></thead><tbody id="we-security-rows"></tbody></table>
-      </div>
-      <div class="product-section">
-        <div class="category-header">
-          <span class="category-name">Storage &amp; Antennas</span>
-          <span class="category-desc">SD Cards &amp; Replacement Antennas</span>
-        </div>
-        <table><thead><tr>
-          <th class="center">Qty</th><th>SKU</th><th>UPC</th><th>Description</th>
-          <th class="right">MAP SRP</th><th class="right">Wholesale</th>
-          <th class="right">Order Price</th><th class="right">Line Total</th>
-        </tr></thead><tbody id="we-storage-rows"></tbody></table>
-      </div>
-    </div><!-- end wiseyeForm -->
+    </div><!-- end feathermoonForm -->
 
     <div class="section-label">Order Notes (Optional)</div>
     <textarea class="notes-field" id="orderNotes" placeholder="Special instructions, rush requests, or questions for CTP Marketing..."></textarea>
@@ -742,11 +698,14 @@ initPage().then(() => {
       document.getElementById('orderScreen').style.display = 'block';
       document.getElementById('headerBadge').style.display = 'block';
 
+      // Hide all brand forms first
+      document.getElementById('castForm').style.display = 'none';
+      document.getElementById('feathermoonForm').style.display = 'none';
+
       if (reorder.brand === 'Cast Fishing Co') {
         document.getElementById('orderPageTitle').textContent = 'Cast Fishing Co';
         document.getElementById('headerBadge').textContent = 'Cast Fishing Co';
         document.getElementById('castForm').style.display = 'block';
-        document.getElementById('wiseyeForm').style.display = 'none';
         if (!document.getElementById('prodigy-rows').hasChildNodes()) {
           renderRows('prodigy', 'prodigy-rows');
           renderRows('echo',    'echo-rows');
@@ -754,17 +713,12 @@ initPage().then(() => {
           renderRows('x12',     'x12-rows');
           renderRows('bfs',     'bfs-rows');
         }
-      } else if (reorder.brand === 'WiseEye Tech') {
-        document.getElementById('orderPageTitle').textContent = 'WiseEye Tech';
-        document.getElementById('headerBadge').textContent = 'WiseEye Tech';
-        document.getElementById('castForm').style.display = 'none';
-        document.getElementById('wiseyeForm').style.display = 'block';
-        if (!document.getElementById('we-cameras-rows').hasChildNodes()) {
-          renderWiseyeRows('cameras',  'we-cameras-rows');
-          renderWiseyeRows('power',    'we-power-rows');
-          renderWiseyeRows('cables',   'we-cables-rows');
-          renderWiseyeRows('security', 'we-security-rows');
-          renderWiseyeRows('storage',  'we-storage-rows');
+      } else if (reorder.brand === 'FeatherMoon Outdoors') {
+        document.getElementById('orderPageTitle').textContent = 'FeatherMoon Outdoors';
+        document.getElementById('headerBadge').textContent = 'FeatherMoon Outdoors';
+        document.getElementById('feathermoonForm').style.display = 'block';
+        if (!document.getElementById('feathermoon-rows').hasChildNodes()) {
+          renderFeathermoonRows();
         }
       }
       // Fill in quantities by SKU
@@ -798,11 +752,14 @@ document.querySelectorAll('.brand-card.active').forEach(card => {
     document.querySelectorAll('.line-total').forEach(el => { el.textContent = '—'; el.classList.remove('has-value'); });
     updateTotals();
 
+    // Hide all brand forms first
+    document.getElementById('castForm').style.display = 'none';
+    document.getElementById('feathermoonForm').style.display = 'none';
+
     if (brand === 'cast') {
       document.getElementById('orderPageTitle').textContent = 'Cast Fishing Co';
       document.getElementById('headerBadge').textContent = 'Cast Fishing Co';
       document.getElementById('castForm').style.display = 'block';
-      document.getElementById('wiseyeForm').style.display = 'none';
       if (!document.getElementById('prodigy-rows').hasChildNodes()) {
         renderRows('prodigy', 'prodigy-rows');
         renderRows('echo',    'echo-rows');
@@ -810,17 +767,12 @@ document.querySelectorAll('.brand-card.active').forEach(card => {
         renderRows('x12',     'x12-rows');
         renderRows('bfs',     'bfs-rows');
       }
-    } else if (brand === 'wiseeye') {
-      document.getElementById('orderPageTitle').textContent = 'WiseEye Tech';
-      document.getElementById('headerBadge').textContent = 'WiseEye Tech';
-      document.getElementById('castForm').style.display = 'none';
-      document.getElementById('wiseyeForm').style.display = 'block';
-      if (!document.getElementById('we-cameras-rows').hasChildNodes()) {
-        renderWiseyeRows('cameras',  'we-cameras-rows');
-        renderWiseyeRows('power',    'we-power-rows');
-        renderWiseyeRows('cables',   'we-cables-rows');
-        renderWiseyeRows('security', 'we-security-rows');
-        renderWiseyeRows('storage',  'we-storage-rows');
+    } else if (brand === 'feathermoon') {
+      document.getElementById('orderPageTitle').textContent = 'FeatherMoon Outdoors';
+      document.getElementById('headerBadge').textContent = 'FeatherMoon Outdoors';
+      document.getElementById('feathermoonForm').style.display = 'block';
+      if (!document.getElementById('feathermoon-rows').hasChildNodes()) {
+        renderFeathermoonRows();
       }
     }
   });
@@ -920,42 +872,25 @@ const productNames = {
   bfs: 'BFS Casting Braid'
 };
 
-// ── WiseEye catalog ──────────────────────────────────────────
-const wiseyeCatalog = {
-  cameras: [
-    { sku: 'CM-DC2LGN-DD1', upc: '715786401865', desc: 'WiseEye Data Cam 2',         map: 229.99, wholesale: 172.49, order_price: 165.59 },
-    { sku: 'CM-DC2NGN-DD1', upc: '659675878300', desc: 'WiseEye Data Cam 2 No Glow', map: 249.99, wholesale: 187.49, order_price: 179.99 },
-    { sku: 'CM-MC2LGN-ZE1', upc: '659675841601', desc: 'WiseEye Mini Cam 2',         map: 139.99, wholesale: 104.99, order_price: 100.79 },
-  ],
-  power: [
-    { sku: 'AC-SC05AH-ZB2', upc: '715786006572', desc: 'SP2 Solar Charger 7.4V 5W 5000mAh',        map: 89.99,  wholesale: 67.49, order_price: 64.79 },
-    { sku: 'AC-CDRC17-ZB1', upc: '680660845472', desc: "Solar Charger Replacement Cord 5' 1.7MM",  map: 12.99,  wholesale: 9.09,  order_price: 8.73  },
-    { sku: 'AC-DC2BP5-ZE1', upc: '659675668857', desc: 'Lithium Battery Pack (DC-2) 5Ah',           map: 54.99,  wholesale: 41.24, order_price: 39.59 },
-    { sku: 'AC-DC2BTA-ZE1', upc: '615629004034', desc: 'AA Battery Tray (DC-2) Replacement',        map: 12.99,  wholesale: 9.09,  order_price: 8.73  },
-  ],
-  cables: [
-    { sku: 'AC-CD12MK-ZB2', upc: '610655628834', desc: "12V Cord Kit 5'/10' 4 Pieces",  map: 26.99, wholesale: 18.89, order_price: 18.13 },
-    { sku: 'AC-CDBAT5-ZB1', upc: '680660845489', desc: "12V Clip Connectors 5'",        map: 12.99, wholesale: 9.09,  order_price: 8.73  },
-    { sku: 'AC-CDSPT5-ZB2', upc: '658865433947', desc: "12V Spade Connectors 5'",       map: 12.99, wholesale: 9.09,  order_price: 8.73  },
-    { sku: 'AC-CDRGT5-ZB2', upc: '645637128040', desc: "12V Ring Connectors 5'",        map: 12.99, wholesale: 9.09,  order_price: 8.73  },
-    { sku: 'AC-CDMEC5-ZB1', upc: '685568337658', desc: "12V Power Cord Extension 5'",   map: 12.99, wholesale: 9.09,  order_price: 8.73  },
-  ],
-  security: [
-    { sku: 'AC-SBDC2X-ZE1', upc: '659675693910', desc: 'Security Box (DC-2 Only)',                     map: 49.99, wholesale: 34.99, order_price: 33.59 },
-    { sku: 'AC-SBD1M1-ZE1', upc: '645637236929', desc: 'Security Box (DC-1, MC-1 and MC-2)',           map: 49.99, wholesale: 34.99, order_price: 33.59 },
-    { sku: 'AC-CLMCK2-ZB3', upc: '605258627032', desc: 'Clamp Mount Kit Maverick II (T-Post Double)',  map: 38.99, wholesale: 27.29, order_price: 26.20 },
-    { sku: 'AC-CLMCK2-ZB2', upc: '610655926138', desc: 'Clamp Mount Kit Maverick I (T-Post Single)',   map: 28.99, wholesale: 20.29, order_price: 19.48 },
-    { sku: 'AC-CLMCK2-ZB1', upc: '610655640102', desc: 'Clamp Mount Kit Infinity (Tree Spike)',        map: 25.99, wholesale: 18.19, order_price: 17.46 },
-    { sku: 'AC-CLMCK1-ZB2', upc: '715786171805', desc: 'Clamp Mount Kit (Not Recommended for DC-2)',   map: 17.99, wholesale: 12.59, order_price: 12.09 },
-  ],
-  storage: [
-    { sku: 'AC-SD032G-ZB2', upc: '638457963212', desc: 'SD Card Retail Pkg 32GB C10 U3',           map: 16.99, wholesale: 11.89, order_price: 11.41 },
-    { sku: 'AC-ANDC2C-DD1', upc: '659675880921', desc: 'Replacement Antenna 5dBi Camo (DC-2)',     map: 16.99, wholesale: 11.89, order_price: 11.41 },
-    { sku: 'AC-ANMC2G-ZE1', upc: '715786192589', desc: 'Replacement Antenna 5dBi Gray (MC-2)',     map: 16.99, wholesale: 11.89, order_price: 11.41 },
-    { sku: 'AC-ANBLKN-ZB1', upc: '680660845526', desc: 'Replacement Antenna 5dBi Black',           map: 16.99, wholesale: 11.89, order_price: 11.41 },
-    { sku: 'AC-AND1M1-AH1', upc: '615629323326', desc: 'Replacement Antenna 6dBi Camo (DC-1)',     map: 16.99, wholesale: 11.89, order_price: 11.41 },
-  ]
-};
+
+// ── Feathermoon Outdoors catalog ─────────────────────────────
+const feathermoonCatalog = [
+  { sku: 'FM-MOUTHCALL-1',   desc: '1 Mouth Call',        notes: '',                                  retail: 8.49,  wholesale: 5.59  },
+  { sku: 'FM-MOUTHCALL-3',   desc: '3 Mouth Calls',       notes: 'Hunters 3 Pk',                     retail: 19.99, wholesale: 11.99 },
+  { sku: 'FM-WALNUTSLATE',   desc: 'Walnut Slate Pot',    notes: '',                                  retail: 51.49, wholesale: 37.50 },
+  { sku: 'FM-NEWLAMINATE',   desc: 'New Laminate Pot',    notes: '',                                  retail: 75.00, wholesale: 60.00 },
+  { sku: 'FM-LAMINATE',      desc: 'Laminate Pot',        notes: '',                                  retail: 75.00, wholesale: 60.00 },
+  { sku: 'FM-CHERRYPOT',     desc: 'Cherry Pot',          notes: '',                                  retail: 51.49, wholesale: 37.50 },
+  { sku: 'FM-CHERRYFLIP',    desc: 'Cherry Flip',         notes: 'The Game Changer, Glass over Slate', retail: 51.49, wholesale: 37.50 },
+  { sku: 'FM-CAMOFLIP',      desc: 'Camo Flip',           notes: '',                                  retail: 22.99, wholesale: 16.99 },
+  { sku: 'FM-GRUNTCALL',     desc: 'Grunt Call',          notes: '',                                  retail: 22.99, wholesale: 17.50 },
+  { sku: 'FM-WALNUTFLIP',    desc: 'Walnut Flip',         notes: '',                                  retail: 51.49, wholesale: 37.50 },
+  { sku: 'FM-PREDCALL',      desc: 'Pred Call',           notes: '',                                  retail: 15.49, wholesale: 11.75 },
+  { sku: 'FM-CONDSTONES',    desc: 'Cond. Stones',        notes: '',                                  retail: 9.99,  wholesale: 6.50  },
+  { sku: 'FM-CROWCALL',      desc: 'Crow Call',           notes: '',                                  retail: 14.49, wholesale: 11.25 },
+  { sku: 'FM-BLEATCAN',      desc: 'Bleat Can',           notes: '',                                  retail: 10.99, wholesale: 7.99  },
+  { sku: 'FM-OWLHOOTER',     desc: 'Owl Hooter',          notes: '',                                  retail: 25.00, wholesale: 12.60 },
+];
 
 // ── Render functions ─────────────────────────────────────────
 function renderRows(cat, tbodyId) {
@@ -982,24 +917,23 @@ function renderRows(cat, tbodyId) {
   });
 }
 
-function renderWiseyeRows(cat, tbodyId) {
-  const tbody = document.getElementById(tbodyId);
-  wiseyeCatalog[cat].forEach(p => {
+function renderFeathermoonRows() {
+  const tbody = document.getElementById('feathermoon-rows');
+  feathermoonCatalog.forEach(p => {
     const tr = document.createElement('tr');
     tr.innerHTML = `
+      <td class="bold">${p.desc}</td>
+      <td class="sku">${p.sku}</td>
+      <td style="font-size:11px;color:var(--muted)">${p.notes}</td>
+      <td class="right">$${p.wholesale.toFixed(2)}</td>
+      <td class="right" style="color:var(--muted)">$${p.retail.toFixed(2)}</td>
       <td style="text-align:center">
         <input class="qty-input" type="number" min="0" step="1"
-          data-sku="${p.sku}" data-wholesale="${p.order_price}"
-          data-product="${p.desc}" data-upc="${p.upc}"
-          data-map="${p.map}" data-ws="${p.wholesale}" data-op="${p.order_price}"
+          data-sku="${p.sku}" data-wholesale="${p.wholesale}"
+          data-product="${p.desc}" data-color=""
+          data-size="" data-retail="${p.retail}"
           placeholder="0" autocomplete="off">
       </td>
-      <td class="sku">${p.sku}</td>
-      <td class="sku">${p.upc}</td>
-      <td class="bold">${p.desc}</td>
-      <td class="right" style="color:var(--muted)">$${p.map.toFixed(2)}</td>
-      <td class="right" style="color:var(--muted)">$${p.wholesale.toFixed(2)}</td>
-      <td class="right">$${p.order_price.toFixed(2)}</td>
       <td class="right"><span class="line-total" id="lt-${p.sku.replace(/[.\s]/g,'_')}">—</span></td>
     `;
     tbody.appendChild(tr);
