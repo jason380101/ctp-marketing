@@ -1904,8 +1904,7 @@ function renderLanierRows(cat, tbodyId) {
           data-color="${p.color}" data-retail="0"
           placeholder="0" autocomplete="off">
       </td>
-      <td class="sku">${p.sku}</td>
-      <td class="sku">${p.item}</td>
+      <td class="sku">${p.sku.replace('LB-','')}</td>
       <td class="bold">${desc}</td>
       <td style="text-align:center;color:var(--muted)">${p.pack}pk</td>
       <td class="right">$${p.wholesale.toFixed(2)}</td>
