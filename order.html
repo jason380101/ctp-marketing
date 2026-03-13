@@ -8,6 +8,7 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="bluerock-catalog.js"></script>
 <script src="spotsticker-catalog.js"></script>
+<script src="copperredbait-catalog.js"></script>
 <style>
   :root {
     --navy: #0a1628;
@@ -520,6 +521,20 @@
       </div>
     </div>
 
+    <div class="brand-card active" data-brand="copperred">
+      <div class="brand-card-inner">
+        <div class="brand-logo-area">
+          <div class="brand-initials">CB</div>
+        </div>
+        <div class="brand-info">
+          <div class="brand-card-name">Copper Red Baits</div>
+          <div class="brand-card-desc">Jerk Baits · Lipless Cranks · Blade Baits · Poppin Frogs · Walking Frogs</div>
+          <div class="brand-card-tag">120 SKUs Available</div>
+        </div>
+        <div class="brand-arrow">→</div>
+      </div>
+    </div>
+
   </div>
 </main>
 </div>
@@ -529,7 +544,7 @@
 
 <main>
   <div style="display:flex;align-items:center;gap:16px;margin-bottom:6px;">
-    <button id="backToBrands" style="background:none;border:none;color:var(--muted);font-family:'DM Sans',sans-serif;font-size:13px;letter-spacing:1px;cursor:pointer;padding:0;transition:color 0.2s;" onmouseover="this.style.color='var(--teal)'" onmouseout="this.style.color='var(--muted)'">← Change Brand</button>
+    <button id="backToBrands" style="background:var(--navy-light);border:1px solid var(--teal);color:var(--teal);font-family:'Bebas Neue',sans-serif;font-size:15px;letter-spacing:2px;cursor:pointer;padding:8px 20px;border-radius:4px;transition:all 0.2s;" onmouseover="this.style.background='var(--teal)';this.style.color='var(--navy)'" onmouseout="this.style.background='var(--navy-light)';this.style.color='var(--teal)'">← Change Brand</button>
   </div>
   <div class="page-title" id="orderPageTitle">Cast Fishing Co</div>
   <div class="page-subtitle">Wholesale Order Form — Powered by <span>CTP Marketing LLC</span></div>
@@ -1046,6 +1061,13 @@
       </div>
     </div><!-- end spotstickerForm -->
 
+    <!-- COPPER RED BAITS FORM -->
+    <div id="copperredForm" style="display:none">
+      <div class="product-section">
+        <div id="copperred-sections"></div>
+      </div>
+    </div><!-- end copperredForm -->
+
     <div class="section-label">Order Notes (Optional)</div>
     <textarea class="notes-field" id="orderNotes" placeholder="Special instructions, rush requests, or questions for CTP Marketing..."></textarea>
 
@@ -1137,6 +1159,7 @@ initPage().then(() => {
       document.getElementById('lanierForm').style.display = 'none';
       document.getElementById('bluerockForm').style.display = 'none';
       document.getElementById('spotstickerForm').style.display = 'none';
+      document.getElementById('copperredForm').style.display = 'none';
 
       if (reorder.brand === 'Cast Fishing Co') {
         document.getElementById('orderPageTitle').textContent = 'Cast Fishing Co';
@@ -1184,6 +1207,13 @@ initPage().then(() => {
         if (!document.getElementById('spotsticker-sections').hasChildNodes()) {
           renderAllSpotstickerSections();
         }
+      } else if (reorder.brand === 'Copper Red Baits') {
+        document.getElementById('orderPageTitle').textContent = 'Copper Red Baits';
+        document.getElementById('headerBadge').textContent = 'Copper Red Baits';
+        document.getElementById('copperredForm').style.display = 'block';
+        if (!document.getElementById('copperred-sections').hasChildNodes()) {
+          renderAllCopperredSections();
+        }
       }
       // Fill in quantities by SKU
       if (reorder.items && reorder.items.length) {
@@ -1223,6 +1253,7 @@ document.querySelectorAll('.brand-card.active').forEach(card => {
     document.getElementById('lanierForm').style.display = 'none';
     document.getElementById('bluerockForm').style.display = 'none';
     document.getElementById('spotstickerForm').style.display = 'none';
+    document.getElementById('copperredForm').style.display = 'none';
 
     if (brand === 'cast') {
       document.getElementById('orderPageTitle').textContent = 'Cast Fishing Co';
@@ -1269,6 +1300,13 @@ document.querySelectorAll('.brand-card.active').forEach(card => {
       document.getElementById('spotstickerForm').style.display = 'block';
       if (!document.getElementById('spotsticker-sections').hasChildNodes()) {
         renderAllSpotstickerSections();
+      }
+    } else if (brand === 'copperred') {
+      document.getElementById('orderPageTitle').textContent = 'Copper Red Baits';
+      document.getElementById('headerBadge').textContent = 'Copper Red Baits';
+      document.getElementById('copperredForm').style.display = 'block';
+      if (!document.getElementById('copperred-sections').hasChildNodes()) {
+        renderAllCopperredSections();
       }
     }
   });
