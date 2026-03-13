@@ -601,6 +601,61 @@ const bluerockCatalog = {
     { sku:'BR-190567152615', upc:'190567152615', desc:'Deuce Stick Worm — 5.25" — Summer Craw', size:'5.25"', color:'Summer Craw', pack:'8 Pack', wholesale:3.89, retail:5.99 },
   ],
 };
+// ── Blue Rock categories metadata ─────────────────────────────
+const bluerockCategories = [
+  // JIGS
+  { key:'jig_1099',       label:'1099 Jig',                              group:'Jigs' },
+  { key:'jig_1099xl',     label:'1099 XL Jig',                           group:'Jigs' },
+  { key:'triple_threat',  label:'Triple Threat Finesse Jig',             group:'Jigs' },
+  { key:'jig_247',        label:'247 Jig',                               group:'Jigs' },
+  { key:'sabotage_swim',  label:'Sabotage Swim Jig',                     group:'Jigs' },
+  { key:'scrapper_ball',  label:'Scrapper Ball Head Finesse Jig',        group:'Jigs' },
+  // SPINNERBAITS
+  { key:'ss_wc',          label:'Showstopper Spinnerbait Willow/Colorado', group:'Spinnerbaits' },
+  { key:'ss_dw',          label:'Showstopper Spinnerbait Double Willow',   group:'Spinnerbaits' },
+  { key:'ss_sc',          label:'Showstopper Spinnerbait Single Colorado', group:'Spinnerbaits' },
+  { key:'ss_dc',          label:'Showstopper Spinnerbait Double Colorado', group:'Spinnerbaits' },
+  { key:'indiana_pulse',  label:'Indiana Pulse Spinnerbait',               group:'Spinnerbaits' },
+  { key:'flare_series',   label:'Flare Series Painted Blade Spinnerbait',  group:'Spinnerbaits' },
+  // BUZZBAITS
+  { key:'boss_man',       label:'Boss Man Buzzbait',                     group:'Buzzbaits' },
+  { key:'bombshell',      label:'Bombshell Naked Buzzbait',              group:'Buzzbaits' },
+  // TERMINAL
+  { key:'plush_underspin',    label:'Plush Underspin',                   group:'Terminal' },
+  { key:'moneyball_3_0',      label:'Money Ball Stupid Tube Head 3/0',   group:'Terminal' },
+  { key:'moneyball_5_0',      label:'Money Ball Stupid Tube Head 5/0',   group:'Terminal' },
+  { key:'ricochet_tube',      label:'Ricochet Rattling Tube Head',       group:'Terminal' },
+  { key:'tube_jr',            label:'Tube Jr Hook',                      group:'Terminal' },
+  { key:'goby_fat_head',      label:'Goby Fat Head Tube Hook',          group:'Terminal' },
+  { key:'tactical_tube',      label:'Tactical Tube Jig Head',           group:'Terminal' },
+  { key:'mini_mack',          label:'Mini Mack Ball Head',              group:'Terminal' },
+  { key:'ss_round_ball',      label:'SS Round Ball Jig Head',           group:'Terminal' },
+  { key:'covert_round_ball',  label:'Covert Round Ball Finesse Swimbait Head', group:'Terminal' },
+  { key:'nasty_ned_head',     label:'Nasty Ned Head',                   group:'Terminal' },
+  { key:'nasty_ned_weedless', label:'Nasty Ned Head Weedless',          group:'Terminal' },
+  { key:'ewg_ned_1_0',        label:'EWG Ned 1/0',                     group:'Terminal' },
+  { key:'ewg_ned_2_0',        label:'EWG Ned 2/0',                     group:'Terminal' },
+  { key:'shimmy_shaky',       label:'Shimmy Shaky Head Light Wire',    group:'Terminal' },
+  { key:'bobber_stops',       label:'Bobber Stops',                    group:'Terminal' },
+  { key:'bluerock_tfw',       label:'Tungsten Flipping Weights',       group:'Terminal' },
+  { key:'dropshot_tear',      label:'Drop Dead Dropshot Weights — Tear Drop', group:'Terminal' },
+  { key:'dropshot_pencil',    label:'Drop Dead Dropshot Weights — Pencil',    group:'Terminal' },
+  { key:'nail_weights',       label:'Nail Weights',                    group:'Terminal' },
+  { key:'twin_jig_rattle',    label:'Twin Jig Rattle',                group:'Terminal' },
+  { key:'screw_lock_spinner', label:'Screw Lock Tail Spinner',        group:'Terminal' },
+  // SOFT PLASTICS
+  { key:'hydro_shad',      label:'Hydro Shad Finesse Swimbait',       group:'Soft Plastics' },
+  { key:'salty_jr',         label:'Salty Stick Em Tubes Jr',           group:'Soft Plastics' },
+  { key:'salty_tubes',      label:'Salty Stick Em Tubes',              group:'Soft Plastics' },
+  { key:'nasty_ned_worm',   label:'Nasty Ned Worm',                   group:'Soft Plastics' },
+  { key:'bulldozer_toad',   label:'Bulldozer Buzz Toad',              group:'Soft Plastics' },
+  { key:'helgy',            label:'Helgy',                             group:'Soft Plastics' },
+  { key:'chaw_craw',        label:'Chaw Craw',                        group:'Soft Plastics' },
+  { key:'savvy_swimmer',    label:'Savvy Swimmer',                    group:'Soft Plastics' },
+  { key:'trash_chunk',      label:'Trash Chunk',                      group:'Soft Plastics' },
+  { key:'deuce_stick',      label:'Deuce Stick Worm',                 group:'Soft Plastics' },
+];
+
 // ── Blue Rock Custom Tackle render function ───────────────────
 function renderBluerockRows(cat, tbodyId) {
   const tbody = document.getElementById(tbodyId);
@@ -622,5 +677,37 @@ function renderBluerockRows(cat, tbodyId) {
       <td class="right"><span class="line-total" id="lt-${p.sku.replace(/[^a-zA-Z0-9]/g,'_')}">—</span></td>
     `;
     tbody.appendChild(tr);
+  });
+}
+
+// ── Build all Blue Rock sections dynamically ──────────────────
+function renderAllBluerockSections() {
+  const container = document.getElementById('bluerock-sections');
+  let lastGroup = '';
+  bluerockCategories.forEach(cat => {
+    if (cat.group !== lastGroup) {
+      lastGroup = cat.group;
+      const groupLabel = document.createElement('div');
+      groupLabel.className = 'section-label';
+      groupLabel.textContent = cat.group;
+      container.appendChild(groupLabel);
+    }
+    const tbodyId = 'br-' + cat.key + '-rows';
+    const skuCount = bluerockCatalog[cat.key].length;
+    const section = document.createElement('div');
+    section.className = 'product-section';
+    section.innerHTML = `
+      <div class="category-header">
+        <span class="category-name">${cat.label}</span>
+        <span class="category-desc">${skuCount} SKUs</span>
+      </div>
+      <table><thead><tr>
+        <th class="center">Qty</th><th>UPC</th><th>Description</th><th>Pack</th>
+        <th class="right">Wholesale</th><th class="right">Retail</th>
+        <th class="right">Line Total</th>
+      </tr></thead><tbody id="${tbodyId}"></tbody></table>
+    `;
+    container.appendChild(section);
+    renderBluerockRows(cat.key, tbodyId);
   });
 }

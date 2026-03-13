@@ -6,6 +6,7 @@
 <title>Cast Fishing Co — Order Form | CTP Marketing</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="bluerock-catalog.js"></script>
 <style>
   :root {
     --navy: #0a1628;
@@ -490,16 +491,17 @@
       </div>
     </div>
 
-    <div class="brand-card coming-soon" data-brand="bluerock">
+    <div class="brand-card active" data-brand="bluerock">
       <div class="brand-card-inner">
         <div class="brand-logo-area">
           <div class="brand-initials">BR</div>
         </div>
         <div class="brand-info">
           <div class="brand-card-name">Blue Rock Custom Tackle</div>
-          <div class="brand-card-desc">Hand-tied jigs</div>
-          <div class="brand-card-tag coming">Coming Soon</div>
+          <div class="brand-card-desc">Hand-Tied Jigs · Spinnerbaits · Buzzbaits · Tube Heads · Underspins · Soft Plastics</div>
+          <div class="brand-card-tag">465 SKUs Available</div>
         </div>
+        <div class="brand-arrow">→</div>
       </div>
     </div>
 
@@ -1007,6 +1009,21 @@
       </div>
     </div><!-- end lanierForm -->
 
+    <!-- BLUE ROCK CUSTOM TACKLE FORM -->
+    <div id="bluerockForm" style="display:none">
+      <div style="background:var(--navy-light);border:1px solid var(--gold);border-radius:4px;padding:16px 24px;margin-bottom:32px;">
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:2px;color:var(--gold);margin-bottom:8px;">Blue Rock Order Requirements</div>
+        <div style="font-size:13px;color:var(--muted);line-height:1.8;">
+          <span style="color:var(--white);font-weight:500;">Wholesale Minimum Order Value:</span> $250.00<br>
+          <span style="color:var(--white);font-weight:500;">Product Minimum Order Quantity:</span> 4 Per Variant<br>
+          <span style="color:var(--teal);font-weight:500;">FREE Shipping</span> on Orders Over $1,000.00
+        </div>
+      </div>
+      <div class="product-section">
+        <div id="bluerock-sections"></div>
+      </div>
+    </div><!-- end bluerockForm -->
+
     <div class="section-label">Order Notes (Optional)</div>
     <textarea class="notes-field" id="orderNotes" placeholder="Special instructions, rush requests, or questions for CTP Marketing..."></textarea>
 
@@ -1096,6 +1113,7 @@ initPage().then(() => {
       document.getElementById('feathermoonForm').style.display = 'none';
       document.getElementById('qtForm').style.display = 'none';
       document.getElementById('lanierForm').style.display = 'none';
+      document.getElementById('bluerockForm').style.display = 'none';
 
       if (reorder.brand === 'Cast Fishing Co') {
         document.getElementById('orderPageTitle').textContent = 'Cast Fishing Co';
@@ -1128,6 +1146,13 @@ initPage().then(() => {
         document.getElementById('lanierForm').style.display = 'block';
         if (!document.getElementById('lb-finesse_worm-rows').hasChildNodes()) {
           renderAllLanierRows();
+        }
+      } else if (reorder.brand === 'Blue Rock Custom Tackle') {
+        document.getElementById('orderPageTitle').textContent = 'Blue Rock Custom Tackle';
+        document.getElementById('headerBadge').textContent = 'Blue Rock Custom Tackle';
+        document.getElementById('bluerockForm').style.display = 'block';
+        if (!document.getElementById('bluerock-sections').hasChildNodes()) {
+          renderAllBluerockSections();
         }
       }
       // Fill in quantities by SKU
@@ -1166,6 +1191,7 @@ document.querySelectorAll('.brand-card.active').forEach(card => {
     document.getElementById('feathermoonForm').style.display = 'none';
     document.getElementById('qtForm').style.display = 'none';
     document.getElementById('lanierForm').style.display = 'none';
+    document.getElementById('bluerockForm').style.display = 'none';
 
     if (brand === 'cast') {
       document.getElementById('orderPageTitle').textContent = 'Cast Fishing Co';
@@ -1198,6 +1224,13 @@ document.querySelectorAll('.brand-card.active').forEach(card => {
       document.getElementById('lanierForm').style.display = 'block';
       if (!document.getElementById('lb-finesse_worm-rows').hasChildNodes()) {
         renderAllLanierRows();
+      }
+    } else if (brand === 'bluerock') {
+      document.getElementById('orderPageTitle').textContent = 'Blue Rock Custom Tackle';
+      document.getElementById('headerBadge').textContent = 'Blue Rock Custom Tackle';
+      document.getElementById('bluerockForm').style.display = 'block';
+      if (!document.getElementById('bluerock-sections').hasChildNodes()) {
+        renderAllBluerockSections();
       }
     }
   });
