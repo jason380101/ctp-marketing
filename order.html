@@ -7,6 +7,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="bluerock-catalog.js"></script>
+<script src="spotsticker-catalog.js"></script>
 <style>
   :root {
     --navy: #0a1628;
@@ -500,6 +501,20 @@
           <div class="brand-card-name">Blue Rock Custom Tackle</div>
           <div class="brand-card-desc">Hand-Tied Jigs · Spinnerbaits · Buzzbaits · Tube Heads · Underspins · Soft Plastics</div>
           <div class="brand-card-tag">465 SKUs Available</div>
+        </div>
+        <div class="brand-arrow">→</div>
+      </div>
+    </div>
+
+    <div class="brand-card active" data-brand="spotsticker">
+      <div class="brand-card-inner">
+        <div class="brand-logo-area">
+          <div class="brand-initials">SS</div>
+        </div>
+        <div class="brand-info">
+          <div class="brand-card-name">SpotSticker Baits</div>
+          <div class="brand-card-desc">Jig Heads · Dropshot Weights · Hand-Tied Jigs · Underspins · Soft Plastics</div>
+          <div class="brand-card-tag">217 SKUs Available</div>
         </div>
         <div class="brand-arrow">→</div>
       </div>
@@ -1024,6 +1039,13 @@
       </div>
     </div><!-- end bluerockForm -->
 
+    <!-- SPOTSTICKER BAITS FORM -->
+    <div id="spotstickerForm" style="display:none">
+      <div class="product-section">
+        <div id="spotsticker-sections"></div>
+      </div>
+    </div><!-- end spotstickerForm -->
+
     <div class="section-label">Order Notes (Optional)</div>
     <textarea class="notes-field" id="orderNotes" placeholder="Special instructions, rush requests, or questions for CTP Marketing..."></textarea>
 
@@ -1114,6 +1136,7 @@ initPage().then(() => {
       document.getElementById('qtForm').style.display = 'none';
       document.getElementById('lanierForm').style.display = 'none';
       document.getElementById('bluerockForm').style.display = 'none';
+      document.getElementById('spotstickerForm').style.display = 'none';
 
       if (reorder.brand === 'Cast Fishing Co') {
         document.getElementById('orderPageTitle').textContent = 'Cast Fishing Co';
@@ -1154,6 +1177,13 @@ initPage().then(() => {
         if (!document.getElementById('bluerock-sections').hasChildNodes()) {
           renderAllBluerockSections();
         }
+      } else if (reorder.brand === 'SpotSticker Baits') {
+        document.getElementById('orderPageTitle').textContent = 'SpotSticker Baits';
+        document.getElementById('headerBadge').textContent = 'SpotSticker Baits';
+        document.getElementById('spotstickerForm').style.display = 'block';
+        if (!document.getElementById('spotsticker-sections').hasChildNodes()) {
+          renderAllSpotstickerSections();
+        }
       }
       // Fill in quantities by SKU
       if (reorder.items && reorder.items.length) {
@@ -1192,6 +1222,7 @@ document.querySelectorAll('.brand-card.active').forEach(card => {
     document.getElementById('qtForm').style.display = 'none';
     document.getElementById('lanierForm').style.display = 'none';
     document.getElementById('bluerockForm').style.display = 'none';
+    document.getElementById('spotstickerForm').style.display = 'none';
 
     if (brand === 'cast') {
       document.getElementById('orderPageTitle').textContent = 'Cast Fishing Co';
@@ -1231,6 +1262,13 @@ document.querySelectorAll('.brand-card.active').forEach(card => {
       document.getElementById('bluerockForm').style.display = 'block';
       if (!document.getElementById('bluerock-sections').hasChildNodes()) {
         renderAllBluerockSections();
+      }
+    } else if (brand === 'spotsticker') {
+      document.getElementById('orderPageTitle').textContent = 'SpotSticker Baits';
+      document.getElementById('headerBadge').textContent = 'SpotSticker Baits';
+      document.getElementById('spotstickerForm').style.display = 'block';
+      if (!document.getElementById('spotsticker-sections').hasChildNodes()) {
+        renderAllSpotstickerSections();
       }
     }
   });
