@@ -737,19 +737,34 @@ initPage().then(() => {
     localStorage.removeItem('reorder');
     try {
       const reorder = JSON.parse(reorderRaw);
-      // Auto-select the brand
+      // Auto-select the brand (mirror the brand card click logic)
+      document.getElementById('brandScreen').style.display = 'none';
+      document.getElementById('orderScreen').style.display = 'block';
+      document.getElementById('headerBadge').style.display = 'block';
+
       if (reorder.brand === 'Cast Fishing Co') {
-        document.getElementById('brandScreen').style.display = 'none';
-        document.getElementById('orderScreen').style.display = 'block';
-        document.getElementById('headerBadge').style.display = 'block';
         document.getElementById('orderPageTitle').textContent = 'Cast Fishing Co';
         document.getElementById('headerBadge').textContent = 'Cast Fishing Co';
+        document.getElementById('castForm').style.display = 'block';
+        document.getElementById('wiseyeForm').style.display = 'none';
         if (!document.getElementById('prodigy-rows').hasChildNodes()) {
           renderRows('prodigy', 'prodigy-rows');
           renderRows('echo',    'echo-rows');
           renderRows('nova',    'nova-rows');
           renderRows('x12',     'x12-rows');
           renderRows('bfs',     'bfs-rows');
+        }
+      } else if (reorder.brand === 'WiseEye Tech') {
+        document.getElementById('orderPageTitle').textContent = 'WiseEye Tech';
+        document.getElementById('headerBadge').textContent = 'WiseEye Tech';
+        document.getElementById('castForm').style.display = 'none';
+        document.getElementById('wiseyeForm').style.display = 'block';
+        if (!document.getElementById('we-cameras-rows').hasChildNodes()) {
+          renderWiseyeRows('cameras',  'we-cameras-rows');
+          renderWiseyeRows('power',    'we-power-rows');
+          renderWiseyeRows('cables',   'we-cables-rows');
+          renderWiseyeRows('security', 'we-security-rows');
+          renderWiseyeRows('storage',  'we-storage-rows');
         }
       }
       // Fill in quantities by SKU
