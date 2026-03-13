@@ -730,7 +730,45 @@ async function initPage() {
   document.body.classList.add('ready');
 }
 
-initPage();
+initPage().then(() => {
+  // ── Check for reorder data from order history ──────────────
+  const reorderRaw = localStorage.getItem('reorder');
+  if (reorderRaw) {
+    localStorage.removeItem('reorder');
+    try {
+      const reorder = JSON.parse(reorderRaw);
+      // Auto-select the brand
+      if (reorder.brand === 'Cast Fishing Co') {
+        document.getElementById('brandScreen').style.display = 'none';
+        document.getElementById('orderScreen').style.display = 'block';
+        document.getElementById('headerBadge').style.display = 'block';
+        document.getElementById('orderPageTitle').textContent = 'Cast Fishing Co';
+        document.getElementById('headerBadge').textContent = 'Cast Fishing Co';
+        if (!document.getElementById('prodigy-rows').hasChildNodes()) {
+          renderRows('prodigy', 'prodigy-rows');
+          renderRows('echo',    'echo-rows');
+          renderRows('nova',    'nova-rows');
+          renderRows('x12',     'x12-rows');
+          renderRows('bfs',     'bfs-rows');
+        }
+      }
+      // Fill in quantities by SKU
+      if (reorder.items && reorder.items.length) {
+        const skuMap = {};
+        reorder.items.forEach(i => { skuMap[i.sku] = i.qty; });
+        document.querySelectorAll('.qty-input').forEach(input => {
+          const qty = skuMap[input.dataset.sku];
+          if (qty && qty > 0) {
+            input.value = qty;
+          }
+        });
+        updateTotals();
+      }
+    } catch (e) {
+      console.error('Reorder parse error:', e);
+    }
+  }
+});
 
 // ── Brand selection ──────────────────────────────────────────
 document.querySelectorAll('.brand-card.active').forEach(card => {
