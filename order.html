@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cast Fishing Co — Order Form | CTP Marketing</title>
+<title>Order Portal | CTP Marketing</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="bluerock-catalog.js"></script>
@@ -23,9 +23,7 @@
     --border: rgba(0,180,166,0.2);
     --row-alt: rgba(0,180,166,0.04);
   }
-
   * { box-sizing: border-box; margin: 0; padding: 0; }
-
   body {
     background: var(--navy);
     color: var(--white);
@@ -36,7 +34,6 @@
     transition: opacity 0.3s;
   }
   body.ready { opacity: 1; }
-
   #authGate {
     display: flex;
     align-items: center;
@@ -47,7 +44,6 @@
     letter-spacing: 3px;
     color: var(--muted);
   }
-
   header {
     background: var(--navy-mid);
     border-bottom: 2px solid var(--teal);
@@ -56,17 +52,10 @@
     align-items: center;
     justify-content: space-between;
   }
-
   .header-left { display: flex; flex-direction: column; gap: 2px; }
-  .header-brand {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 26px;
-    letter-spacing: 3px;
-  }
+  .header-brand { font-family: 'Bebas Neue', sans-serif; font-size: 26px; letter-spacing: 3px; }
   .header-sub { font-size: 11px; color: var(--muted); letter-spacing: 2px; text-transform: uppercase; }
-
   .header-right { display: flex; align-items: center; gap: 20px; }
-
   .retailer-pill {
     background: rgba(0,180,166,0.1);
     border: 1px solid var(--border);
@@ -76,7 +65,6 @@
     color: var(--teal);
   }
   .retailer-pill span { color: var(--white); font-weight: 500; }
-
   .signout-btn {
     background: none;
     border: 1px solid var(--border);
@@ -91,7 +79,6 @@
     text-transform: uppercase;
   }
   .signout-btn:hover { border-color: var(--teal); color: var(--teal); }
-
   .header-badge {
     background: var(--teal);
     color: var(--navy);
@@ -101,24 +88,10 @@
     padding: 6px 16px;
     border-radius: 2px;
   }
-
   main { max-width: 1100px; margin: 0 auto; padding: 48px 24px 80px; }
-
-  .page-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 48px;
-    letter-spacing: 4px;
-    line-height: 1;
-    margin-bottom: 6px;
-  }
-  .page-subtitle {
-    color: var(--muted);
-    font-size: 14px;
-    letter-spacing: 1px;
-    margin-bottom: 48px;
-  }
+  .page-title { font-family: 'Bebas Neue', sans-serif; font-size: 48px; letter-spacing: 4px; line-height: 1; margin-bottom: 6px; }
+  .page-subtitle { color: var(--muted); font-size: 14px; letter-spacing: 1px; margin-bottom: 48px; }
   .page-subtitle span { color: var(--teal); }
-
   .section-label {
     font-family: 'Bebas Neue', sans-serif;
     font-size: 13px;
@@ -129,13 +102,7 @@
     align-items: center;
     gap: 12px;
   }
-  .section-label::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: var(--border);
-  }
-
+  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
   .retailer-info-banner {
     background: var(--navy-mid);
     border: 1px solid var(--border);
@@ -146,22 +113,10 @@
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 16px;
   }
-
   .info-item { display: flex; flex-direction: column; gap: 4px; }
   .info-label { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); }
   .info-value { font-size: 14px; font-weight: 500; }
-  .info-value.empty { color: var(--muted); font-style: italic; font-weight: 300; }
-
-  .edit-info-link {
-    font-size: 12px;
-    color: var(--teal);
-    text-decoration: none;
-    letter-spacing: 1px;
-    align-self: flex-end;
-  }
-
   .product-section { margin-bottom: 40px; }
-
   .category-header {
     background: var(--navy-light);
     border-left: 3px solid var(--teal);
@@ -170,15 +125,20 @@
     align-items: baseline;
     gap: 10px;
   }
-  .category-name {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 18px;
-    letter-spacing: 2px;
-  }
+  .category-name { font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: 2px; }
   .category-desc { font-size: 12px; color: var(--muted); letter-spacing: 1px; }
-
+  .group-header {
+    background: rgba(0,180,166,0.05);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 8px 16px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 13px;
+    letter-spacing: 3px;
+    color: var(--muted);
+    margin-top: 24px;
+  }
   table { width: 100%; border-collapse: collapse; font-size: 13px; }
-
   thead th {
     background: rgba(0,180,166,0.08);
     padding: 10px 14px;
@@ -192,28 +152,13 @@
   }
   thead th.right { text-align: right; }
   thead th.center { text-align: center; }
-
-  tbody tr {
-    border-bottom: 1px solid rgba(255,255,255,0.04);
-    transition: background 0.15s;
-  }
+  tbody tr { border-bottom: 1px solid rgba(255,255,255,0.04); transition: background 0.15s; }
   tbody tr:nth-child(even) { background: var(--row-alt); }
   tbody tr:hover { background: rgba(0,180,166,0.06); }
-
   td { padding: 10px 14px; vertical-align: middle; }
   td.right { text-align: right; color: var(--muted); }
   td.bold { font-weight: 500; }
-
   .sku { font-size: 11px; color: var(--muted); font-family: monospace; }
-  .color-dot {
-    display: inline-block;
-    width: 8px; height: 8px;
-    border-radius: 50%;
-    margin-right: 6px;
-    background: var(--teal);
-    opacity: 0.6;
-  }
-
   .qty-input {
     width: 70px;
     background: var(--navy);
@@ -229,16 +174,8 @@
     transition: border-color 0.2s, background 0.2s;
   }
   .qty-input:focus { border-color: var(--teal); background: var(--navy-mid); }
-
-  .line-total {
-    font-size: 13px;
-    font-weight: 500;
-    color: var(--muted);
-    min-width: 70px;
-    text-align: right;
-  }
+  .line-total { font-size: 13px; font-weight: 500; color: var(--muted); min-width: 70px; text-align: right; }
   .line-total.has-value { color: var(--gold); }
-
   .notes-field {
     width: 100%;
     background: var(--navy-mid);
@@ -254,7 +191,6 @@
     margin-bottom: 48px;
   }
   .notes-field:focus { border-color: var(--teal); }
-
   .order-summary {
     position: sticky;
     bottom: 0;
@@ -267,13 +203,11 @@
     gap: 32px;
     z-index: 100;
   }
-
   .summary-stats { display: flex; gap: 40px; }
   .stat { display: flex; flex-direction: column; gap: 2px; }
   .stat-label { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); }
   .stat-value { font-family: 'Bebas Neue', sans-serif; font-size: 28px; }
   .stat-value.teal { color: var(--teal); }
-
   .submit-btn {
     background: var(--teal);
     color: var(--navy);
@@ -290,7 +224,6 @@
   .submit-btn:hover { background: #00d4c4; }
   .submit-btn:active { transform: scale(0.98); }
   .submit-btn:disabled { background: var(--muted); cursor: not-allowed; }
-
   .status-msg {
     padding: 16px 24px;
     border-radius: 3px;
@@ -301,14 +234,7 @@
   }
   .status-msg.success { background: rgba(0,180,166,0.15); border: 1px solid var(--teal); color: var(--teal); }
   .status-msg.error { background: rgba(200,50,50,0.15); border: 1px solid #c83232; color: #ff6b6b; }
-
-  .brand-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
-    gap: 16px;
-    margin-top: 40px;
-  }
-
+  .brand-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); gap: 16px; margin-top: 40px; }
   .brand-card {
     background: var(--navy-mid);
     border: 1px solid var(--border);
@@ -317,89 +243,34 @@
     transition: border-color 0.2s, transform 0.15s, box-shadow 0.2s;
     overflow: hidden;
   }
-  .brand-card.active:hover {
-    border-color: var(--teal);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 32px rgba(0,180,166,0.12);
-  }
-  .brand-card.coming-soon {
-    opacity: 0.45;
-    cursor: default;
-  }
-
-  .brand-card-inner {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    padding: 24px;
-  }
-
+  .brand-card.active:hover { border-color: var(--teal); transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,180,166,0.12); }
+  .brand-card.coming-soon { opacity: 0.45; cursor: default; }
+  .brand-card-inner { display: flex; align-items: center; gap: 20px; padding: 24px; }
   .brand-logo-area {
-    width: 64px;
-    height: 64px;
+    width: 64px; height: 64px;
     background: rgba(0,180,166,0.08);
     border: 1px solid var(--border);
     border-radius: 4px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: flex; align-items: center; justify-content: center;
     flex-shrink: 0;
   }
-
-  .brand-initials {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 20px;
-    letter-spacing: 2px;
-    color: var(--teal);
-  }
-
+  .brand-initials { font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: 2px; color: var(--teal); }
   .brand-info { flex: 1; }
-
-  .brand-card-name {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 22px;
-    letter-spacing: 2px;
-    margin-bottom: 4px;
-  }
-
-  .brand-card-desc {
-    font-size: 12px;
-    color: var(--muted);
-    margin-bottom: 8px;
-  }
-
+  .brand-card-name { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 2px; margin-bottom: 4px; }
+  .brand-card-desc { font-size: 12px; color: var(--muted); margin-bottom: 8px; }
   .brand-card-tag {
     display: inline-block;
     background: rgba(0,180,166,0.1);
     border: 1px solid var(--border);
     border-radius: 20px;
-    font-size: 11px;
-    letter-spacing: 1px;
+    font-size: 11px; letter-spacing: 1px;
     color: var(--teal);
     padding: 3px 10px;
   }
-
-  .brand-card-tag.coming {
-    background: rgba(122,154,191,0.1);
-    border-color: rgba(122,154,191,0.2);
-    color: var(--muted);
-  }
-
-  .brand-arrow {
-    font-size: 20px;
-    color: var(--teal);
-    opacity: 0.6;
-    transition: transform 0.2s, opacity 0.2s;
-  }
-  .brand-card.active:hover .brand-arrow {
-    transform: translateX(4px);
-    opacity: 1;
-  }
-
-  @media (max-width: 500px) {
-    .brand-grid { grid-template-columns: 1fr; }
-  }
-
+  .brand-card-tag.coming { background: rgba(122,154,191,0.1); border-color: rgba(122,154,191,0.2); color: var(--muted); }
+  .brand-arrow { font-size: 20px; color: var(--teal); opacity: 0.6; transition: transform 0.2s, opacity 0.2s; }
+  .brand-card.active:hover .brand-arrow { transform: translateX(4px); opacity: 1; }
+  @media (max-width: 500px) { .brand-grid { grid-template-columns: 1fr; } }
   @media (max-width: 768px) {
     header { padding: 16px 20px; flex-wrap: wrap; gap: 12px; }
     .header-right { flex-wrap: wrap; }
@@ -430,19 +301,16 @@
   </div>
 </header>
 
-<!-- ── Brand Selection Screen ───────────────────────────── -->
+<!-- ── Brand Selection Screen ─────────────────────────────── -->
 <div id="brandScreen">
 <main style="max-width:900px;margin:0 auto;padding:64px 24px;">
   <div class="page-title">Select a Brand</div>
   <div class="page-subtitle">Choose which brand you'd like to place a wholesale order for.</div>
-
   <div class="brand-grid">
 
     <div class="brand-card active" data-brand="cast">
       <div class="brand-card-inner">
-        <div class="brand-logo-area">
-          <div class="brand-initials">CFC</div>
-        </div>
+        <div class="brand-logo-area"><div class="brand-initials">CFC</div></div>
         <div class="brand-info">
           <div class="brand-card-name">Cast Fishing Co</div>
           <div class="brand-card-desc">Prodigy · Echo · Nova · X12 Braid · BFS Braid</div>
@@ -454,9 +322,7 @@
 
     <div class="brand-card active" data-brand="feathermoon">
       <div class="brand-card-inner">
-        <div class="brand-logo-area">
-          <div class="brand-initials">FM</div>
-        </div>
+        <div class="brand-logo-area"><div class="brand-initials">FM</div></div>
         <div class="brand-info">
           <div class="brand-card-name">FeatherMoon Outdoors</div>
           <div class="brand-card-desc">Mouth Calls · Pot Calls · Flip Calls · Hunting Accessories</div>
@@ -468,9 +334,7 @@
 
     <div class="brand-card active" data-brand="queen">
       <div class="brand-card-inner">
-        <div class="brand-logo-area">
-          <div class="brand-initials">QT</div>
-        </div>
+        <div class="brand-logo-area"><div class="brand-initials">QT</div></div>
         <div class="brand-info">
           <div class="brand-card-name">Queen Tackle</div>
           <div class="brand-card-desc">Ghost Jig Heads · Flipping Jigs · Swim Jigs · Football Jigs · Weights · Spoons · More</div>
@@ -482,9 +346,7 @@
 
     <div class="brand-card active" data-brand="lanier">
       <div class="brand-card-inner">
-        <div class="brand-logo-area">
-          <div class="brand-initials">LB</div>
-        </div>
+        <div class="brand-logo-area"><div class="brand-initials">LB</div></div>
         <div class="brand-info">
           <div class="brand-card-name">Lanier Baits</div>
           <div class="brand-card-desc">Finesse Worms · Jerk Shads · Hover Shads · Swim Minnows · Craws · Jigs · Spoons · More</div>
@@ -494,15 +356,13 @@
       </div>
     </div>
 
-    <div class="brand-card active" data-brand="bluerock" style="display:none">
+    <div class="brand-card active" data-brand="bluerock">
       <div class="brand-card-inner">
-        <div class="brand-logo-area">
-          <div class="brand-initials">BR</div>
-        </div>
+        <div class="brand-logo-area"><div class="brand-initials">BR</div></div>
         <div class="brand-info">
           <div class="brand-card-name">Blue Rock Custom Tackle</div>
           <div class="brand-card-desc">Hand-Tied Jigs · Spinnerbaits · Buzzbaits · Tube Heads · Underspins · Soft Plastics</div>
-          <div class="brand-card-tag">465 SKUs Available</div>
+          <div class="brand-card-tag">503 SKUs Available</div>
         </div>
         <div class="brand-arrow">→</div>
       </div>
@@ -510,9 +370,7 @@
 
     <div class="brand-card active" data-brand="spotsticker">
       <div class="brand-card-inner">
-        <div class="brand-logo-area">
-          <div class="brand-initials">SS</div>
-        </div>
+        <div class="brand-logo-area"><div class="brand-initials">SS</div></div>
         <div class="brand-info">
           <div class="brand-card-name">SpotSticker Baits</div>
           <div class="brand-card-desc">Jig Heads · Dropshot Weights · Hand-Tied Jigs · Underspins · Soft Plastics</div>
@@ -524,9 +382,7 @@
 
     <div class="brand-card active" data-brand="copperred">
       <div class="brand-card-inner">
-        <div class="brand-logo-area">
-          <div class="brand-initials">CB</div>
-        </div>
+        <div class="brand-logo-area"><div class="brand-initials">CB</div></div>
         <div class="brand-info">
           <div class="brand-card-name">Copper Red Baits</div>
           <div class="brand-card-desc">Jerk Baits · Lipless Cranks · Blade Baits · Poppin Frogs · Walking Frogs</div>
@@ -542,12 +398,11 @@
 
 <!-- ── Order Form Screen ─────────────────────────────────── -->
 <div id="orderScreen" style="display:none">
-
 <main>
   <div style="display:flex;align-items:center;gap:16px;margin-bottom:6px;">
     <button id="backToBrands" style="background:var(--navy-light);border:1px solid var(--teal);color:var(--teal);font-family:'Bebas Neue',sans-serif;font-size:15px;letter-spacing:2px;cursor:pointer;padding:8px 20px;border-radius:4px;transition:all 0.2s;" onmouseover="this.style.background='var(--teal)';this.style.color='var(--navy)'" onmouseout="this.style.background='var(--navy-light)';this.style.color='var(--teal)'">← Change Brand</button>
   </div>
-  <div class="page-title" id="orderPageTitle">Cast Fishing Co</div>
+  <div class="page-title" id="orderPageTitle">Order Form</div>
   <div class="page-subtitle">Wholesale Order Form — Powered by <span>CTP Marketing LLC</span></div>
 
   <div class="section-label">Your Account</div>
@@ -573,14 +428,11 @@
   <form id="orderForm">
     <input type="hidden" id="hiddenRetailerId" name="retailer_id">
 
-    <!-- CAST FORM -->
+    <!-- CAST FISHING CO -->
     <div id="castForm">
       <div class="product-section">
         <div class="section-label">Products — Enter Quantity to Order</div>
-        <div class="category-header">
-          <span class="category-name">Prodigy</span>
-          <span class="category-desc">Soft Plastic Swimbaits</span>
-        </div>
+        <div class="category-header"><span class="category-name">Prodigy</span><span class="category-desc">Soft Plastic Swimbaits</span></div>
         <table><thead><tr>
           <th>Product</th><th>SKU</th><th>Color</th><th>Size / Pack</th>
           <th class="right">Wholesale</th><th class="right">Retail</th>
@@ -588,10 +440,7 @@
         </tr></thead><tbody id="prodigy-rows"></tbody></table>
       </div>
       <div class="product-section">
-        <div class="category-header">
-          <span class="category-name">Echo</span>
-          <span class="category-desc">Finesse Minnow — Sonar/Hover Rig</span>
-        </div>
+        <div class="category-header"><span class="category-name">Echo</span><span class="category-desc">Finesse Minnow — Sonar/Hover Rig</span></div>
         <table><thead><tr>
           <th>Product</th><th>SKU</th><th>Color</th><th>Size / Pack</th>
           <th class="right">Wholesale</th><th class="right">Retail</th>
@@ -599,10 +448,7 @@
         </tr></thead><tbody id="echo-rows"></tbody></table>
       </div>
       <div class="product-section">
-        <div class="category-header">
-          <span class="category-name">Nova</span>
-          <span class="category-desc">Neko Worm</span>
-        </div>
+        <div class="category-header"><span class="category-name">Nova</span><span class="category-desc">Neko Worm</span></div>
         <table><thead><tr>
           <th>Product</th><th>SKU</th><th>Color</th><th>Size / Pack</th>
           <th class="right">Wholesale</th><th class="right">Retail</th>
@@ -610,10 +456,7 @@
         </tr></thead><tbody id="nova-rows"></tbody></table>
       </div>
       <div class="product-section">
-        <div class="category-header">
-          <span class="category-name">X12 Casting Braid</span>
-          <span class="category-desc">330–440 Yard Spools</span>
-        </div>
+        <div class="category-header"><span class="category-name">X12 Casting Braid</span><span class="category-desc">330–440 Yard Spools</span></div>
         <table><thead><tr>
           <th>Product</th><th>SKU</th><th>Color</th><th>Size / Pack</th>
           <th class="right">Wholesale</th><th class="right">Retail</th>
@@ -621,264 +464,132 @@
         </tr></thead><tbody id="x12-rows"></tbody></table>
       </div>
       <div class="product-section">
-        <div class="category-header">
-          <span class="category-name">BFS Casting Braid</span>
-          <span class="category-desc">150 Yard Spools</span>
-        </div>
+        <div class="category-header"><span class="category-name">BFS Casting Braid</span><span class="category-desc">150 Yard Spools</span></div>
         <table><thead><tr>
           <th>Product</th><th>SKU</th><th>Color</th><th>Size / Pack</th>
           <th class="right">Wholesale</th><th class="right">Retail</th>
           <th class="center">Qty</th><th class="right">Line Total</th>
         </tr></thead><tbody id="bfs-rows"></tbody></table>
       </div>
-    </div><!-- end castForm -->
+    </div>
 
-    <!-- FEATHERMOON FORM -->
+    <!-- FEATHERMOON OUTDOORS -->
     <div id="feathermoonForm" style="display:none">
       <div class="product-section">
         <div class="section-label">Products — Enter Quantity to Order</div>
-        <div class="category-header">
-          <span class="category-name">FeatherMoon Outdoors</span>
-          <span class="category-desc">Game Calls &amp; Hunting Accessories</span>
-        </div>
+        <div class="category-header"><span class="category-name">FeatherMoon Outdoors</span><span class="category-desc">Game Calls &amp; Hunting Accessories</span></div>
         <table><thead><tr>
           <th>Product</th><th>SKU</th><th>Notes</th>
           <th class="right">Wholesale</th><th class="right">Retail</th>
           <th class="center">Qty</th><th class="right">Line Total</th>
         </tr></thead><tbody id="feathermoon-rows"></tbody></table>
       </div>
-    </div><!-- end feathermoonForm -->
+    </div>
 
-    <!-- QUEEN TACKLE FORM -->
+    <!-- QUEEN TACKLE (dynamic) -->
     <div id="qtForm" style="display:none">
       <div class="product-section">
+        <div class="section-label">Products — Enter Quantity to Order</div>
         <div id="qt-sections"></div>
       </div>
-    </div><!-- end qtForm -->
+    </div>
 
-    <!-- LANIER BAITS FORM -->
+    <!-- LANIER BAITS -->
     <div id="lanierForm" style="display:none">
       <div class="product-section">
         <div class="section-label">Products — Enter Quantity to Order</div>
 
-        <div class="category-header">
-          <span class="category-name">Finesse Worm</span>
-          <span class="category-desc">10 Pack</span>
-        </div>
-        <table><thead><tr>
-          <th class="center">Qty</th><th>SKU</th><th>Item #</th><th>Color / Description</th>
-          <th class="center">Pack</th>
-          <th class="right">Wholesale</th>
-          <th class="right">Line Total</th>
-        </tr></thead><tbody id="lb-finesse_worm-rows"></tbody></table>
+        <div class="category-header"><span class="category-name">Finesse Worm</span><span class="category-desc">10 Pack</span></div>
+        <table><thead><tr><th class="center">Qty</th><th>SKU</th><th>Item #</th><th>Color / Description</th><th class="center">Pack</th><th class="right">Wholesale</th><th class="right">Line Total</th></tr></thead><tbody id="lb-finesse_worm-rows"></tbody></table>
 
-        <div class="category-header">
-          <span class="category-name">Jerk Shad</span>
-          <span class="category-desc">7 Pack</span>
-        </div>
-        <table><thead><tr>
-          <th class="center">Qty</th><th>SKU</th><th>Item #</th><th>Color / Description</th>
-          <th class="center">Pack</th>
-          <th class="right">Wholesale</th>
-          <th class="right">Line Total</th>
-        </tr></thead><tbody id="lb-jerk_shad-rows"></tbody></table>
+        <div class="category-header"><span class="category-name">Jerk Shad</span><span class="category-desc">7 Pack</span></div>
+        <table><thead><tr><th class="center">Qty</th><th>SKU</th><th>Item #</th><th>Color / Description</th><th class="center">Pack</th><th class="right">Wholesale</th><th class="right">Line Total</th></tr></thead><tbody id="lb-jerk_shad-rows"></tbody></table>
 
-        <div class="category-header">
-          <span class="category-name">Hover Shad</span>
-          <span class="category-desc">7 Pack</span>
-        </div>
-        <table><thead><tr>
-          <th class="center">Qty</th><th>SKU</th><th>Item #</th><th>Color / Description</th>
-          <th class="center">Pack</th>
-          <th class="right">Wholesale</th>
-          <th class="right">Line Total</th>
-        </tr></thead><tbody id="lb-hover_shad-rows"></tbody></table>
+        <div class="category-header"><span class="category-name">Hover Shad</span><span class="category-desc">7 Pack</span></div>
+        <table><thead><tr><th class="center">Qty</th><th>SKU</th><th>Item #</th><th>Color / Description</th><th class="center">Pack</th><th class="right">Wholesale</th><th class="right">Line Total</th></tr></thead><tbody id="lb-hover_shad-rows"></tbody></table>
 
-        <div class="category-header">
-          <span class="category-name">Swim Minnow</span>
-          <span class="category-desc">6 Pack</span>
-        </div>
-        <table><thead><tr>
-          <th class="center">Qty</th><th>SKU</th><th>Item #</th><th>Color / Description</th>
-          <th class="center">Pack</th>
-          <th class="right">Wholesale</th>
-          <th class="right">Line Total</th>
-        </tr></thead><tbody id="lb-swim_minnow-rows"></tbody></table>
+        <div class="category-header"><span class="category-name">Swim Minnow</span><span class="category-desc">6 Pack</span></div>
+        <table><thead><tr><th class="center">Qty</th><th>SKU</th><th>Item #</th><th>Color / Description</th><th class="center">Pack</th><th class="right">Wholesale</th><th class="right">Line Total</th></tr></thead><tbody id="lb-swim_minnow-rows"></tbody></table>
 
-        <div class="category-header">
-          <span class="category-name">Hooch Craw</span>
-          <span class="category-desc">6 Pack</span>
-        </div>
-        <table><thead><tr>
-          <th class="center">Qty</th><th>SKU</th><th>Item #</th><th>Color / Description</th>
-          <th class="center">Pack</th>
-          <th class="right">Wholesale</th>
-          <th class="right">Line Total</th>
-        </tr></thead><tbody id="lb-hooch_craw-rows"></tbody></table>
+        <div class="category-header"><span class="category-name">Hooch Craw</span><span class="category-desc">6 Pack</span></div>
+        <table><thead><tr><th class="center">Qty</th><th>SKU</th><th>Item #</th><th>Color / Description</th><th class="center">Pack</th><th class="right">Wholesale</th><th class="right">Line Total</th></tr></thead><tbody id="lb-hooch_craw-rows"></tbody></table>
 
-        <div class="category-header">
-          <span class="category-name">Shakey / Ned Jig Head</span>
-          <span class="category-desc">3 Pack — Lead</span>
-        </div>
-        <table><thead><tr>
-          <th class="center">Qty</th><th>SKU</th><th>Item #</th><th>Color / Description</th>
-          <th class="center">Pack</th>
-          <th class="right">Wholesale</th>
-          <th class="right">Line Total</th>
-        </tr></thead><tbody id="lb-shakey_ned-rows"></tbody></table>
+        <div class="category-header"><span class="category-name">Shakey / Ned Jig Head</span><span class="category-desc">3 Pack — Lead</span></div>
+        <table><thead><tr><th class="center">Qty</th><th>SKU</th><th>Item #</th><th>Color / Description</th><th class="center">Pack</th><th class="right">Wholesale</th><th class="right">Line Total</th></tr></thead><tbody id="lb-shakey_ned-rows"></tbody></table>
 
-        <div class="category-header">
-          <span class="category-name">Ball Jig Head</span>
-          <span class="category-desc">3 Pack — Lead</span>
-        </div>
-        <table><thead><tr>
-          <th class="center">Qty</th><th>SKU</th><th>Item #</th><th>Color / Description</th>
-          <th class="center">Pack</th>
-          <th class="right">Wholesale</th>
-          <th class="right">Line Total</th>
-        </tr></thead><tbody id="lb-ball_jig-rows"></tbody></table>
+        <div class="category-header"><span class="category-name">Ball Jig Head</span><span class="category-desc">3 Pack — Lead</span></div>
+        <table><thead><tr><th class="center">Qty</th><th>SKU</th><th>Item #</th><th>Color / Description</th><th class="center">Pack</th><th class="right">Wholesale</th><th class="right">Line Total</th></tr></thead><tbody id="lb-ball_jig-rows"></tbody></table>
 
-        <div class="category-header">
-          <span class="category-name">Damiki Jig Head</span>
-          <span class="category-desc">3 Pack — Lead</span>
-        </div>
-        <table><thead><tr>
-          <th class="center">Qty</th><th>SKU</th><th>Item #</th><th>Color / Description</th>
-          <th class="center">Pack</th>
-          <th class="right">Wholesale</th>
-          <th class="right">Line Total</th>
-        </tr></thead><tbody id="lb-damiki-rows"></tbody></table>
+        <div class="category-header"><span class="category-name">Damiki Jig Head</span><span class="category-desc">3 Pack — Lead</span></div>
+        <table><thead><tr><th class="center">Qty</th><th>SKU</th><th>Item #</th><th>Color / Description</th><th class="center">Pack</th><th class="right">Wholesale</th><th class="right">Line Total</th></tr></thead><tbody id="lb-damiki-rows"></tbody></table>
 
-        <div class="category-header">
-          <span class="category-name">Dropshot Weights</span>
-          <span class="category-desc">Lead</span>
-        </div>
-        <table><thead><tr>
-          <th class="center">Qty</th><th>SKU</th><th>Item #</th><th>Color / Description</th>
-          <th class="center">Pack</th>
-          <th class="right">Wholesale</th>
-          <th class="right">Line Total</th>
-        </tr></thead><tbody id="lb-dropshot-rows"></tbody></table>
+        <div class="category-header"><span class="category-name">Dropshot Weights</span><span class="category-desc">Lead</span></div>
+        <table><thead><tr><th class="center">Qty</th><th>SKU</th><th>Item #</th><th>Color / Description</th><th class="center">Pack</th><th class="right">Wholesale</th><th class="right">Line Total</th></tr></thead><tbody id="lb-dropshot-rows"></tbody></table>
 
-        <div class="category-header">
-          <span class="category-name">E-Liminator</span>
-          <span class="category-desc">Lead</span>
-        </div>
-        <table><thead><tr>
-          <th class="center">Qty</th><th>SKU</th><th>Item #</th><th>Color / Description</th>
-          <th class="center">Pack</th>
-          <th class="right">Wholesale</th>
-          <th class="right">Line Total</th>
-        </tr></thead><tbody id="lb-eliminator-rows"></tbody></table>
+        <div class="category-header"><span class="category-name">E-Liminator</span><span class="category-desc">Lead</span></div>
+        <table><thead><tr><th class="center">Qty</th><th>SKU</th><th>Item #</th><th>Color / Description</th><th class="center">Pack</th><th class="right">Wholesale</th><th class="right">Line Total</th></tr></thead><tbody id="lb-eliminator-rows"></tbody></table>
 
-        <div class="category-header">
-          <span class="category-name">Hooks</span>
-          <span class="category-desc">LJ's Series</span>
-        </div>
-        <table><thead><tr>
-          <th class="center">Qty</th><th>SKU</th><th>Item #</th><th>Color / Description</th>
-          <th class="center">Pack</th>
-          <th class="right">Wholesale</th>
-          <th class="right">Line Total</th>
-        </tr></thead><tbody id="lb-hooks-rows"></tbody></table>
+        <div class="category-header"><span class="category-name">Hooks</span><span class="category-desc">LJ's Series</span></div>
+        <table><thead><tr><th class="center">Qty</th><th>SKU</th><th>Item #</th><th>Color / Description</th><th class="center">Pack</th><th class="right">Wholesale</th><th class="right">Line Total</th></tr></thead><tbody id="lb-hooks-rows"></tbody></table>
 
-        <div class="category-header">
-          <span class="category-name">Swivels</span>
-          <span class="category-desc">Barrel Swivels</span>
-        </div>
-        <table><thead><tr>
-          <th class="center">Qty</th><th>SKU</th><th>Item #</th><th>Color / Description</th>
-          <th class="center">Pack</th>
-          <th class="right">Wholesale</th>
-          <th class="right">Line Total</th>
-        </tr></thead><tbody id="lb-swivels-rows"></tbody></table>
+        <div class="category-header"><span class="category-name">Swivels</span><span class="category-desc">Barrel Swivels</span></div>
+        <table><thead><tr><th class="center">Qty</th><th>SKU</th><th>Item #</th><th>Color / Description</th><th class="center">Pack</th><th class="right">Wholesale</th><th class="right">Line Total</th></tr></thead><tbody id="lb-swivels-rows"></tbody></table>
 
-        <div class="category-header">
-          <span class="category-name">Spoons</span>
-          <span class="category-desc">1/2oz &amp; 3/4oz</span>
-        </div>
-        <table><thead><tr>
-          <th class="center">Qty</th><th>SKU</th><th>Item #</th><th>Color / Description</th>
-          <th class="center">Pack</th>
-          <th class="right">Wholesale</th>
-          <th class="right">Line Total</th>
-        </tr></thead><tbody id="lb-spoons-rows"></tbody></table>
+        <div class="category-header"><span class="category-name">Spoons</span><span class="category-desc">1/2oz &amp; 3/4oz</span></div>
+        <table><thead><tr><th class="center">Qty</th><th>SKU</th><th>Item #</th><th>Color / Description</th><th class="center">Pack</th><th class="right">Wholesale</th><th class="right">Line Total</th></tr></thead><tbody id="lb-spoons-rows"></tbody></table>
 
-        <div class="category-header">
-          <span class="category-name">Shad Spin</span>
-          <span class="category-desc">Underspin Jig</span>
-        </div>
-        <table><thead><tr>
-          <th class="center">Qty</th><th>SKU</th><th>Item #</th><th>Color / Description</th>
-          <th class="center">Pack</th>
-          <th class="right">Wholesale</th>
-          <th class="right">Line Total</th>
-        </tr></thead><tbody id="lb-shad_spin-rows"></tbody></table>
+        <div class="category-header"><span class="category-name">Shad Spin</span><span class="category-desc">Underspin Jig</span></div>
+        <table><thead><tr><th class="center">Qty</th><th>SKU</th><th>Item #</th><th>Color / Description</th><th class="center">Pack</th><th class="right">Wholesale</th><th class="right">Line Total</th></tr></thead><tbody id="lb-shad_spin-rows"></tbody></table>
 
-        <div class="category-header">
-          <span class="category-name">Hard Swimmer</span>
-          <span class="category-desc">Jointed 125mm Swimbait</span>
-        </div>
-        <table><thead><tr>
-          <th class="center">Qty</th><th>SKU</th><th>Item #</th><th>Color / Description</th>
-          <th class="center">Pack</th>
-          <th class="right">Wholesale</th>
-          <th class="right">Line Total</th>
-        </tr></thead><tbody id="lb-hard_swimmer-rows"></tbody></table>
+        <div class="category-header"><span class="category-name">Hard Swimmer</span><span class="category-desc">Jointed 125mm Swimbait</span></div>
+        <table><thead><tr><th class="center">Qty</th><th>SKU</th><th>Item #</th><th>Color / Description</th><th class="center">Pack</th><th class="right">Wholesale</th><th class="right">Line Total</th></tr></thead><tbody id="lb-hard_swimmer-rows"></tbody></table>
 
       </div>
-    </div><!-- end lanierForm -->
+    </div>
 
-    <!-- BLUE ROCK CUSTOM TACKLE FORM -->
+    <!-- BLUE ROCK CUSTOM TACKLE (dynamic) -->
     <div id="bluerockForm" style="display:none">
       <div style="background:var(--navy-light);border:1px solid var(--gold);border-radius:4px;padding:16px 24px;margin-bottom:32px;">
         <div style="font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:2px;color:var(--gold);margin-bottom:8px;">Blue Rock Order Requirements</div>
         <div style="font-size:13px;color:var(--muted);line-height:1.8;">
-          <span style="color:var(--white);font-weight:500;">Wholesale Minimum Order Value:</span> $250.00<br>
-          <span style="color:var(--white);font-weight:500;">Product Minimum Order Quantity:</span> 4 Per Variant<br>
+          <span style="color:var(--white);font-weight:500;">Minimum Order Value:</span> $250.00 &nbsp;·&nbsp;
+          <span style="color:var(--white);font-weight:500;">Minimum Qty Per Variant:</span> 4 &nbsp;·&nbsp;
           <span style="color:var(--teal);font-weight:500;">FREE Shipping</span> on Orders Over $1,000.00
         </div>
       </div>
       <div class="product-section">
+        <div class="section-label">Products — Enter Quantity to Order</div>
         <div id="bluerock-sections"></div>
       </div>
-    </div><!-- end bluerockForm -->
+    </div>
 
-    <!-- SPOTSTICKER BAITS FORM -->
+    <!-- SPOTSTICKER BAITS (dynamic) -->
     <div id="spotstickerForm" style="display:none">
       <div class="product-section">
+        <div class="section-label">Products — Enter Quantity to Order</div>
         <div id="spotsticker-sections"></div>
       </div>
-    </div><!-- end spotstickerForm -->
+    </div>
 
-    <!-- COPPER RED BAITS FORM -->
+    <!-- COPPER RED BAITS (dynamic) -->
     <div id="copperredForm" style="display:none">
       <div class="product-section">
+        <div class="section-label">Products — Enter Quantity to Order</div>
         <div id="copperred-sections"></div>
       </div>
-    </div><!-- end copperredForm -->
+    </div>
 
     <div class="section-label">Order Notes (Optional)</div>
     <textarea class="notes-field" id="orderNotes" placeholder="Special instructions, rush requests, or questions for CTP Marketing..."></textarea>
-
     <div id="statusMsg" class="status-msg"></div>
   </form>
 </main>
 
 <div class="order-summary">
   <div class="summary-stats">
-    <div class="stat">
-      <div class="stat-label">Items Ordered</div>
-      <div class="stat-value" id="totalItems">0</div>
-    </div>
-    <div class="stat">
-      <div class="stat-label">SKUs Selected</div>
-      <div class="stat-value" id="totalSkus">0</div>
-    </div>
-    <div class="stat">
-      <div class="stat-label">Order Total</div>
-      <div class="stat-value teal" id="orderTotal">$0.00</div>
-    </div>
+    <div class="stat"><div class="stat-label">Items Ordered</div><div class="stat-value" id="totalItems">0</div></div>
+    <div class="stat"><div class="stat-label">SKUs Selected</div><div class="stat-value" id="totalSkus">0</div></div>
+    <div class="stat"><div class="stat-label">Order Total</div><div class="stat-value teal" id="orderTotal">$0.00</div></div>
   </div>
   <button class="submit-btn" id="submitBtn">SUBMIT ORDER</button>
 </div>
@@ -887,221 +598,120 @@
 </div><!-- end pageContent -->
 
 <script>
-// ── Supabase config ──────────────────────────────────────────
+// ── Supabase ──────────────────────────────────────────────────
 const SUPABASE_URL = 'https://esmaohthnfgibncscewj.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVzbWFvaHRobmZnaWJuY3NjZXdqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMyNDgxNzYsImV4cCI6MjA4ODgyNDE3Nn0.-QwoQje7kAOktUaQ2_PI_wMffw81eHja_8g61gzKV1Q';
 const N8N_WEBHOOK_URL = 'https://neffdigitalsolutions.app.n8n.cloud/webhook/cast-order';
-
 const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-// ── Auth gate ────────────────────────────────────────────────
 let currentUser = null;
 let currentRetailer = null;
 
+// ── Auth ──────────────────────────────────────────────────────
 async function initPage() {
   const { data: { session } } = await sb.auth.getSession();
-  if (!session) {
-    window.location.href = '/login.html';
-    return;
-  }
-
+  if (!session) { window.location.href = '/login.html'; return; }
   currentUser = session.user;
-
-  const { data: retailer } = await sb
-    .from('retailers')
-    .select('*')
-    .eq('id', currentUser.id)
-    .single();
-
+  const { data: retailer } = await sb.from('retailers').select('*').eq('id', currentUser.id).single();
   currentRetailer = retailer;
-
   document.getElementById('retailerName').textContent = retailer?.store_name || currentUser.email;
   document.getElementById('infoStore').textContent = retailer?.store_name || '—';
   document.getElementById('infoContact').textContent = retailer?.contact_name || '—';
   document.getElementById('infoEmail').textContent = retailer?.email || currentUser.email;
   document.getElementById('infoAddress').textContent =
     retailer?.shipping_address && retailer?.city_state_zip
-      ? `${retailer.shipping_address}, ${retailer.city_state_zip}`
-      : 'Not set';
+      ? `${retailer.shipping_address}, ${retailer.city_state_zip}` : 'Not set';
   document.getElementById('hiddenRetailerId').value = currentUser.id;
-
   document.getElementById('authGate').style.display = 'none';
   document.getElementById('pageContent').style.display = 'block';
   document.body.classList.add('ready');
 }
 
+function hideAllForms() {
+  ['castForm','feathermoonForm','qtForm','lanierForm','bluerockForm','spotstickerForm','copperredForm']
+    .forEach(id => document.getElementById(id).style.display = 'none');
+}
+
+function showBrand(brand, title) {
+  document.getElementById('brandScreen').style.display = 'none';
+  document.getElementById('orderScreen').style.display = 'block';
+  document.getElementById('headerBadge').style.display = 'block';
+  document.getElementById('orderPageTitle').textContent = title;
+  document.getElementById('headerBadge').textContent = title;
+  hideAllForms();
+  document.querySelectorAll('.qty-input').forEach(i => { i.value = ''; });
+  document.querySelectorAll('.line-total').forEach(el => { el.textContent = '—'; el.classList.remove('has-value'); });
+  updateTotals();
+
+  if (brand === 'cast') {
+    document.getElementById('castForm').style.display = 'block';
+    if (!document.getElementById('prodigy-rows').hasChildNodes()) {
+      renderCastRows('prodigy','prodigy-rows'); renderCastRows('echo','echo-rows');
+      renderCastRows('nova','nova-rows'); renderCastRows('x12','x12-rows'); renderCastRows('bfs','bfs-rows');
+    }
+  } else if (brand === 'feathermoon') {
+    document.getElementById('feathermoonForm').style.display = 'block';
+    if (!document.getElementById('feathermoon-rows').hasChildNodes()) renderFeathermoonRows();
+  } else if (brand === 'queen') {
+    document.getElementById('qtForm').style.display = 'block';
+    if (!document.getElementById('qt-sections').hasChildNodes()) renderAllQTSections();
+  } else if (brand === 'lanier') {
+    document.getElementById('lanierForm').style.display = 'block';
+    if (!document.getElementById('lb-finesse_worm-rows').hasChildNodes()) renderAllLanierRows();
+  } else if (brand === 'bluerock') {
+    document.getElementById('bluerockForm').style.display = 'block';
+    if (!document.getElementById('bluerock-sections').hasChildNodes()) renderAllBluerockSections();
+  } else if (brand === 'spotsticker') {
+    document.getElementById('spotstickerForm').style.display = 'block';
+    if (!document.getElementById('spotsticker-sections').hasChildNodes()) renderAllSpotstickerSections();
+  } else if (brand === 'copperred') {
+    document.getElementById('copperredForm').style.display = 'block';
+    if (!document.getElementById('copperred-sections').hasChildNodes()) renderAllCopperredSections();
+  }
+}
+
+const brandNames = {
+  cast: 'Cast Fishing Co', feathermoon: 'FeatherMoon Outdoors',
+  queen: 'Queen Tackle', lanier: 'Lanier Baits',
+  bluerock: 'Blue Rock Custom Tackle', spotsticker: 'SpotSticker Baits',
+  copperred: 'Copper Red Baits'
+};
+
 initPage().then(() => {
-  // ── Check for reorder data from order history ──────────────
+  // Reorder from order history
   const reorderRaw = localStorage.getItem('reorder');
   if (reorderRaw) {
     localStorage.removeItem('reorder');
     try {
       const reorder = JSON.parse(reorderRaw);
-      // Auto-select the brand (mirror the brand card click logic)
-      document.getElementById('brandScreen').style.display = 'none';
-      document.getElementById('orderScreen').style.display = 'block';
-      document.getElementById('headerBadge').style.display = 'block';
-
-      // Hide all brand forms first
-      document.getElementById('castForm').style.display = 'none';
-      document.getElementById('feathermoonForm').style.display = 'none';
-      document.getElementById('qtForm').style.display = 'none';
-      document.getElementById('lanierForm').style.display = 'none';
-      document.getElementById('bluerockForm').style.display = 'none';
-      document.getElementById('spotstickerForm').style.display = 'none';
-      document.getElementById('copperredForm').style.display = 'none';
-
-      if (reorder.brand === 'Cast Fishing Co') {
-        document.getElementById('orderPageTitle').textContent = 'Cast Fishing Co';
-        document.getElementById('headerBadge').textContent = 'Cast Fishing Co';
-        document.getElementById('castForm').style.display = 'block';
-        if (!document.getElementById('prodigy-rows').hasChildNodes()) {
-          renderRows('prodigy', 'prodigy-rows');
-          renderRows('echo',    'echo-rows');
-          renderRows('nova',    'nova-rows');
-          renderRows('x12',     'x12-rows');
-          renderRows('bfs',     'bfs-rows');
-        }
-      } else if (reorder.brand === 'FeatherMoon Outdoors') {
-        document.getElementById('orderPageTitle').textContent = 'FeatherMoon Outdoors';
-        document.getElementById('headerBadge').textContent = 'FeatherMoon Outdoors';
-        document.getElementById('feathermoonForm').style.display = 'block';
-        if (!document.getElementById('feathermoon-rows').hasChildNodes()) {
-          renderFeathermoonRows();
-        }
-      } else if (reorder.brand === 'Queen Tackle') {
-        document.getElementById('orderPageTitle').textContent = 'Queen Tackle';
-        document.getElementById('headerBadge').textContent = 'Queen Tackle';
-        document.getElementById('qtForm').style.display = 'block';
-        if (!document.getElementById('qt-sections').hasChildNodes()) {
-          renderAllQTSections();
-        }
-      } else if (reorder.brand === 'Lanier Baits') {
-        document.getElementById('orderPageTitle').textContent = 'Lanier Baits';
-        document.getElementById('headerBadge').textContent = 'Lanier Baits';
-        document.getElementById('lanierForm').style.display = 'block';
-        if (!document.getElementById('lb-finesse_worm-rows').hasChildNodes()) {
-          renderAllLanierRows();
-        }
-      } else if (reorder.brand === 'Blue Rock Custom Tackle') {
-        document.getElementById('orderPageTitle').textContent = 'Blue Rock Custom Tackle';
-        document.getElementById('headerBadge').textContent = 'Blue Rock Custom Tackle';
-        document.getElementById('bluerockForm').style.display = 'block';
-        if (!document.getElementById('bluerock-sections').hasChildNodes()) {
-          renderAllBluerockSections();
-        }
-      } else if (reorder.brand === 'SpotSticker Baits') {
-        document.getElementById('orderPageTitle').textContent = 'SpotSticker Baits';
-        document.getElementById('headerBadge').textContent = 'SpotSticker Baits';
-        document.getElementById('spotstickerForm').style.display = 'block';
-        if (!document.getElementById('spotsticker-sections').hasChildNodes()) {
-          renderAllSpotstickerSections();
-        }
-      } else if (reorder.brand === 'Copper Red Baits') {
-        document.getElementById('orderPageTitle').textContent = 'Copper Red Baits';
-        document.getElementById('headerBadge').textContent = 'Copper Red Baits';
-        document.getElementById('copperredForm').style.display = 'block';
-        if (!document.getElementById('copperred-sections').hasChildNodes()) {
-          renderAllCopperredSections();
+      const brandKey = Object.keys(brandNames).find(k => brandNames[k] === reorder.brand);
+      if (brandKey) {
+        showBrand(brandKey, reorder.brand);
+        if (reorder.items && reorder.items.length) {
+          setTimeout(() => {
+            const skuMap = {};
+            reorder.items.forEach(i => { skuMap[i.sku] = i.qty; });
+            document.querySelectorAll('.qty-input').forEach(input => {
+              const qty = skuMap[input.dataset.sku];
+              if (qty && qty > 0) { input.value = qty; }
+            });
+            updateTotals();
+          }, 300);
         }
       }
-      // Fill in quantities by SKU
-      if (reorder.items && reorder.items.length) {
-        const skuMap = {};
-        reorder.items.forEach(i => { skuMap[i.sku] = i.qty; });
-        document.querySelectorAll('.qty-input').forEach(input => {
-          const qty = skuMap[input.dataset.sku];
-          if (qty && qty > 0) {
-            input.value = qty;
-          }
-        });
-        updateTotals();
-      }
-    } catch (e) {
-      console.error('Reorder parse error:', e);
-    }
+    } catch(e) { console.error('Reorder error:', e); }
   }
 });
 
-// ── Brand selection ──────────────────────────────────────────
+// Brand card clicks
 document.querySelectorAll('.brand-card.active').forEach(card => {
   card.addEventListener('click', () => {
     const brand = card.dataset.brand;
-    document.getElementById('brandScreen').style.display = 'none';
-    document.getElementById('orderScreen').style.display = 'block';
-    document.getElementById('headerBadge').style.display = 'block';
-
-    // Reset qty inputs and totals on brand switch
-    document.querySelectorAll('.qty-input').forEach(i => { i.value = ''; });
-    document.querySelectorAll('.line-total').forEach(el => { el.textContent = '—'; el.classList.remove('has-value'); });
-    updateTotals();
-
-    // Hide all brand forms first
-    document.getElementById('castForm').style.display = 'none';
-    document.getElementById('feathermoonForm').style.display = 'none';
-    document.getElementById('qtForm').style.display = 'none';
-    document.getElementById('lanierForm').style.display = 'none';
-    document.getElementById('bluerockForm').style.display = 'none';
-    document.getElementById('spotstickerForm').style.display = 'none';
-    document.getElementById('copperredForm').style.display = 'none';
-
-    if (brand === 'cast') {
-      document.getElementById('orderPageTitle').textContent = 'Cast Fishing Co';
-      document.getElementById('headerBadge').textContent = 'Cast Fishing Co';
-      document.getElementById('castForm').style.display = 'block';
-      if (!document.getElementById('prodigy-rows').hasChildNodes()) {
-        renderRows('prodigy', 'prodigy-rows');
-        renderRows('echo',    'echo-rows');
-        renderRows('nova',    'nova-rows');
-        renderRows('x12',     'x12-rows');
-        renderRows('bfs',     'bfs-rows');
-      }
-    } else if (brand === 'feathermoon') {
-      document.getElementById('orderPageTitle').textContent = 'FeatherMoon Outdoors';
-      document.getElementById('headerBadge').textContent = 'FeatherMoon Outdoors';
-      document.getElementById('feathermoonForm').style.display = 'block';
-      if (!document.getElementById('feathermoon-rows').hasChildNodes()) {
-        renderFeathermoonRows();
-      }
-    } else if (brand === 'queen') {
-      document.getElementById('orderPageTitle').textContent = 'Queen Tackle';
-      document.getElementById('headerBadge').textContent = 'Queen Tackle';
-      document.getElementById('qtForm').style.display = 'block';
-      if (!document.getElementById('qt-sections').hasChildNodes()) {
-        renderAllQTSections();
-      }
-    } else if (brand === 'lanier') {
-      document.getElementById('orderPageTitle').textContent = 'Lanier Baits';
-      document.getElementById('headerBadge').textContent = 'Lanier Baits';
-      document.getElementById('lanierForm').style.display = 'block';
-      if (!document.getElementById('lb-finesse_worm-rows').hasChildNodes()) {
-        renderAllLanierRows();
-      }
-    } else if (brand === 'bluerock') {
-      document.getElementById('orderPageTitle').textContent = 'Blue Rock Custom Tackle';
-      document.getElementById('headerBadge').textContent = 'Blue Rock Custom Tackle';
-      document.getElementById('bluerockForm').style.display = 'block';
-      if (!document.getElementById('bluerock-sections').hasChildNodes()) {
-        renderAllBluerockSections();
-      }
-    } else if (brand === 'spotsticker') {
-      document.getElementById('orderPageTitle').textContent = 'SpotSticker Baits';
-      document.getElementById('headerBadge').textContent = 'SpotSticker Baits';
-      document.getElementById('spotstickerForm').style.display = 'block';
-      if (!document.getElementById('spotsticker-sections').hasChildNodes()) {
-        renderAllSpotstickerSections();
-      }
-    } else if (brand === 'copperred') {
-      document.getElementById('orderPageTitle').textContent = 'Copper Red Baits';
-      document.getElementById('headerBadge').textContent = 'Copper Red Baits';
-      document.getElementById('copperredForm').style.display = 'block';
-      if (!document.getElementById('copperred-sections').hasChildNodes()) {
-        renderAllCopperredSections();
-      }
-    }
+    showBrand(brand, brandNames[brand]);
   });
 });
 
+// Back button
 document.getElementById('backToBrands').addEventListener('click', () => {
   document.getElementById('orderScreen').style.display = 'none';
   document.getElementById('brandScreen').style.display = 'block';
@@ -1113,133 +723,121 @@ document.getElementById('backToBrands').addEventListener('click', () => {
   document.getElementById('statusMsg').style.display = 'none';
 });
 
-// ── Sign out ─────────────────────────────────────────────────
+// Sign out
 document.getElementById('signoutBtn').addEventListener('click', async () => {
   await sb.auth.signOut();
   window.location.href = '/login.html';
 });
 
-// ── Cast catalog ─────────────────────────────────────────────
-const catalog = {
+// ── Cast Fishing Co catalog ───────────────────────────────────
+const castCatalog = {
   prodigy: [
-    { sku: 'CFC-PRODIGY-ETHER-3',      color: 'Ether',             size: '3" / 8 Pack',   wholesale: 5.40, retail: 9.99 },
-    { sku: 'CFC-PRODIGY-BBHERRING-3',  color: 'Blue Back Herring', size: '3" / 8 Pack',   wholesale: 5.40, retail: 9.99 },
-    { sku: 'CFC-PRODIGY-TITAN-3',      color: 'Titan',             size: '3" / 8 Pack',   wholesale: 6.90, retail: 9.99 },
-    { sku: 'CFC-PRODIGY-OZARK-3',      color: 'Ozark',             size: '3" / 8 Pack',   wholesale: 5.40, retail: 9.99 },
-    { sku: 'CFC-PRODIGY-CARBON-3',     color: 'Carbon',            size: '3" / 8 Pack',   wholesale: 5.40, retail: 9.99 },
-    { sku: 'CFC-PRODIGY-AMETHYST-3',   color: 'Amethyst',          size: '3" / 8 Pack',   wholesale: 5.40, retail: 9.99 },
-    { sku: 'CFC-PRODIGY-LANIER-3',     color: 'Lanier',            size: '3" / 8 Pack',   wholesale: 5.40, retail: 9.99 },
-    { sku: 'CFC-PRODIGY-ETHER-4',      color: 'Ether',             size: '4.1" / 6 Pack', wholesale: 5.95, retail: 10.99 },
-    { sku: 'CFC-PRODIGY-BBHERRING-4',  color: 'Blue Back Herring', size: '4.1" / 6 Pack', wholesale: 5.95, retail: 10.99 },
-    { sku: 'CFC-PRODIGY-TITAN-4',      color: 'Titan',             size: '4.1" / 6 Pack', wholesale: 7.50, retail: 10.99 },
-    { sku: 'CFC-PRODIGY-OZARK-4',      color: 'Ozark',             size: '4.1" / 6 Pack', wholesale: 5.95, retail: 10.99 },
-    { sku: 'CFC-PRODIGY-CARBON-4',     color: 'Carbon',            size: '4.1" / 6 Pack', wholesale: 5.95, retail: 10.99 },
-    { sku: 'CFC-PRODIGY-AMETHYST-4',   color: 'Amethyst',          size: '4.1" / 6 Pack', wholesale: 5.95, retail: 10.99 },
-    { sku: 'CFC-PRODIGY-LANIER-4',     color: 'Lanier',            size: '4.1" / 6 Pack', wholesale: 5.95, retail: 10.99 },
+    { sku:'CFC-PRODIGY-ETHER-3',      color:'Ether',             size:'3" / 8 Pack',   wholesale:5.40, retail:9.99 },
+    { sku:'CFC-PRODIGY-BBHERRING-3',  color:'Blue Back Herring', size:'3" / 8 Pack',   wholesale:5.40, retail:9.99 },
+    { sku:'CFC-PRODIGY-TITAN-3',      color:'Titan',             size:'3" / 8 Pack',   wholesale:6.90, retail:9.99 },
+    { sku:'CFC-PRODIGY-OZARK-3',      color:'Ozark',             size:'3" / 8 Pack',   wholesale:5.40, retail:9.99 },
+    { sku:'CFC-PRODIGY-CARBON-3',     color:'Carbon',            size:'3" / 8 Pack',   wholesale:5.40, retail:9.99 },
+    { sku:'CFC-PRODIGY-AMETHYST-3',   color:'Amethyst',          size:'3" / 8 Pack',   wholesale:5.40, retail:9.99 },
+    { sku:'CFC-PRODIGY-LANIER-3',     color:'Lanier',            size:'3" / 8 Pack',   wholesale:5.40, retail:9.99 },
+    { sku:'CFC-PRODIGY-ETHER-4',      color:'Ether',             size:'4.1" / 6 Pack', wholesale:5.95, retail:10.99 },
+    { sku:'CFC-PRODIGY-BBHERRING-4',  color:'Blue Back Herring', size:'4.1" / 6 Pack', wholesale:5.95, retail:10.99 },
+    { sku:'CFC-PRODIGY-TITAN-4',      color:'Titan',             size:'4.1" / 6 Pack', wholesale:7.50, retail:10.99 },
+    { sku:'CFC-PRODIGY-OZARK-4',      color:'Ozark',             size:'4.1" / 6 Pack', wholesale:5.95, retail:10.99 },
+    { sku:'CFC-PRODIGY-CARBON-4',     color:'Carbon',            size:'4.1" / 6 Pack', wholesale:5.95, retail:10.99 },
+    { sku:'CFC-PRODIGY-AMETHYST-4',   color:'Amethyst',          size:'4.1" / 6 Pack', wholesale:5.95, retail:10.99 },
+    { sku:'CFC-PRODIGY-LANIER-4',     color:'Lanier',            size:'4.1" / 6 Pack', wholesale:5.95, retail:10.99 },
   ],
   echo: [
-    { sku: 'CFC-ECHO-ETHER-2.75',      color: 'Ether',             size: '2.75" / 8 Pack', wholesale: 5.40, retail: 9.99 },
-    { sku: 'CFC-ECHO-BBHERRING-2.75',  color: 'Blue Back Herring', size: '2.75" / 8 Pack', wholesale: 5.40, retail: 9.99 },
-    { sku: 'CFC-ECHO-TITAN-2.75',      color: 'Titan',             size: '2.75" / 8 Pack', wholesale: 6.90, retail: 9.99 },
-    { sku: 'CFC-ECHO-OZARK-2.75',      color: 'Ozark',             size: '2.75" / 8 Pack', wholesale: 5.40, retail: 9.99 },
-    { sku: 'CFC-ECHO-CARBON-2.75',     color: 'Carbon',            size: '2.75" / 8 Pack', wholesale: 5.40, retail: 9.99 },
-    { sku: 'CFC-ECHO-AMETHYST-2.75',   color: 'Amethyst',          size: '2.75" / 8 Pack', wholesale: 5.40, retail: 9.99 },
-    { sku: 'CFC-ECHO-LANIER-2.75',     color: 'Lanier',            size: '2.75" / 8 Pack', wholesale: 5.40, retail: 9.99 },
-    { sku: 'CFC-ECHO-ETHER-3',         color: 'Ether',             size: '3.5" / 8 Pack',  wholesale: 5.40, retail: 9.99 },
-    { sku: 'CFC-ECHO-BBHERRING-3',     color: 'Blue Back Herring', size: '3.5" / 8 Pack',  wholesale: 5.40, retail: 9.99 },
-    { sku: 'CFC-ECHO-TITAN-3',         color: 'Titan',             size: '3.5" / 8 Pack',  wholesale: 6.90, retail: 9.99 },
-    { sku: 'CFC-ECHO-OZARK-3',         color: 'Ozark',             size: '3.5" / 8 Pack',  wholesale: 5.40, retail: 9.99 },
-    { sku: 'CFC-ECHO-CARBON-3',        color: 'Carbon',            size: '3.5" / 8 Pack',  wholesale: 5.40, retail: 9.99 },
-    { sku: 'CFC-ECHO-AMETHYST-3',      color: 'Amethyst',          size: '3.5" / 8 Pack',  wholesale: 5.40, retail: 9.99 },
-    { sku: 'CFC-ECHO-LANIER-3',        color: 'Lanier',            size: '3.5" / 8 Pack',  wholesale: 5.40, retail: 9.99 },
-    { sku: 'CFC-ECHO-ETHER-5',         color: 'Ether',             size: '5.4" / 6 Pack',  wholesale: 7.10, retail: 11.99 },
-    { sku: 'CFC-ECHO-BBHERRING-5',     color: 'Blue Back Herring', size: '5.4" / 6 Pack',  wholesale: 7.10, retail: 11.99 },
-    { sku: 'CFC-ECHO-TITAN-5',         color: 'Titan',             size: '5.4" / 6 Pack',  wholesale: 8.10, retail: 11.99 },
-    { sku: 'CFC-ECHO-OZARK-5',         color: 'Ozark',             size: '5.4" / 6 Pack',  wholesale: 7.10, retail: 11.99 },
-    { sku: 'CFC-ECHO-CARBON-5',        color: 'Carbon',            size: '5.4" / 6 Pack',  wholesale: 7.10, retail: 11.99 },
-    { sku: 'CFC-ECHO-AMETHYST-5',      color: 'Amethyst',          size: '5.4" / 6 Pack',  wholesale: 7.10, retail: 11.99 },
-    { sku: 'CFC-ECHO-LANIER-5',        color: 'Lanier',            size: '5.4" / 6 Pack',  wholesale: 7.10, retail: 11.99 },
-    { sku: 'CFC-ECHO-ETHER-7',         color: 'Ether',             size: '7.2" / 5 Pack',  wholesale: 7.65, retail: 12.99 },
-    { sku: 'CFC-ECHO-BBHERRING-7',     color: 'Blue Back Herring', size: '7.2" / 5 Pack',  wholesale: 7.65, retail: 12.99 },
-    { sku: 'CFC-ECHO-TITAN-7',         color: 'Titan',             size: '7.2" / 5 Pack',  wholesale: 8.65, retail: 12.99 },
-    { sku: 'CFC-ECHO-OZARK-7',         color: 'Ozark',             size: '7.2" / 5 Pack',  wholesale: 7.65, retail: 12.99 },
-    { sku: 'CFC-ECHO-CARBON-7',        color: 'Carbon',            size: '7.2" / 5 Pack',  wholesale: 7.65, retail: 12.99 },
-    { sku: 'CFC-ECHO-AMETHYST-7',      color: 'Amethyst',          size: '7.2" / 5 Pack',  wholesale: 7.65, retail: 12.99 },
-    { sku: 'CFC-ECHO-LANIER-7',        color: 'Lanier',            size: '7.2" / 5 Pack',  wholesale: 7.65, retail: 12.99 },
+    { sku:'CFC-ECHO-ETHER-2.75',      color:'Ether',             size:'2.75" / 8 Pack', wholesale:5.40, retail:9.99 },
+    { sku:'CFC-ECHO-BBHERRING-2.75',  color:'Blue Back Herring', size:'2.75" / 8 Pack', wholesale:5.40, retail:9.99 },
+    { sku:'CFC-ECHO-TITAN-2.75',      color:'Titan',             size:'2.75" / 8 Pack', wholesale:6.90, retail:9.99 },
+    { sku:'CFC-ECHO-OZARK-2.75',      color:'Ozark',             size:'2.75" / 8 Pack', wholesale:5.40, retail:9.99 },
+    { sku:'CFC-ECHO-CARBON-2.75',     color:'Carbon',            size:'2.75" / 8 Pack', wholesale:5.40, retail:9.99 },
+    { sku:'CFC-ECHO-AMETHYST-2.75',   color:'Amethyst',          size:'2.75" / 8 Pack', wholesale:5.40, retail:9.99 },
+    { sku:'CFC-ECHO-LANIER-2.75',     color:'Lanier',            size:'2.75" / 8 Pack', wholesale:5.40, retail:9.99 },
+    { sku:'CFC-ECHO-ETHER-3',         color:'Ether',             size:'3.5" / 8 Pack',  wholesale:5.40, retail:9.99 },
+    { sku:'CFC-ECHO-BBHERRING-3',     color:'Blue Back Herring', size:'3.5" / 8 Pack',  wholesale:5.40, retail:9.99 },
+    { sku:'CFC-ECHO-TITAN-3',         color:'Titan',             size:'3.5" / 8 Pack',  wholesale:6.90, retail:9.99 },
+    { sku:'CFC-ECHO-OZARK-3',         color:'Ozark',             size:'3.5" / 8 Pack',  wholesale:5.40, retail:9.99 },
+    { sku:'CFC-ECHO-CARBON-3',        color:'Carbon',            size:'3.5" / 8 Pack',  wholesale:5.40, retail:9.99 },
+    { sku:'CFC-ECHO-AMETHYST-3',      color:'Amethyst',          size:'3.5" / 8 Pack',  wholesale:5.40, retail:9.99 },
+    { sku:'CFC-ECHO-LANIER-3',        color:'Lanier',            size:'3.5" / 8 Pack',  wholesale:5.40, retail:9.99 },
+    { sku:'CFC-ECHO-ETHER-5',         color:'Ether',             size:'5.4" / 6 Pack',  wholesale:7.10, retail:11.99 },
+    { sku:'CFC-ECHO-BBHERRING-5',     color:'Blue Back Herring', size:'5.4" / 6 Pack',  wholesale:7.10, retail:11.99 },
+    { sku:'CFC-ECHO-TITAN-5',         color:'Titan',             size:'5.4" / 6 Pack',  wholesale:8.10, retail:11.99 },
+    { sku:'CFC-ECHO-OZARK-5',         color:'Ozark',             size:'5.4" / 6 Pack',  wholesale:7.10, retail:11.99 },
+    { sku:'CFC-ECHO-CARBON-5',        color:'Carbon',            size:'5.4" / 6 Pack',  wholesale:7.10, retail:11.99 },
+    { sku:'CFC-ECHO-AMETHYST-5',      color:'Amethyst',          size:'5.4" / 6 Pack',  wholesale:7.10, retail:11.99 },
+    { sku:'CFC-ECHO-LANIER-5',        color:'Lanier',            size:'5.4" / 6 Pack',  wholesale:7.10, retail:11.99 },
+    { sku:'CFC-ECHO-ETHER-7',         color:'Ether',             size:'7.2" / 5 Pack',  wholesale:7.65, retail:12.99 },
+    { sku:'CFC-ECHO-BBHERRING-7',     color:'Blue Back Herring', size:'7.2" / 5 Pack',  wholesale:7.65, retail:12.99 },
+    { sku:'CFC-ECHO-TITAN-7',         color:'Titan',             size:'7.2" / 5 Pack',  wholesale:8.65, retail:12.99 },
+    { sku:'CFC-ECHO-OZARK-7',         color:'Ozark',             size:'7.2" / 5 Pack',  wholesale:7.65, retail:12.99 },
+    { sku:'CFC-ECHO-CARBON-7',        color:'Carbon',            size:'7.2" / 5 Pack',  wholesale:7.65, retail:12.99 },
+    { sku:'CFC-ECHO-AMETHYST-7',      color:'Amethyst',          size:'7.2" / 5 Pack',  wholesale:7.65, retail:12.99 },
+    { sku:'CFC-ECHO-LANIER-7',        color:'Lanier',            size:'7.2" / 5 Pack',  wholesale:7.65, retail:12.99 },
   ],
   nova: [
-    { sku: 'CFC-NOVA-MAMBA-4.5',         color: 'Mamba',          size: '4.5" / 10 Pack', wholesale: 5.50, retail: 8.99 },
-    { sku: 'CFC-NOVA-LANIER-4.5',        color: 'Lanier',         size: '4.5" / 10 Pack', wholesale: 5.50, retail: 8.99 },
-    { sku: 'CFC-NOVA-AMETHYST-4.5',      color: 'Amethyst',       size: '4.5" / 10 Pack', wholesale: 5.50, retail: 8.99 },
-    { sku: 'CFC-NOVA-SPIKEDPUMPKIN-4.5', color: 'Spiced Pumpkin', size: '4.5" / 10 Pack', wholesale: 5.50, retail: 8.99 },
-    { sku: 'CFC-NOVA-SPACEJAM-4.5',      color: 'Spacejam',       size: '4.5" / 10 Pack', wholesale: 5.50, retail: 8.99 },
+    { sku:'CFC-NOVA-MAMBA-4.5',         color:'Mamba',          size:'4.5" / 10 Pack', wholesale:5.50, retail:8.99 },
+    { sku:'CFC-NOVA-LANIER-4.5',        color:'Lanier',         size:'4.5" / 10 Pack', wholesale:5.50, retail:8.99 },
+    { sku:'CFC-NOVA-AMETHYST-4.5',      color:'Amethyst',       size:'4.5" / 10 Pack', wholesale:5.50, retail:8.99 },
+    { sku:'CFC-NOVA-SPIKEDPUMPKIN-4.5', color:'Spiced Pumpkin', size:'4.5" / 10 Pack', wholesale:5.50, retail:8.99 },
+    { sku:'CFC-NOVA-SPACEJAM-4.5',      color:'Spacejam',       size:'4.5" / 10 Pack', wholesale:5.50, retail:8.99 },
   ],
   x12: [
-    { sku: 'CFC-X12-12LB', color: 'Atoll', size: '12LB / 330 Yds', wholesale: 40.00, retail: 59.99 },
-    { sku: 'CFC-X12-20LB', color: 'Atoll', size: '20LB / 330 Yds', wholesale: 40.00, retail: 59.99 },
-    { sku: 'CFC-X12-30LB', color: 'Atoll', size: '30LB / 330 Yds', wholesale: 40.00, retail: 59.99 },
-    { sku: 'CFC-X12-50LB', color: 'Atoll', size: '50LB / 330 Yds', wholesale: 40.00, retail: 59.99 },
-    { sku: 'CFC-X12-65LB', color: 'Atoll', size: '65LB / 440 Yds', wholesale: 40.00, retail: 59.99 },
-    { sku: 'CFC-X12-80LB', color: 'Atoll', size: '80LB / 440 Yds', wholesale: 40.00, retail: 59.99 },
+    { sku:'CFC-X12-12LB', color:'Atoll', size:'12LB / 330 Yds', wholesale:40.00, retail:59.99 },
+    { sku:'CFC-X12-20LB', color:'Atoll', size:'20LB / 330 Yds', wholesale:40.00, retail:59.99 },
+    { sku:'CFC-X12-30LB', color:'Atoll', size:'30LB / 330 Yds', wholesale:40.00, retail:59.99 },
+    { sku:'CFC-X12-50LB', color:'Atoll', size:'50LB / 330 Yds', wholesale:40.00, retail:59.99 },
+    { sku:'CFC-X12-65LB', color:'Atoll', size:'65LB / 440 Yds', wholesale:40.00, retail:59.99 },
+    { sku:'CFC-X12-80LB', color:'Atoll', size:'80LB / 440 Yds', wholesale:40.00, retail:59.99 },
   ],
   bfs: [
-    { sku: 'CFC-BFS-8LB',  color: 'Grape', size: '8LB / 150 Yds',  wholesale: 20.00, retail: 29.99 },
-    { sku: 'CFC-BFS-10LB', color: 'Grape', size: '10LB / 150 Yds', wholesale: 20.00, retail: 29.99 },
+    { sku:'CFC-BFS-8LB',  color:'Grape', size:'8LB / 150 Yds',  wholesale:20.00, retail:29.99 },
+    { sku:'CFC-BFS-10LB', color:'Grape', size:'10LB / 150 Yds', wholesale:20.00, retail:29.99 },
   ]
 };
+const castProductNames = { prodigy:'Prodigy Swimbait', echo:'Echo Finesse Minnow', nova:'Nova Neko Worm', x12:'X12 Casting Braid', bfs:'BFS Casting Braid' };
 
-const productNames = {
-  prodigy: 'Prodigy Swimbait',
-  echo: 'Echo Finesse Minnow',
-  nova: 'Nova Neko Worm',
-  x12: 'X12 Casting Braid',
-  bfs: 'BFS Casting Braid'
-};
-
-
-// ── Feathermoon Outdoors catalog ─────────────────────────────
-const feathermoonCatalog = [
-  { sku: 'FM-MOUTHCALL-1',   desc: '1 Mouth Call',        notes: '',                                  retail: 8.49,  wholesale: 5.59  },
-  { sku: 'FM-MOUTHCALL-3',   desc: '3 Mouth Calls',       notes: 'Hunters 3 Pk',                     retail: 19.99, wholesale: 11.99 },
-  { sku: 'FM-WALNUTSLATE',   desc: 'Walnut Slate Pot',    notes: '',                                  retail: 51.49, wholesale: 37.50 },
-  { sku: 'FM-NEWLAMINATE',   desc: 'New Laminate Pot',    notes: '',                                  retail: 75.00, wholesale: 60.00 },
-  { sku: 'FM-LAMINATE',      desc: 'Laminate Pot',        notes: '',                                  retail: 75.00, wholesale: 60.00 },
-  { sku: 'FM-CHERRYPOT',     desc: 'Cherry Pot',          notes: '',                                  retail: 51.49, wholesale: 37.50 },
-  { sku: 'FM-CHERRYFLIP',    desc: 'Cherry Flip',         notes: 'The Game Changer, Glass over Slate', retail: 51.49, wholesale: 37.50 },
-  { sku: 'FM-CAMOFLIP',      desc: 'Camo Flip',           notes: '',                                  retail: 22.99, wholesale: 16.99 },
-  { sku: 'FM-GRUNTCALL',     desc: 'Grunt Call',          notes: '',                                  retail: 22.99, wholesale: 17.50 },
-  { sku: 'FM-WALNUTFLIP',    desc: 'Walnut Flip',         notes: '',                                  retail: 51.49, wholesale: 37.50 },
-  { sku: 'FM-PREDCALL',      desc: 'Pred Call',           notes: '',                                  retail: 15.49, wholesale: 11.75 },
-  { sku: 'FM-CONDSTONES',    desc: 'Cond. Stones',        notes: '',                                  retail: 9.99,  wholesale: 6.50  },
-  { sku: 'FM-CROWCALL',      desc: 'Crow Call',           notes: '',                                  retail: 14.49, wholesale: 11.25 },
-  { sku: 'FM-BLEATCAN',      desc: 'Bleat Can',           notes: '',                                  retail: 10.99, wholesale: 7.99  },
-  { sku: 'FM-OWLHOOTER',     desc: 'Owl Hooter',          notes: '',                                  retail: 25.00, wholesale: 12.60 },
-];
-
-// ── Render functions ─────────────────────────────────────────
-function renderRows(cat, tbodyId) {
+function renderCastRows(cat, tbodyId) {
   const tbody = document.getElementById(tbodyId);
-  catalog[cat].forEach(p => {
+  castCatalog[cat].forEach(p => {
     const tr = document.createElement('tr');
     tr.innerHTML = `
-      <td class="bold">${productNames[cat]}</td>
+      <td class="bold">${castProductNames[cat]}</td>
       <td class="sku">${p.sku}</td>
-      <td><span class="color-dot"></span>${p.color}</td>
+      <td><span style="display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;background:var(--teal);opacity:0.6;"></span>${p.color}</td>
       <td>${p.size}</td>
       <td class="right">$${p.wholesale.toFixed(2)}</td>
       <td class="right" style="color:var(--muted)">$${p.retail.toFixed(2)}</td>
-      <td style="text-align:center">
-        <input class="qty-input" type="number" min="0" step="1"
-          data-sku="${p.sku}" data-wholesale="${p.wholesale}"
-          data-product="${productNames[cat]}" data-color="${p.color}"
-          data-size='${p.size}' data-retail="${p.retail}"
-          placeholder="0" autocomplete="off">
-      </td>
+      <td style="text-align:center"><input class="qty-input" type="number" min="0" step="1"
+        data-sku="${p.sku}" data-wholesale="${p.wholesale}"
+        data-product="${castProductNames[cat]}" data-color="${p.color}"
+        data-size="${p.size}" data-retail="${p.retail}" placeholder="0" autocomplete="off"></td>
       <td class="right"><span class="line-total" id="lt-${p.sku.replace(/[.\s]/g,'_')}">—</span></td>
     `;
     tbody.appendChild(tr);
   });
 }
+
+// ── FeatherMoon Outdoors catalog ─────────────────────────────
+const feathermoonCatalog = [
+  { sku:'FM-MOUTHCALL-1',  desc:'1 Mouth Call',     notes:'',                                   retail:8.49,  wholesale:5.59  },
+  { sku:'FM-MOUTHCALL-3',  desc:'3 Mouth Calls',    notes:'Hunters 3 Pk',                       retail:19.99, wholesale:11.99 },
+  { sku:'FM-WALNUTSLATE',  desc:'Walnut Slate Pot',  notes:'',                                   retail:51.49, wholesale:37.50 },
+  { sku:'FM-NEWLAMINATE',  desc:'New Laminate Pot',  notes:'',                                   retail:75.00, wholesale:60.00 },
+  { sku:'FM-LAMINATE',     desc:'Laminate Pot',      notes:'',                                   retail:75.00, wholesale:60.00 },
+  { sku:'FM-CHERRYPOT',    desc:'Cherry Pot',        notes:'',                                   retail:51.49, wholesale:37.50 },
+  { sku:'FM-CHERRYFLIP',   desc:'Cherry Flip',       notes:'The Game Changer, Glass over Slate', retail:51.49, wholesale:37.50 },
+  { sku:'FM-CAMOFLIP',     desc:'Camo Flip',         notes:'',                                   retail:22.99, wholesale:16.99 },
+  { sku:'FM-GRUNTCALL',    desc:'Grunt Call',        notes:'',                                   retail:22.99, wholesale:17.50 },
+  { sku:'FM-WALNUTFLIP',   desc:'Walnut Flip',       notes:'',                                   retail:51.49, wholesale:37.50 },
+  { sku:'FM-PREDCALL',     desc:'Pred Call',         notes:'',                                   retail:15.49, wholesale:11.75 },
+  { sku:'FM-CONDSTONES',   desc:'Cond. Stones',      notes:'',                                   retail:9.99,  wholesale:6.50  },
+  { sku:'FM-CROWCALL',     desc:'Crow Call',         notes:'',                                   retail:14.49, wholesale:11.25 },
+  { sku:'FM-BLEATCAN',     desc:'Bleat Can',         notes:'',                                   retail:10.99, wholesale:7.99  },
+  { sku:'FM-OWLHOOTER',    desc:'Owl Hooter',        notes:'',                                   retail:25.00, wholesale:12.60 },
+];
 
 function renderFeathermoonRows() {
   const tbody = document.getElementById('feathermoon-rows');
@@ -1251,16 +849,62 @@ function renderFeathermoonRows() {
       <td style="font-size:11px;color:var(--muted)">${p.notes}</td>
       <td class="right">$${p.wholesale.toFixed(2)}</td>
       <td class="right" style="color:var(--muted)">$${p.retail.toFixed(2)}</td>
-      <td style="text-align:center">
-        <input class="qty-input" type="number" min="0" step="1"
-          data-sku="${p.sku}" data-wholesale="${p.wholesale}"
-          data-product="${p.desc}" data-color=""
-          data-size="" data-retail="${p.retail}"
-          placeholder="0" autocomplete="off">
-      </td>
+      <td style="text-align:center"><input class="qty-input" type="number" min="0" step="1"
+        data-sku="${p.sku}" data-wholesale="${p.wholesale}"
+        data-product="${p.desc}" data-color="" data-size="" data-retail="${p.retail}"
+        placeholder="0" autocomplete="off"></td>
       <td class="right"><span class="line-total" id="lt-${p.sku.replace(/[.\s]/g,'_')}">—</span></td>
     `;
     tbody.appendChild(tr);
+  });
+}
+
+// ── Queen Tackle sections ─────────────────────────────────────
+const qtSectionDefs = [
+  { key:'porcupine_balls',            label:'Porcupine Balls' },
+  { key:'ghost_jig_heads',            label:'Ghost Jig Heads' },
+  { key:'ls_rollin_strollin',         label:'LS Tungsten Rollin Strollin Jig Heads' },
+  { key:'line_throughs_nail_weights', label:'Line Throughs Tungsten Nail Weights — New' },
+  { key:'ls_underspins',              label:'LS Tungsten Underspins' },
+  { key:'ls_jigging_spoons',          label:'LS Tungsten Jigging Spoons' },
+  { key:'finesse_peanut_jigs',        label:'Tungsten Finesse Peanut Jigs' },
+  { key:'flipping_jigs',              label:'Tungsten Flipping Jigs' },
+  { key:'swim_jigs',                  label:'Tungsten Swim Jigs' },
+  { key:'football_jigs',              label:'Tungsten Football Jigs' },
+  { key:'hammerhead_jigs',            label:'Hammerhead Jigs — Rattle In Tungsten Football Head' },
+  { key:'ping_jigs',                  label:'Tungsten Ping Jigs (Marabou Hair)' },
+  { key:'punch_skirts',               label:'Tungsten Punch Skirts' },
+  { key:'switch_blades',              label:'Switch Blades' },
+  { key:'switch_blade_jig',           label:'Switch Blade Tungsten Jig (Bladed Jig)' },
+  { key:'worm_weights',               label:'Tungsten Worm Weights' },
+  { key:'flipping_weights',           label:'Tungsten Flipping Weights' },
+  { key:'barrell_weights',            label:'Tungsten Barrell Weights — Carolina Rig' },
+  { key:'dropshot_weights',           label:'Tungsten Dropshot Weights' },
+  { key:'swingheads',                 label:'Tungsten Swingheads' },
+  { key:'shakeyheads',                label:'Tungsten Shakeyheads & Hammer Shakes' },
+];
+
+function renderAllQTSections() {
+  const container = document.getElementById('qt-sections');
+  qtSectionDefs.forEach(({ key, label }) => {
+    const tbodyId = 'qt-' + key + '-rows';
+    const count = qtCatalog[key] ? qtCatalog[key].length : 0;
+    const div = document.createElement('div');
+    div.className = 'product-section';
+    div.innerHTML = `
+      <div class="category-header">
+        <span class="category-name">${label}</span>
+        <span class="category-desc">${count} SKUs</span>
+      </div>
+      <table>
+        <thead><tr>
+          <th class="center">Qty</th><th>SKU</th><th>UPC</th><th>Description</th>
+          <th class="right">Wholesale</th><th class="right">MSRP</th><th class="right">Line Total</th>
+        </tr></thead>
+        <tbody id="${tbodyId}"></tbody>
+      </table>`;
+    container.appendChild(div);
+    renderQTRows(key, tbodyId);
   });
 }
 
@@ -1311,15 +955,15 @@ const lanierCatalog = {
     { sku:'LB-312', item:312, color:'Magic Shad',          pack:7, wholesale:3.49 },
   ],
   swim_minnow: [
-    { sku:'LB-401', item:401, color:'Herring',      pack:6, wholesale:4.30 },
-    { sku:'LB-402', item:402, color:'Limeade',      pack:6, wholesale:4.30 },
-    { sku:'LB-403', item:403, color:'Diet FZNH2O',  pack:6, wholesale:4.30 },
-    { sku:'LB-404', item:404, color:'FZNH2O',       pack:6, wholesale:4.30 },
-    { sku:'LB-405', item:405, color:'Melon Rose',   pack:6, wholesale:4.30 },
-    { sku:'LB-406', item:406, color:'Storm',        pack:6, wholesale:4.30 },
-    { sku:'LB-407', item:407, color:'Natty Shad',   pack:6, wholesale:4.30 },
-    { sku:'LB-408', item:408, color:'Pearl',        pack:6, wholesale:4.30 },
-    { sku:'LB-409', item:409, color:'Magic Shad',   pack:6, wholesale:4.30 },
+    { sku:'LB-401', item:401, color:'Herring',     pack:6, wholesale:4.30 },
+    { sku:'LB-402', item:402, color:'Limeade',     pack:6, wholesale:4.30 },
+    { sku:'LB-403', item:403, color:'Diet FZNH2O', pack:6, wholesale:4.30 },
+    { sku:'LB-404', item:404, color:'FZNH2O',      pack:6, wholesale:4.30 },
+    { sku:'LB-405', item:405, color:'Melon Rose',  pack:6, wholesale:4.30 },
+    { sku:'LB-406', item:406, color:'Storm',       pack:6, wholesale:4.30 },
+    { sku:'LB-407', item:407, color:'Natty Shad',  pack:6, wholesale:4.30 },
+    { sku:'LB-408', item:408, color:'Pearl',       pack:6, wholesale:4.30 },
+    { sku:'LB-409', item:409, color:'Magic Shad',  pack:6, wholesale:4.30 },
   ],
   hooch_craw: [
     { sku:'LB-501', item:501, color:'Dirty Craw', pack:6, wholesale:4.30 },
@@ -1375,12 +1019,12 @@ const lanierCatalog = {
 
 const lanierCategories = [
   ['finesse_worm','lb-finesse_worm-rows'], ['jerk_shad','lb-jerk_shad-rows'],
-  ['hover_shad','lb-hover_shad-rows'], ['swim_minnow','lb-swim_minnow-rows'],
-  ['hooch_craw','lb-hooch_craw-rows'], ['shakey_ned','lb-shakey_ned-rows'],
-  ['ball_jig','lb-ball_jig-rows'], ['damiki','lb-damiki-rows'],
-  ['dropshot','lb-dropshot-rows'], ['eliminator','lb-eliminator-rows'],
-  ['hooks','lb-hooks-rows'], ['swivels','lb-swivels-rows'],
-  ['spoons','lb-spoons-rows'], ['shad_spin','lb-shad_spin-rows'],
+  ['hover_shad','lb-hover_shad-rows'],     ['swim_minnow','lb-swim_minnow-rows'],
+  ['hooch_craw','lb-hooch_craw-rows'],     ['shakey_ned','lb-shakey_ned-rows'],
+  ['ball_jig','lb-ball_jig-rows'],         ['damiki','lb-damiki-rows'],
+  ['dropshot','lb-dropshot-rows'],         ['eliminator','lb-eliminator-rows'],
+  ['hooks','lb-hooks-rows'],               ['swivels','lb-swivels-rows'],
+  ['spoons','lb-spoons-rows'],             ['shad_spin','lb-shad_spin-rows'],
   ['hard_swimmer','lb-hard_swimmer-rows'],
 ];
 
@@ -1390,14 +1034,12 @@ function renderLanierRows(cat, tbodyId) {
     const desc = p.size ? `${p.size} — ${p.color}` : p.color;
     const tr = document.createElement('tr');
     tr.innerHTML = `
-      <td style="text-align:center">
-        <input class="qty-input" type="number" min="0" step="1"
-          data-sku="${p.sku}" data-wholesale="${p.wholesale}"
-          data-product="${desc.replace(/"/g, '&quot;')}"
-          data-color="${p.color}" data-retail="0"
-          placeholder="0" autocomplete="off">
-      </td>
+      <td style="text-align:center"><input class="qty-input" type="number" min="0" step="1"
+        data-sku="${p.sku}" data-wholesale="${p.wholesale}"
+        data-product="${desc.replace(/"/g,'&quot;')}" data-color="${p.color}" data-retail="0"
+        placeholder="0" autocomplete="off"></td>
       <td class="sku">${p.sku.replace('LB-','')}</td>
+      <td class="sku">${p.item}</td>
       <td class="bold">${desc}</td>
       <td style="text-align:center;color:var(--muted)">${p.pack}pk</td>
       <td class="right">$${p.wholesale.toFixed(2)}</td>
@@ -1406,26 +1048,201 @@ function renderLanierRows(cat, tbodyId) {
     tbody.appendChild(tr);
   });
 }
-
 function renderAllLanierRows() {
   lanierCategories.forEach(([cat, tbodyId]) => renderLanierRows(cat, tbodyId));
 }
 
-// ── Live totals ──────────────────────────────────────────────
+// ── Blue Rock sections ────────────────────────────────────────
+const bluerockSectionDefs = [
+  { group:'JIGS',            key:'jig_1099',          label:'1099 Jig' },
+  { group:null,              key:'jig_1099xl',         label:'1099 XL Jig' },
+  { group:null,              key:'triple_threat',      label:'Triple Threat Finesse Jig' },
+  { group:null,              key:'jig_247',            label:'247 Jig' },
+  { group:null,              key:'sabotage_swim',       label:'Sabotage Swim Jig' },
+  { group:null,              key:'scrapper_ball',       label:'Scrapper Ball Head Finesse Jig' },
+  { group:'SPINNERBAITS',    key:'ss_wc',              label:'Showstopper W/C' },
+  { group:null,              key:'ss_dw',              label:'Showstopper DW' },
+  { group:null,              key:'ss_sc',              label:'Showstopper Single Colorado' },
+  { group:null,              key:'ss_dc',              label:'Showstopper Double Colorado' },
+  { group:null,              key:'indiana_pulse',       label:'Indiana Pulse' },
+  { group:null,              key:'flare_series',        label:'Flare Series' },
+  { group:'BUZZBAITS',       key:'boss_man',            label:'Boss Man' },
+  { group:null,              key:'bombshell',           label:'Bombshell Naked' },
+  { group:'TERMINAL TACKLE', key:'plush_underspin',     label:'Plush Underspin' },
+  { group:null,              key:'moneyball_3_0',       label:'Money Ball 3/0' },
+  { group:null,              key:'moneyball_5_0',       label:'Money Ball 5/0' },
+  { group:null,              key:'ricochet_tube',       label:'Ricochet Rattling Tube Head' },
+  { group:null,              key:'tube_jr',             label:'Tube Jr Hook' },
+  { group:null,              key:'goby_fat_head',       label:'Goby Fat Head' },
+  { group:null,              key:'tactical_tube',       label:'Tactical Tube Jig Head' },
+  { group:null,              key:'mini_mack',           label:'Mini Mack Ball Head' },
+  { group:null,              key:'ss_round_ball',       label:'SS Round Ball Jig Head' },
+  { group:null,              key:'covert_round_ball',   label:'Covert Round Ball Swimbait Head' },
+  { group:null,              key:'nasty_ned_head',      label:'Nasty Ned Head' },
+  { group:null,              key:'nasty_ned_weedless',  label:'Nasty Ned Weedless' },
+  { group:null,              key:'ewg_ned_1_0',         label:'EWG Ned 1/0' },
+  { group:null,              key:'ewg_ned_2_0',         label:'EWG Ned 2/0' },
+  { group:null,              key:'shimmy_shaky',        label:'Shimmy Shaky Head' },
+  { group:null,              key:'bobber_stops',        label:'Bobber Stops' },
+  { group:null,              key:'bluerock_tfw',        label:'Tungsten Flipping Weights' },
+  { group:null,              key:'dropshot_tear',       label:'Dropshot Tear Drop' },
+  { group:null,              key:'dropshot_pencil',     label:'Dropshot Pencil' },
+  { group:null,              key:'nail_weights',        label:'Nail Weights' },
+  { group:null,              key:'twin_jig_rattle',     label:'Twin Jig Rattle' },
+  { group:null,              key:'screw_lock_spinner',  label:'Screw Lock Tail Spinner' },
+  { group:'SOFT PLASTICS',   key:'hydro_shad',          label:'Hydro Shad' },
+  { group:null,              key:'salty_jr',            label:'Salty Stick Em Jr 2.75"' },
+  { group:null,              key:'salty_tubes',         label:'Salty Stick Em 3.5"/4"' },
+  { group:null,              key:'nasty_ned_worm',      label:'Nasty Ned Worm' },
+  { group:null,              key:'bulldozer_toad',      label:'Bulldozer Buzz Toad' },
+  { group:null,              key:'helgy',               label:'Helgy' },
+  { group:null,              key:'chaw_craw',           label:'Chaw Craw' },
+  { group:null,              key:'savvy_swimmer',       label:'Savvy Swimmer' },
+  { group:null,              key:'trash_chunk',         label:'Trash Chunk' },
+  { group:null,              key:'deuce_stick',         label:'Deuce Stick Worm' },
+];
+
+function renderAllBluerockSections() {
+  const container = document.getElementById('bluerock-sections');
+  bluerockSectionDefs.forEach(({ group, key, label }) => {
+    if (group) {
+      const h = document.createElement('div');
+      h.className = 'group-header';
+      h.textContent = group;
+      container.appendChild(h);
+    }
+    const count = bluerockCatalog[key] ? bluerockCatalog[key].length : 0;
+    const tbodyId = 'br-' + key.replace(/_/g,'-') + '-rows';
+    const div = document.createElement('div');
+    div.className = 'product-section';
+    div.innerHTML = `
+      <div class="category-header">
+        <span class="category-name">${label}</span>
+        <span class="category-desc">${count} SKUs</span>
+      </div>
+      <table>
+        <thead><tr>
+          <th class="center">Qty</th><th>UPC</th><th>Description</th><th>Pack</th>
+          <th class="right">Wholesale</th><th class="right">MSRP</th><th class="right">Line Total</th>
+        </tr></thead>
+        <tbody id="${tbodyId}"></tbody>
+      </table>`;
+    container.appendChild(div);
+    if (bluerockCatalog[key]) renderBluerockRows(key, tbodyId);
+  });
+}
+
+// ── SpotSticker sections ──────────────────────────────────────
+const spotstickerSectionDefs = [
+  { group:'JIG HEADS — STANDARD (UNPAINTED)', key:'wide_gap',           label:'Wide Gap Eagle Claw 570 4/0' },
+  { group:null,                               key:'long_shank',          label:'Long Shank Eagle Claw 574 3/0' },
+  { group:null,                               key:'magnum',              label:'Magnum Eagle Claw 574 4/0' },
+  { group:'JIG HEADS — PRO SERIES (PAINTED)', key:'pro_ball',            label:'Pro Series Ball Head' },
+  { group:null,                               key:'pro_football',        label:'Pro Series Football Stand-Up Head' },
+  { group:null,                               key:'football_ewg',        label:'Football EWG Stand-Up Head' },
+  { group:null,                               key:'screwball_shaky',     label:'Screwball Shaky Head' },
+  { group:null,                               key:'crawler_heads',       label:'Crawler Heads' },
+  { group:'DROPSHOT WEIGHTS',                 key:'dropshot_cylinder',   label:'Finesse Dropshot — Cylinder' },
+  { group:null,                               key:'dropshot_teardrop',   label:'Finesse Dropshot — Teardrop' },
+  { group:'HAND-TIED JIGS',                   key:'casting_jigs',        label:'Hand-Tied Casting Jigs' },
+  { group:null,                               key:'football_jigs',       label:'Hand-Tied Football Jigs' },
+  { group:'SPECIALTY HEADS',                  key:'underspins',          label:'Underspins' },
+  { group:null,                               key:'football_swimbait',   label:'Football Swimbait Heads' },
+  { group:null,                               key:'screwlock_swimbait',  label:'Screwlock Swimbait Heads' },
+  { group:'SOFT PLASTICS',                    key:'dropshot_worm_6',     label:'Drop-Shot Worm 6"' },
+  { group:null,                               key:'dropshot_worm_45',    label:'Drop-Shot Worm 4.5"' },
+  { group:null,                               key:'twin_tail_grub',      label:'5" Twin-Tail Grub' },
+  { group:null,                               key:'finesse_stick',       label:'6" Finesse Stick (5.75")' },
+  { group:null,                               key:'swimbait_38',         label:'Soft Swimbait 3.8"' },
+  { group:null,                               key:'swimbait_33',         label:'Soft Swimbait 3.3"' },
+];
+
+function renderAllSpotstickerSections() {
+  const container = document.getElementById('spotsticker-sections');
+  spotstickerSectionDefs.forEach(({ group, key, label }) => {
+    if (group) {
+      const h = document.createElement('div');
+      h.className = 'group-header';
+      h.textContent = group;
+      container.appendChild(h);
+    }
+    const count = spotstickerCatalog[key] ? spotstickerCatalog[key].length : 0;
+    const tbodyId = 'ss-' + key.replace(/_/g,'-') + '-rows';
+    const div = document.createElement('div');
+    div.className = 'product-section';
+    div.innerHTML = `
+      <div class="category-header">
+        <span class="category-name">${label}</span>
+        <span class="category-desc">${count} SKUs</span>
+      </div>
+      <table>
+        <thead><tr>
+          <th class="center">Qty</th><th>SKU</th><th>Description</th><th>Pack</th>
+          <th class="right">Wholesale</th><th class="right">Retail</th><th class="right">Line Total</th>
+        </tr></thead>
+        <tbody id="${tbodyId}"></tbody>
+      </table>`;
+    container.appendChild(div);
+    if (spotstickerCatalog[key]) renderSpotstickerRows(key, tbodyId);
+  });
+}
+
+// ── Copper Red sections ───────────────────────────────────────
+const copperredSectionDefs = [
+  { group:'HARD BAITS',  key:'jonah_jerkbait',              label:'Jonah 1:17 — Rattling Jerk Bait' },
+  { group:'SNATCHIN SHAD', key:'snatchin_shad_half_rattling', label:'Snatchin Shad 1/2 oz — Rattling' },
+  { group:null,          key:'snatchin_shad_half_silent',   label:'Snatchin Shad 1/2 oz — Silent' },
+  { group:null,          key:'snatchin_shad_threequarter',  label:'Snatchin Shad 3/4 oz' },
+  { group:'BLADE BAITS', key:'the_shank',                   label:'The Shank — 1.9" Blade Bait' },
+  { group:'FROGS',       key:'loud_mouth',                  label:'Loud Mouth — Poppin Frog' },
+  { group:null,          key:'ripple_frog',                 label:'Ripple Frog — 2" Frog' },
+  { group:null,          key:'tsunami_frog',                label:'Tsunami Frog — 3.5" Frog' },
+  { group:null,          key:'wave_frog',                   label:'Wave Frog — 2.5" Frog' },
+];
+
+function renderAllCopperredSections() {
+  const container = document.getElementById('copperred-sections');
+  copperredSectionDefs.forEach(({ group, key, label }) => {
+    if (group) {
+      const h = document.createElement('div');
+      h.className = 'group-header';
+      h.textContent = group;
+      container.appendChild(h);
+    }
+    const count = copperredCatalog[key] ? copperredCatalog[key].length : 0;
+    const tbodyId = 'cb-' + key.replace(/_/g,'-') + '-rows';
+    const div = document.createElement('div');
+    div.className = 'product-section';
+    div.innerHTML = `
+      <div class="category-header">
+        <span class="category-name">${label}</span>
+        <span class="category-desc">${count} SKUs</span>
+      </div>
+      <table>
+        <thead><tr>
+          <th class="center">Qty</th><th>UPC</th><th>Description</th><th>Detail</th>
+          <th class="right">Wholesale</th><th class="right">MSRP</th><th class="right">Line Total</th>
+        </tr></thead>
+        <tbody id="${tbodyId}"></tbody>
+      </table>`;
+    container.appendChild(div);
+    if (copperredCatalog[key]) renderCopperredRows(key, tbodyId);
+  });
+}
+
+// ── Live totals ───────────────────────────────────────────────
 function updateTotals() {
   let totalCost = 0, totalItems = 0, totalSkus = 0;
   document.querySelectorAll('.qty-input').forEach(input => {
     const qty = parseInt(input.value) || 0;
     const wholesale = parseFloat(input.dataset.wholesale);
-    const ltId = `lt-${input.dataset.sku.replace(/[.\s]/g,'_')}`;
+    const ltId = 'lt-' + input.dataset.sku.replace(/[.\s]/g,'_');
     const ltEl = document.getElementById(ltId);
     if (ltEl) {
       if (qty > 0) {
         const line = qty * wholesale;
-        totalCost += line;
-        totalItems += qty;
-        totalSkus++;
-        ltEl.textContent = `$${line.toFixed(2)}`;
+        totalCost += line; totalItems += qty; totalSkus++;
+        ltEl.textContent = '$' + line.toFixed(2);
         ltEl.classList.add('has-value');
       } else {
         ltEl.textContent = '—';
@@ -1435,18 +1252,14 @@ function updateTotals() {
   });
   document.getElementById('totalItems').textContent = totalItems;
   document.getElementById('totalSkus').textContent = totalSkus;
-  document.getElementById('orderTotal').textContent = `$${totalCost.toFixed(2)}`;
+  document.getElementById('orderTotal').textContent = '$' + totalCost.toFixed(2);
 }
+document.addEventListener('input', e => { if (e.target.classList.contains('qty-input')) updateTotals(); });
 
-document.addEventListener('input', e => {
-  if (e.target.classList.contains('qty-input')) updateTotals();
-});
-
-// ── Submit ───────────────────────────────────────────────────
+// ── Submit order ──────────────────────────────────────────────
 document.getElementById('submitBtn').addEventListener('click', async () => {
   const btn = document.getElementById('submitBtn');
   const statusEl = document.getElementById('statusMsg');
-
   statusEl.style.display = 'none';
 
   const items = [];
@@ -1459,7 +1272,7 @@ document.getElementById('submitBtn').addEventListener('click', async () => {
         color: input.dataset.color || '',
         size: input.dataset.size || '',
         wholesale_cost: parseFloat(input.dataset.wholesale),
-        retail_price: parseFloat(input.dataset.retail || input.dataset.map || 0),
+        retail_price: parseFloat(input.dataset.retail || 0),
         qty,
         line_total: (qty * parseFloat(input.dataset.wholesale)).toFixed(2)
       });
@@ -1480,52 +1293,36 @@ document.getElementById('submitBtn').addEventListener('click', async () => {
   btn.textContent = 'SUBMITTING...';
 
   try {
-    // 1. Save order to Supabase
     const { data: order, error: orderError } = await sb
       .from('orders')
-      .insert({
-        retailer_id: currentUser.id,
-        brand: brandName,
-        order_total: parseFloat(order_total),
-        notes: document.getElementById('orderNotes').value || null
-      })
-      .select()
-      .single();
-
+      .insert({ retailer_id: currentUser.id, brand: brandName, order_total: parseFloat(order_total), notes: document.getElementById('orderNotes').value || null })
+      .select().single();
     if (orderError) throw orderError;
 
-    // 2. Save order items
-    const orderItems = items.map(item => ({ ...item, order_id: order.id }));
-    const { error: itemsError } = await sb.from('order_items').insert(orderItems);
+    const { error: itemsError } = await sb.from('order_items').insert(items.map(item => ({ ...item, order_id: order.id })));
     if (itemsError) throw itemsError;
 
-    // 3. Fire n8n webhook
     await fetch(N8N_WEBHOOK_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        order_id: order.id,
-        brand: brandName,
+        order_id: order.id, brand: brandName,
         retailer: {
-          store_name: currentRetailer?.store_name,
-          contact_name: currentRetailer?.contact_name,
-          email: currentRetailer?.email || currentUser.email,
-          phone: currentRetailer?.phone,
-          shipping_address: currentRetailer?.shipping_address,
-          city_state_zip: currentRetailer?.city_state_zip
+          store_name: currentRetailer?.store_name, contact_name: currentRetailer?.contact_name,
+          email: currentRetailer?.email || currentUser.email, phone: currentRetailer?.phone,
+          shipping_address: currentRetailer?.shipping_address, city_state_zip: currentRetailer?.city_state_zip
         },
-        items,
-        order_total,
+        items, order_total,
         notes: document.getElementById('orderNotes').value || ''
       })
     });
 
     btn.textContent = 'ORDER SENT — REDIRECTING...';
-    window.location.href = `/order-confirmation.html?id=${order.id}`;
+    window.location.href = '/order-confirmation.html?id=' + order.id;
 
   } catch (err) {
     console.error(err);
-    statusEl.textContent = 'Something went wrong submitting your order. Please try again or contact info@ctpmarketing.com.';
+    statusEl.textContent = 'Something went wrong submitting your order. Please try again or contact jason.neff01@gmail.com.';
     statusEl.className = 'status-msg error';
     statusEl.style.display = 'block';
     btn.disabled = false;
@@ -1533,6 +1330,11 @@ document.getElementById('submitBtn').addEventListener('click', async () => {
   }
 });
 </script>
-<footer style="text-align:center;padding:20px 40px;font-size:11px;color:var(--muted);letter-spacing:1px;border-top:1px solid var(--border);">© 2026 CTP Marketing LLC — Lore City, Ohio · <a href="/privacy.html" style="color:var(--teal);text-decoration:none;">Privacy Policy</a> · <a href="/terms.html" style="color:var(--teal);text-decoration:none;">Terms of Service</a></footer>
+
+<footer style="text-align:center;padding:20px 40px;font-size:11px;color:var(--muted);letter-spacing:1px;border-top:1px solid var(--border);">
+  &copy; 2026 CTP Marketing LLC — Lore City, Ohio &nbsp;·&nbsp;
+  <a href="/privacy.html" style="color:var(--teal);text-decoration:none;">Privacy Policy</a> &nbsp;·&nbsp;
+  <a href="/terms.html" style="color:var(--teal);text-decoration:none;">Terms of Service</a>
+</footer>
 </body>
 </html>
