@@ -6,7 +6,6 @@
 <title>Order Portal | CTP Marketing</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="bluerock-catalog.js"></script>
 <script src="queen-tackle-catalog-new.js"></script>
 <script src="spotsticker-catalog.js"></script>
 <script src="copperredbait-catalog.js"></script>
@@ -356,18 +355,6 @@
       </div>
     </div>
 
-    <div class="brand-card active" data-brand="bluerock">
-      <div class="brand-card-inner">
-        <div class="brand-logo-area"><div class="brand-initials">BR</div></div>
-        <div class="brand-info">
-          <div class="brand-card-name">Blue Rock Custom Tackle</div>
-          <div class="brand-card-desc">Hand-Tied Jigs · Spinnerbaits · Buzzbaits · Tube Heads · Underspins · Soft Plastics</div>
-          <div class="brand-card-tag">503 SKUs Available</div>
-        </div>
-        <div class="brand-arrow">→</div>
-      </div>
-    </div>
-
     <div class="brand-card active" data-brand="spotsticker">
       <div class="brand-card-inner">
         <div class="brand-logo-area"><div class="brand-initials">SS</div></div>
@@ -547,22 +534,6 @@
       </div>
     </div>
 
-    <!-- BLUE ROCK CUSTOM TACKLE (dynamic) -->
-    <div id="bluerockForm" style="display:none">
-      <div style="background:var(--navy-light);border:1px solid var(--gold);border-radius:4px;padding:16px 24px;margin-bottom:32px;">
-        <div style="font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:2px;color:var(--gold);margin-bottom:8px;">Blue Rock Order Requirements</div>
-        <div style="font-size:13px;color:var(--muted);line-height:1.8;">
-          <span style="color:var(--white);font-weight:500;">Minimum Order Value:</span> $250.00 &nbsp;·&nbsp;
-          <span style="color:var(--white);font-weight:500;">Minimum Qty Per Variant:</span> 4 &nbsp;·&nbsp;
-          <span style="color:var(--teal);font-weight:500;">FREE Shipping</span> on Orders Over $1,000.00
-        </div>
-      </div>
-      <div class="product-section">
-        <div class="section-label">Products — Enter Quantity to Order</div>
-        <div id="bluerock-sections"></div>
-      </div>
-    </div>
-
     <!-- SPOTSTICKER BAITS (dynamic) -->
     <div id="spotstickerForm" style="display:none">
       <div class="product-section">
@@ -628,7 +599,7 @@ async function initPage() {
 }
 
 function hideAllForms() {
-  ['castForm','feathermoonForm','qtForm','lanierForm','bluerockForm','spotstickerForm','copperredForm']
+  ['castForm','feathermoonForm','qtForm','lanierForm','spotstickerForm','copperredForm']
     .forEach(id => document.getElementById(id).style.display = 'none');
 }
 
@@ -658,9 +629,6 @@ function showBrand(brand, title) {
   } else if (brand === 'lanier') {
     document.getElementById('lanierForm').style.display = 'block';
     if (!document.getElementById('lb-finesse_worm-rows').hasChildNodes()) renderAllLanierRows();
-  } else if (brand === 'bluerock') {
-    document.getElementById('bluerockForm').style.display = 'block';
-    if (!document.getElementById('bluerock-sections').hasChildNodes()) renderAllBluerockSections();
   } else if (brand === 'spotsticker') {
     document.getElementById('spotstickerForm').style.display = 'block';
     if (!document.getElementById('spotsticker-sections').hasChildNodes()) renderAllSpotstickerSections();
@@ -673,7 +641,7 @@ function showBrand(brand, title) {
 const brandNames = {
   cast: 'Cast Fishing Co', feathermoon: 'FeatherMoon Outdoors',
   queen: 'Queen Tackle', lanier: 'Lanier Baits',
-  bluerock: 'Blue Rock Custom Tackle', spotsticker: 'SpotSticker Baits',
+  spotsticker: 'SpotSticker Baits',
   copperred: 'Copper Red Baits'
 };
 
@@ -1050,86 +1018,6 @@ function renderLanierRows(cat, tbodyId) {
 }
 function renderAllLanierRows() {
   lanierCategories.forEach(([cat, tbodyId]) => renderLanierRows(cat, tbodyId));
-}
-
-// ── Blue Rock sections ────────────────────────────────────────
-const bluerockSectionDefs = [
-  { group:'JIGS',            key:'jig_1099',          label:'1099 Jig' },
-  { group:null,              key:'jig_1099xl',         label:'1099 XL Jig' },
-  { group:null,              key:'triple_threat',      label:'Triple Threat Finesse Jig' },
-  { group:null,              key:'jig_247',            label:'247 Jig' },
-  { group:null,              key:'sabotage_swim',       label:'Sabotage Swim Jig' },
-  { group:null,              key:'scrapper_ball',       label:'Scrapper Ball Head Finesse Jig' },
-  { group:'SPINNERBAITS',    key:'ss_wc',              label:'Showstopper W/C' },
-  { group:null,              key:'ss_dw',              label:'Showstopper DW' },
-  { group:null,              key:'ss_sc',              label:'Showstopper Single Colorado' },
-  { group:null,              key:'ss_dc',              label:'Showstopper Double Colorado' },
-  { group:null,              key:'indiana_pulse',       label:'Indiana Pulse' },
-  { group:null,              key:'flare_series',        label:'Flare Series' },
-  { group:'BUZZBAITS',       key:'boss_man',            label:'Boss Man' },
-  { group:null,              key:'bombshell',           label:'Bombshell Naked' },
-  { group:'TERMINAL TACKLE', key:'plush_underspin',     label:'Plush Underspin' },
-  { group:null,              key:'moneyball_3_0',       label:'Money Ball 3/0' },
-  { group:null,              key:'moneyball_5_0',       label:'Money Ball 5/0' },
-  { group:null,              key:'ricochet_tube',       label:'Ricochet Rattling Tube Head' },
-  { group:null,              key:'tube_jr',             label:'Tube Jr Hook' },
-  { group:null,              key:'goby_fat_head',       label:'Goby Fat Head' },
-  { group:null,              key:'tactical_tube',       label:'Tactical Tube Jig Head' },
-  { group:null,              key:'mini_mack',           label:'Mini Mack Ball Head' },
-  { group:null,              key:'ss_round_ball',       label:'SS Round Ball Jig Head' },
-  { group:null,              key:'covert_round_ball',   label:'Covert Round Ball Swimbait Head' },
-  { group:null,              key:'nasty_ned_head',      label:'Nasty Ned Head' },
-  { group:null,              key:'nasty_ned_weedless',  label:'Nasty Ned Weedless' },
-  { group:null,              key:'ewg_ned_1_0',         label:'EWG Ned 1/0' },
-  { group:null,              key:'ewg_ned_2_0',         label:'EWG Ned 2/0' },
-  { group:null,              key:'shimmy_shaky',        label:'Shimmy Shaky Head' },
-  { group:null,              key:'bobber_stops',        label:'Bobber Stops' },
-  { group:null,              key:'bluerock_tfw',        label:'Tungsten Flipping Weights' },
-  { group:null,              key:'dropshot_tear',       label:'Dropshot Tear Drop' },
-  { group:null,              key:'dropshot_pencil',     label:'Dropshot Pencil' },
-  { group:null,              key:'nail_weights',        label:'Nail Weights' },
-  { group:null,              key:'twin_jig_rattle',     label:'Twin Jig Rattle' },
-  { group:null,              key:'screw_lock_spinner',  label:'Screw Lock Tail Spinner' },
-  { group:'SOFT PLASTICS',   key:'hydro_shad',          label:'Hydro Shad' },
-  { group:null,              key:'salty_jr',            label:'Salty Stick Em Jr 2.75"' },
-  { group:null,              key:'salty_tubes',         label:'Salty Stick Em 3.5"/4"' },
-  { group:null,              key:'nasty_ned_worm',      label:'Nasty Ned Worm' },
-  { group:null,              key:'bulldozer_toad',      label:'Bulldozer Buzz Toad' },
-  { group:null,              key:'helgy',               label:'Helgy' },
-  { group:null,              key:'chaw_craw',           label:'Chaw Craw' },
-  { group:null,              key:'savvy_swimmer',       label:'Savvy Swimmer' },
-  { group:null,              key:'trash_chunk',         label:'Trash Chunk' },
-  { group:null,              key:'deuce_stick',         label:'Deuce Stick Worm' },
-];
-
-function renderAllBluerockSections() {
-  const container = document.getElementById('bluerock-sections');
-  bluerockSectionDefs.forEach(({ group, key, label }) => {
-    if (group) {
-      const h = document.createElement('div');
-      h.className = 'group-header';
-      h.textContent = group;
-      container.appendChild(h);
-    }
-    const count = bluerockCatalog[key] ? bluerockCatalog[key].length : 0;
-    const tbodyId = 'br-' + key.replace(/_/g,'-') + '-rows';
-    const div = document.createElement('div');
-    div.className = 'product-section';
-    div.innerHTML = `
-      <div class="category-header">
-        <span class="category-name">${label}</span>
-        <span class="category-desc">${count} SKUs</span>
-      </div>
-      <table>
-        <thead><tr>
-          <th class="center">Qty</th><th>UPC</th><th>Description</th><th>Pack</th>
-          <th class="right">Wholesale</th><th class="right">MSRP</th><th class="right">Line Total</th>
-        </tr></thead>
-        <tbody id="${tbodyId}"></tbody>
-      </table>`;
-    container.appendChild(div);
-    if (bluerockCatalog[key]) renderBluerockRows(key, tbodyId);
-  });
 }
 
 // ── SpotSticker sections ──────────────────────────────────────
